@@ -101,9 +101,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         // movieAdapterViewHolder.mMovieThumbnailIv.getContext()
 
         /*Picasso.with(iV.getContext())
-                .load(R.drawable.ic_launcher_background);
-*/
-
+                .load(R.drawable.ic_launcher_background); */
 
          // currentMovie.getTitle()
          // movieAdapterViewHolder.mMovieTitleTv.setText(currentMovie.getTitle());
@@ -144,7 +142,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
      * created one. This is handy when we get new data from the web but don't want to create a
      * new MovieAdapter to display it.
      *
-     * @param movieData The new weather data to be displayed.
+     * @param movieData The new movie data to be displayed.
      */
     public void setMovieData(List<AMovie> movieData) {
         mMovieData = movieData;

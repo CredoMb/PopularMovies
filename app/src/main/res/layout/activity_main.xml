@@ -5,6 +5,14 @@
     android:layout_height="match_parent"
     android:background="@android:color/black">
 
+        <ProgressBar
+            android:id="@+id/loading_spinner"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true">
+        </ProgressBar>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_mainactivity"
             android:paddingTop="16dp"
