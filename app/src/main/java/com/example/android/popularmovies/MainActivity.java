@@ -59,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // The progress spinner to use for a good
         mProgressSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
 
+        // Remove the progress spinner to display the empty state view properly
+        //mProgressSpinner.setVisibility(View.INVISIBLE);
+
         GridLayoutManager layoutManager = new GridLayoutManager(this,3);
         mRecyclerView.setHasFixedSize(true);
 
@@ -78,7 +81,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>());//new ArrayList<AMovie>());
         // How about putting a list inside the movie adapter ?
         // I don't know about that, really !
-        //
 
         /* Setting the adapter attaches it to the RecyclerView in our layout. */
         mRecyclerView.setAdapter(mMovietAdapter);

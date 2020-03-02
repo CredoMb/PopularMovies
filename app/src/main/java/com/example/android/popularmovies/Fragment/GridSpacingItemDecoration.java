@@ -5,6 +5,14 @@ import android.view.View;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+/***************************************************************************************
+ *    Title: GridSpacingItemDecoration class source code
+ *    Author: Edwardaa
+ *    Date: 2016
+ *    Availability: https://stackoverflow.com/questions/28531996/android-recyclerview-gridlayoutmanager-column-spacing/28533234
+ *
+ ***************************************************************************************/
+
 public class GridSpacingItemDecoration extends RecyclerView.ItemDecoration {
 
     private int spanCount;
