@@ -45,13 +45,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:text="SpiderMan"/>
 
     <!-- Movie Quick Details -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:layout_marginBottom="16dp">
 
         <TextView
             android:id="@+id/release_year_tv"
@@ -60,6 +62,7 @@
             android:layout_weight="1"
             android:textSize="14sp"
             android:textColor="@android:color/darker_gray" />
+
         <TextView
             android:id="@+id/public_allowed_tv"
             android:layout_width="0dp"
@@ -76,6 +79,18 @@
             android:textSize="14sp"
             android:textColor="@android:color/darker_gray" />
 
+        <!-- Add the movie ratings in here-->
+        <RatingBar
+            android:id="@+id/rating_bar"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:isIndicator="true"
+            android:numStars="5"
+            android:saveEnabled="true" />
+        <!-- android:theme="@style/RatingBar" -->
+
     </LinearLayout>
 
     <!-- This will contain the synopsis of the movie -->
@@ -83,21 +98,24 @@
         android:id="@+id/movie_synopsis_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:layout_marginBottom="8dp"/>
 
     <!-- This will contain the name of the movie's director -->
     <TextView
         android:id="@+id/movie_director_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:layout_marginBottom="4dp"/>
 
     <!-- This will contain the names of the movie's stars -->
     <TextView
         android:id="@+id/movie_stars_tv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:layout_marginBottom="4dp"/>
 
     <!--Make a similar movie window -->
 
