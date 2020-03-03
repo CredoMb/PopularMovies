@@ -89,17 +89,18 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         AMovie currentMovie = mMovieData.get(position);
 
         if(ImagebaseUrl !=null && !ImagebaseUrl.isEmpty()) {
+        /*
+            GlideApp.with(mContext)
+                    .load("http://via.placeholder.com/300.png")
+                    .into(movieAdapterViewHolder.mMovieThumbnailIv);*/
 
-            Picasso.get()
-                .load(ImagebaseUrl)
-                    .placeholder(R.drawable.movie_poster)
-                .into(movieAdapterViewHolder.mMovieThumbnailIv);
         }
 
         movieAdapterViewHolder.mMovietitleTv.setText(currentMovie.getTitle());
         movieAdapterViewHolder.mMovieyearTv.setText(currentMovie.getYear());
         // iV.setImageResource(R.drawable.ic_launcher_foreground);
         // movieAdapterViewHolder.mMovieThumbnailIv.getContext()
+        int id = R.drawable.ic_launcher_background;
 
         /*Picasso.with(iV.getContext())
                 .load(R.drawable.ic_launcher_background); */
