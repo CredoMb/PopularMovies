@@ -1,5 +1,6 @@
 package com.example.android.popularmovies.Data;
 
+import android.net.Uri;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -42,6 +43,10 @@ public final class QueryUtils {
 
     private static String POSTER_BASE_URL = "https://image.tmdb.org/t/p/original";
 
+    private static String BASE_CREDIT_REQUEST_URL = "https://api.themoviedb.org/3/movie/";
+
+    // The key can not appear on github as this is a public repo
+    private static String API_KEY ="";
     /**
      * This is a sample json response to help us test the last function
      */
@@ -97,8 +102,8 @@ public final class QueryUtils {
             }
 
         } catch (IOException e) {
+            //  Handle the exception
             Log.e(LOG_TAG, "Problem retrieving the Movie JSON results.", e);
-            // TODO: Handle the exception
 
         } finally {
             if (urlConnection != null) {
@@ -154,7 +159,7 @@ public final class QueryUtils {
         try {
             jsonResponse = makeHttpRequest(url);
         } catch (IOException e) {
-            // TODO Handle the IOException
+            // Handle the IOException
             Log.e(LOG_TAG, "Problem retrieving the Movie JSON results.", e);
         }
         Log.w(LOG_TAG, "This is the \"fetchMovieData\" method");
@@ -193,23 +198,38 @@ public final class QueryUtils {
 
                 // Extract the path of the Poster Image for the movie positionned at the index "i"
                 String posterPath = JSONmovieArray.optJSONObject(i).optString("poster_path");
+                // Build the complete link to get the poster Image
                 String posterCompletePath = POSTER_BASE_URL + posterPath;// the base url + the path ! Bitch ! What else ?
+                // Extract the movie title's String
                 String movieTitle = JSONmovieArray.optJSONObject(i).optString("title");
+                // Extract the movie Year
                 String movieYear = JSONmovieArray.optJSONObject(i).optString("release_date").substring(MOVIE_YEAR_START_INDEX,MOVIE_YEAR_END_INDEX);
+
+                // if (code == DETAIL_MOVIE) {}
+                String synopsis = JSONmovieArray.optJSONObject(i).optString("overview");
+                String movieDirector = JSONmovieArray.optJSONObject(i).optString;
+                String backDropPath = JSONmovieArray.optJSONObject(i).optString("backdrop_path");
+
+                // Make another API request ! Damn, it's expensive !
+                List<String>mMovieStars  = JSONmovieArray.optJSONObject(i).optString;
+                float movieRating ; // this is the vote_average and the vote_count
+
+
+                // If it's the Url of one movie only --> Add all the other things needed inside the
+                // DetailActivity
 
                 movies.add(new AMovie(movieTitle,posterCompletePath,movieYear));
 
                 Log.e("title and year",movieTitle + " "+movieYear);
             }
-                // From the VolumeInfo object, get datas (title,averageRating, ratingsCount & infoLink)
-                // to create a new Book inside the Book's ArrayList
+
             }
 
          catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the book JSON results", e);
+            Log.e("QueryUtils", "Problem parsing the movie JSON results", e);
         }
 
         return movies;
@@ -219,16 +239,60 @@ public final class QueryUtils {
      * This function will extract the authors from the JsonArray and return a List of String
      * that contains all the authors
      */
-    private static List<String> extractAuthors(JSONArray JSONAuthorsArray) {
+    private static List<String> extractCast(int id) {
 
-        List<String> authors = new ArrayList<String>();
+        String movieCreditUrl ;
 
-        if (JSONAuthorsArray != null && JSONAuthorsArray.length() > 0) {
-            for (int i = 0; i < JSONAuthorsArray.length(); i++) {
-                authors.add(JSONAuthorsArray.optString(i)); // What to do now ?
-            }
+        // Put together the base credit url and the movie id
+        // followed by "/credit". This way,we will get the
+        // json related to the movie credit only
+        String BaseCreditUrlWithMovieId = BASE_CREDIT_REQUEST_URL
+                + String.valueOf(id)
+                + "/credits";
+
+        // Build the URI that will be use to get the credit part of the movie
+        Uri movieBaseCreditUri = Uri.parse(BaseCreditUrlWithMovieId);
+        Uri.Builder uriBuilder = movieBaseCreditUri.buildUpon();
+
+        // Add some relevant information the finalize the Uri
+        uriBuilder.appendQueryParameter("api_key",API_KEY);
+
+        // Create URL object
+        URL url = createUrl(uriBuilder.toString());
+
+        // Perform HTTP request to the URL and receive a JSON response back
+        String movieCreditJsonResponse = "";
+
+        try {
+            movieCreditJsonResponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            //  Handle the IOException
+            Log.e(LOG_TAG, "Problem retrieving the targeted Movie JSON results.", e);
         }
-        return authors;
+
+        // The list that will contain all the cast member of a movie
+        List<String> cast = new ArrayList<String>();
+
+        try {
+            // Get the main Json object returned by the Request
+            JSONObject movieCreditJsonObject = new JSONObject(movieCreditJsonResponse);
+            // Get the Array of the entire movie cast
+            JSONArray movieCastJsonArray = movieCreditJsonObject.optJSONArray("cast");
+
+            for(int i =0; i< movieCastJsonArray.length();i++) {
+                // What to do now ? I don't know !
+                cast.set(i,movieCastJsonArray.optJSONObject(i).optString("name"));
+            }
+
+        } catch (JSONException e) {
+            // If an error is thrown when executing any of the above statements in the "try" block,
+            // catch the exception here, so the app doesn't crash. Print a log message
+            // with the message from the exception.
+            Log.e("QueryUtils", "Problem parsing the movie cast JSON results", e);
+
+        }
+
+        return cast;
     }
 
     /**

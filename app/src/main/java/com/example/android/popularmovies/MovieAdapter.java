@@ -1,13 +1,17 @@
 package com.example.android.popularmovies;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.module.AppGlideModule;
+import com.example.android.popularmovies.Data.GlideHelperClass;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
@@ -18,7 +22,7 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
-    private String ImagebaseUrl = "https://image.tmdb.org/t/p/original/s8qRIwA0zDPbnRekeU0rDwWE7q7.jpg";
+    private String ImagebaseUrl = "https://image.tmdb.org/t/p/original";
     private List <AMovie> mMovieData = new ArrayList<AMovie>();
     private Context mContext;
 
@@ -87,14 +91,24 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
        // movieAdapterViewHolder.mMovieThumbnailIv.setImageURI(Uri.parse(ImagebaseUrl));
         AMovie currentMovie = mMovieData.get(position);
+        //String posterFullLink =
+        /*RequestBuilder<R.drawable> errorImage ;
+        errorImage.load(R.drawable.movie_poster);*/
 
-        if(ImagebaseUrl !=null && !ImagebaseUrl.isEmpty()) {
+        GlideHelperClass glideHelper = new GlideHelperClass(mContext,
+                currentMovie.getPosterPath(),
+                R.drawable.ic_launcher_background,
+                movieAdapterViewHolder.mMovieThumbnailIv);
+        //Log.e("the path",ImagebaseUrl + currentMovie.getPosterPath());
+
+        glideHelper.loadImage();
+
         /*
             GlideApp.with(mContext)
                     .load("http://via.placeholder.com/300.png")
                     .into(movieAdapterViewHolder.mMovieThumbnailIv);*/
 
-        }
+
 
         movieAdapterViewHolder.mMovietitleTv.setText(currentMovie.getTitle());
         movieAdapterViewHolder.mMovieyearTv.setText(currentMovie.getYear());

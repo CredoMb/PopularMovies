@@ -5,31 +5,32 @@ import java.util.List;
 
 public class AMovie {
 
-    // The id of the movie's image
-    private String mImageUrl;
+    /** Except the mPosterImagePath theses attributes
+     * will be used on the MainActivity and the DetailActivity */
 
+    // The id of the movie's image
+    private String mPosterImagePath;
     // The movie's name
     private String mTitle;
-
     // The movie's year
     private String mYear;
 
+    /** Theses other attributes will be used
+     * inside the DetailActivity only*/
     // The synopsis of the movie
     private String mSynopsis;
-    // The director of the movie
-    private String mMovieDirector;
     // A list that contains all the movie stars
     private List<String> mMovieStars;
     // The average rating of the movie
     private float mMovieRating;
 
-
     /**
      * Constructor with the 3 main attribute of the class
      */
-    public AMovie(String title, String imageUrl, String year) {
+    public AMovie(String title, String PosterImagePath,
+                  String year) {
         mTitle = title;
-        mImageUrl = imageUrl;
+        mPosterImagePath = PosterImagePath;
         mYear = year;
     }
 
@@ -37,8 +38,8 @@ public class AMovie {
      * Defining getters for the "AMovie" Class
      */
 
-    public String getImageId() {
-        return mImageUrl;
+    public String getPosterPath() {
+        return mPosterImagePath;
     }
 
     public String getTitle() {
@@ -49,10 +50,6 @@ public class AMovie {
 
     public String getSynopsis() {
         return mSynopsis;
-    }
-
-    public String getMovieDirector() {
-        return mMovieDirector;
     }
 
     public List<String> getMovieStars() {
@@ -79,10 +76,6 @@ public class AMovie {
         for (int i = 0; i < movieStars.size(); i++) {
             mMovieStars.set(i, movieStars.get(i));
         }
-    }
-
-    public void setMovieDirector(String movieDirector) {
-        mMovieDirector = movieDirector;
     }
 
     public void setMovieRating(float movieRating) {

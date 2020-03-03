@@ -43,4 +43,5 @@ public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
     }
     // Obtain 2 things : How to make the card I want to make
     // Open dater
+
 }

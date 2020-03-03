@@ -187,6 +187,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // data set. This will trigger the ListView to update.*/
 
         if (data != null && !data.isEmpty()) {
+
+            mProgressSpinner.setVisibility(View.GONE);
             mMovietAdapter.setMovieData(data);
         }
     }
