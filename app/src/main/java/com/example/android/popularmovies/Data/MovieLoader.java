@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Movie;
 
 import com.example.android.popularmovies.AMovie;
-
 import java.util.List;
 
 public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {

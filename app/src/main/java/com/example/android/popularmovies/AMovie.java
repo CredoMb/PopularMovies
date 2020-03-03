@@ -45,6 +45,8 @@ public class AMovie {
         return mTitle;
     }
 
+    public String getYear(){return mYear;}
+
     public String getSynopsis() {
         return mSynopsis;
     }
@@ -86,5 +88,4 @@ public class AMovie {
     public void setMovieRating(float movieRating) {
         mMovieRating = movieRating;
     }
-
 }
