@@ -5,6 +5,8 @@ import android.content.Context;
 import android.graphics.Movie;
 
 import com.example.android.popularmovies.AMovie;
+import com.example.android.popularmovies.DetailActivity;
+
 import java.util.List;
 
 public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
@@ -39,7 +41,16 @@ public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
         if (mUrl == null) {
             return null;
         }
-        return QueryUtils.fetchMoviesData(mUrl);
+        // Make the network request and
+        // return a list of movie
+        List <AMovie> movieList = QueryUtils.fetchMoviesData(mUrl);
+        // Set the list of movie on the
+        // "movieList" static attribute of
+        // the DetailActivity. This way, the
+        // DetailActivity could use the list to
+        // show details about a movie that was clicked
+        DetailActivity.movieList = movieList;
+        return movieList;
     }
     // Obtain 2 things : How to make the card I want to make
     // Open dater

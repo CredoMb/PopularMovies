@@ -2,11 +2,15 @@ package com.example.android.popularmovies;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.List;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -24,6 +28,13 @@ public class DetailActivity extends AppCompatActivity {
 
     // The key for the extra in the intent
     public static String EXTRA_POSITION ="movie position";
+
+    //The default position of a movie inside the movie list
+    private int DEFAULT_POSITION = -1;
+
+    // Will store the list of movies gotten from
+    // the network request made inside the MovieLoader
+    public static List<AMovie> movieList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,8 +67,38 @@ public class DetailActivity extends AppCompatActivity {
             // the rating Bar for the movie ratings
         mMovieRatingBar = (RatingBar) findViewById(R.id.rating_bar);
 
-    }
 
+        // Receive the intent from the Main Activity
+        Intent intent = getIntent();
+        // If the intent is null, display a toast with an error message
+        if (intent == null) {
+            closeOnError();
+        }
+
+        // Get the extra associated with the intent.
+        // This extra represent the position of the movie
+        // that was clicked on
+        int position = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+        if (position == DEFAULT_POSITION) {
+            // EXTRA_POSITION not found in intent
+            closeOnError();
+            return;
+        }
+
+        // Get the array that contains the Json for all the sandwiches
+        // present on the screen
+        if (movieList == null) {
+            // Sandwich data unavailable
+            closeOnError();
+            return;
+        }
+        // How about getting the json again ?
+        // How to create a String ressource
+    }
+    private void closeOnError(){
+        finish();
+        Toast.makeText(this, "Movie Data is not available", Toast.LENGTH_SHORT).show();
+    }
 }
 
 // /s8qRIwA0zDPbnRekeU0rDwWE7q7.jpg
