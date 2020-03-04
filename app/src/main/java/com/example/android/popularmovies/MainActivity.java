@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView.ItemDecoration;
 
 import android.app.LoaderManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -28,7 +29,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<AMovie>>{
+public class MainActivity extends AppCompatActivity implements
+        LoaderManager.LoaderCallbacks<List<AMovie>>,
+        MovieAdapter.MovieAdapterOnClickHandler {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
@@ -78,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
          * The MovieAdapter is responsible for linking our movie data with the Views that
          * will end up displaying our movie data.
          */
-        mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>());//new ArrayList<AMovie>());
+        mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>(),this);//new ArrayList<AMovie>());
         // How about putting a list inside the movie adapter ?
         // I don't know about that, really !
 
@@ -198,7 +201,13 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     public void onLoaderReset(Loader<List<AMovie>> loader) {
 
         // Create a new empty Movie list for the Adapter
-        mMovietAdapter =  new MovieAdapter(this,new ArrayList<AMovie>());
+        mMovietAdapter =  new MovieAdapter(this,new ArrayList<AMovie>(),this);
     }
 
+    @Override
+    public void onClick(int position) {
+        Intent intent = new Intent(MainActivity.this,DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_POSITION,position);
+        startActivity(intent);
+    }
 }

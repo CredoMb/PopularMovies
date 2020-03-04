@@ -19,6 +19,8 @@ public class AMovie {
      * inside the DetailActivity only*/
     // The synopsis of the movie
     private String mSynopsis;
+    // The Director of the movie
+    private String mMovieDirector;
     // A list that contains all the movie stars
     private List<String> mMovieStars;
     // The average rating of the movie
@@ -32,6 +34,23 @@ public class AMovie {
         mTitle = title;
         mPosterImagePath = PosterImagePath;
         mYear = year;
+    }
+
+    /**
+     * Constructor with all the attributes of the class
+     */
+    public AMovie(String title, String posterImagePath,
+                  String year,String synopsis,
+                  String movieDirector,
+                  List<String> movieStars,
+                  float movieRating) {
+
+        this(title,posterImagePath,year);
+        mSynopsis = synopsis;
+        mMovieDirector = movieDirector;
+        mMovieStars = movieStars;
+        mMovieRating = movieRating;
+
     }
 
     /**
@@ -50,6 +69,10 @@ public class AMovie {
 
     public String getSynopsis() {
         return mSynopsis;
+    }
+
+    public String getDirector() {
+        return mMovieDirector;
     }
 
     public List<String> getMovieStars() {

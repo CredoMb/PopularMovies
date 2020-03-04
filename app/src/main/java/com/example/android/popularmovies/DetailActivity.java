@@ -22,6 +22,9 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mMovieStarsTv;
     private TextView mMovieDirectorTv;
 
+    // The key for the extra in the intent
+    public static String EXTRA_POSITION ="movie position";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -1,6 +1,7 @@
 package com.example.android.popularmovies;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,14 +27,22 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     private List <AMovie> mMovieData = new ArrayList<AMovie>();
     private Context mContext;
 
+    public interface MovieAdapterOnClickHandler{
+        void onClick(int postion);
+    }
+
+    final private MovieAdapterOnClickHandler mClickHandler;
+
     /**Constructor of the adaptor */
-    public MovieAdapter(Context context, List<AMovie> movieData) {
+    public MovieAdapter(Context context, List<AMovie> movieData,
+                        MovieAdapterOnClickHandler clickHandler) {
 
         mContext = context;
         mMovieData = movieData;
+        mClickHandler = clickHandler;
     }
 
-    public class MovieAdapterViewHolder extends RecyclerView.ViewHolder {
+    public class MovieAdapterViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // TODO 1: Here, create variables reference to the item_layout
 
@@ -58,8 +67,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
             mMovieThumbnailIv.setImageResource(currentMovie.getImage());
             */
         }
-        // TODO 2 :
+
+        @Override
+        public void onClick(View v){
+            mClickHandler.onClick(getAdapterPosition());
+        }
     }
+
 
     @NonNull
     @Override
@@ -115,29 +129,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         // iV.setImageResource(R.drawable.ic_launcher_foreground);
         // movieAdapterViewHolder.mMovieThumbnailIv.getContext()
         int id = R.drawable.ic_launcher_background;
-
-        /*Picasso.with(iV.getContext())
-                .load(R.drawable.ic_launcher_background); */
-
-         // currentMovie.getTitle()
-         // movieAdapterViewHolder.mMovieTitleTv.setText(currentMovie.getTitle());
-         // currentMovie.getImageId()
-         // movieAdapterViewHolder.mMovieThumbnailIv.setImageResource(R.drawable.ic_launcher_foreground);
-
-          // Either the context Is bad or the load doesn't work !
-        // Tester le Query Utils avec le Sample Json, bitch !
-
-        // Genérer l'image à la position donnée puis
-        // Why is this considered as a null object ? Really, I don't know ! I don't know !
-
-        /*Picasso.with(iV.getContext())
-                .load(R.drawable.ic_launcher_background);*/
-
-                // Either the context or the ImageView is not correct ! Bitch !
-
-                //.load(currentMovie.getImageId())
-                //.error(R.drawable.error)
-                //.placeholder(R.drawable.sandwich_placeholder)
 
     }
 

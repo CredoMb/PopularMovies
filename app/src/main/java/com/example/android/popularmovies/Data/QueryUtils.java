@@ -41,7 +41,7 @@ public final class QueryUtils {
 
     /** The base Url and size for the image */
 
-    private static String POSTER_BASE_URL = "https://image.tmdb.org/t/p/original";
+    private static String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 
     private static String BASE_CREDIT_REQUEST_URL = "https://api.themoviedb.org/3/movie/";
 
@@ -56,7 +56,12 @@ public final class QueryUtils {
 
     private static int MOVIE_YEAR_START_INDEX = 0;
     private static int MOVIE_YEAR_END_INDEX = 4;
+
+    /** This will contain the director of a given movie*/
+    private static String mMovieDirector;
+
     /**
+     *
      * Returns new URL object from the given string URL.
      */
     private static URL createUrl(String stringUrl) {
@@ -199,28 +204,33 @@ public final class QueryUtils {
                 // Extract the path of the Poster Image for the movie positionned at the index "i"
                 String posterPath = JSONmovieArray.optJSONObject(i).optString("poster_path");
                 // Build the complete link to get the poster Image
-                String posterCompletePath = POSTER_BASE_URL + posterPath;// the base url + the path ! Bitch ! What else ?
+                String posterCompletePath = IMAGE_BASE_URL + posterPath;
                 // Extract the movie title's String
                 String movieTitle = JSONmovieArray.optJSONObject(i).optString("title");
                 // Extract the movie Year
                 String movieYear = JSONmovieArray.optJSONObject(i).optString("release_date").substring(MOVIE_YEAR_START_INDEX,MOVIE_YEAR_END_INDEX);
 
-                // if (code == DETAIL_MOVIE) {}
+
+                /** The following group of informations will only be used in the DetailActivity */
+
                 String synopsis = JSONmovieArray.optJSONObject(i).optString("overview");
-                String movieDirector = JSONmovieArray.optJSONObject(i).optString;
+                    // Extract the path of the movie's backDrop Image for the movie positionned at the index "i"
                 String backDropPath = JSONmovieArray.optJSONObject(i).optString("backdrop_path");
+                    // Build the complete link to get the poster Image
+                String backDropPathCompletePath = IMAGE_BASE_URL + backDropPath;
 
-                // Make another API request ! Damn, it's expensive !
-                List<String>mMovieStars  = JSONmovieArray.optJSONObject(i).optString;
-                float movieRating ; // this is the vote_average and the vote_count
+                    // Get the cast as an ArrayList of String and set the value of the "movieDirector"
+                    // This will use the id of the movie to make an second API call and get back informations
+                    // related to the movie credits
+                List<String>movieCast  = extractCastandDirector(JSONmovieArray.optJSONObject(i).optInt("id"));
+                    // get the rating of the movie
+                float movieRating = (float) JSONmovieArray.optJSONObject(i).optDouble("vote_average"); // this is the vote_average and the vote_count
 
+                movies.add(new AMovie(movieTitle,posterCompletePath,movieYear,
+                        synopsis,mMovieDirector,movieCast,movieRating));
 
-                // If it's the Url of one movie only --> Add all the other things needed inside the
-                // DetailActivity
-
-                movies.add(new AMovie(movieTitle,posterCompletePath,movieYear));
-
-                Log.e("title and year",movieTitle + " "+movieYear);
+                Log.e("the director","bisou " + mMovieDirector);
+                // The function goes into the "if" but the value doesn't change, why ?
             }
 
             }
@@ -239,9 +249,8 @@ public final class QueryUtils {
      * This function will extract the authors from the JsonArray and return a List of String
      * that contains all the authors
      */
-    private static List<String> extractCast(int id) {
-
-        String movieCreditUrl ;
+    private static List<String> extractCastandDirector(int id) {
+        // I can get the director name inside the list as the first
 
         // Put together the base credit url and the movie id
         // followed by "/credit". This way,we will get the
@@ -257,7 +266,7 @@ public final class QueryUtils {
         // Add some relevant information the finalize the Uri
         uriBuilder.appendQueryParameter("api_key",API_KEY);
 
-        // Create URL object
+        // Create URL object by converting the uri to a String
         URL url = createUrl(uriBuilder.toString());
 
         // Perform HTTP request to the URL and receive a JSON response back
@@ -278,10 +287,32 @@ public final class QueryUtils {
             JSONObject movieCreditJsonObject = new JSONObject(movieCreditJsonResponse);
             // Get the Array of the entire movie cast
             JSONArray movieCastJsonArray = movieCreditJsonObject.optJSONArray("cast");
+            // Get the Array of the movie crew
+            JSONArray movieCrewJsonArray = movieCreditJsonObject.optJSONArray("crew");
 
+            // Extract the cast of the movie.
+            // Iterate through all the cast members inside of the movieCastJsonArray
+            // and get their names
             for(int i =0; i< movieCastJsonArray.length();i++) {
                 // What to do now ? I don't know !
-                cast.set(i,movieCastJsonArray.optJSONObject(i).optString("name"));
+                cast.add(movieCastJsonArray.optJSONObject(i).optString("name"));
+            }
+
+            // Iterate through the crew members
+            // until we find the director of the movie
+            for (int i = 0; i < movieCrewJsonArray.length(); i++) {
+
+                //Log.e("the departement here","bijou " +movieCrewJsonArray.optJSONObject(i).optString("department"));
+                // Inside the crew array, find the object that contains the
+                // name of the director. Only one object has the name of the movie director
+                if (movieCrewJsonArray.optJSONObject(i).optString("department").equals("Directing")
+                        && movieCrewJsonArray.optJSONObject(i).optString("job").equals("Director") ){
+                    // Extract the name of the director
+                    // from the object that contains it
+                    mMovieDirector = movieCrewJsonArray.optJSONObject(i).optString("name");
+
+                    break;
+                }
             }
 
         } catch (JSONException e) {
@@ -292,6 +323,7 @@ public final class QueryUtils {
 
         }
 
+        //Log.e("director from function",directorName);
         return cast;
     }
 
