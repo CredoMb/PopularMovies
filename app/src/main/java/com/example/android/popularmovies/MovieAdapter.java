@@ -1,19 +1,13 @@
 package com.example.android.popularmovies;
 
 import android.content.Context;
-import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.annotation.GlideModule;
-import com.bumptech.glide.module.AppGlideModule;
 import com.example.android.popularmovies.Data.GlideHelperClass;
-import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -57,15 +51,11 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
             /*mMovieTitleTv = (TextView) view.findViewById(); */
             // Get the ImageView from the list item layout
               mMovieThumbnailIv = (ImageView) view.findViewById(R.id.movieThumbnail_Iv);
-                mMovietitleTv = (TextView) view.findViewById(R.id.title_text_view);
+                mMovietitleTv = (TextView) view.findViewById(R.id.title_text_view_main);
                 mMovieyearTv = (TextView) view.findViewById(R.id.year_text_view);
 
-              // What to do now ? Why not setting the content here ?
-           // mMovieThumbnailIv.setImageResource(R.drawable.ic_launcher_background);
 
-            /*mMovieTitleTv.setText(currentMovie.getTitle());
-            mMovieThumbnailIv.setImageResource(currentMovie.getImage());
-            */
+                view.setOnClickListener(this);              // What to do now ? Why not setting the content here ?
         }
 
         @Override
@@ -73,7 +63,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
             mClickHandler.onClick(getAdapterPosition());
         }
     }
-
 
     @NonNull
     @Override

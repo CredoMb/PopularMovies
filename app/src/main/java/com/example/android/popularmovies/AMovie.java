@@ -21,6 +21,13 @@ public class AMovie {
     private String mSynopsis;
     // The Director of the movie
     private String mMovieDirector;
+
+    // The public allowed in this movie
+    private String mAllowedPublic;
+
+    // The lenght of the movie
+    private String mMovieLenght;
+
     // A list that contains all the movie stars
     private List<String> mMovieStars;
     // The average rating of the movie
@@ -40,12 +47,15 @@ public class AMovie {
      * Constructor with all the attributes of the class
      */
     public AMovie(String title, String posterImagePath,
-                  String year,String synopsis,
+                  String year,
+                  String lenght,
+                  String synopsis,
                   String movieDirector,
                   List<String> movieStars,
                   float movieRating) {
 
         this(title,posterImagePath,year);
+        mMovieLenght = lenght;
         mSynopsis = synopsis;
         mMovieDirector = movieDirector;
         mMovieStars = movieStars;
@@ -71,6 +81,8 @@ public class AMovie {
         return mSynopsis;
     }
 
+    public String getmMovieLenght() {return mMovieLenght;}
+
     public String getDirector() {
         return mMovieDirector;
     }
@@ -80,7 +92,9 @@ public class AMovie {
     }
 
     public float getMovieRating() {
-        return mMovieRating;
+        // Divide the current rating by 2,
+        // to have a rating out of 5
+        return mMovieRating/2f;
     }
 
     /**

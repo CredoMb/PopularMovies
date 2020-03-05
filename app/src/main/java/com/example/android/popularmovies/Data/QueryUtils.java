@@ -39,11 +39,17 @@ public final class QueryUtils {
      */
     public static final String LOG_TAG = MainActivity.class.getSimpleName();
 
-    /** The base Url and size for the image */
-
+    /** The base Urls */
     private static String IMAGE_BASE_URL = "https://image.tmdb.org/t/p/original";
 
-    private static String BASE_CREDIT_REQUEST_URL = "https://api.themoviedb.org/3/movie/";
+    private static String MOVIE_BASE_REQUEST_URL = "https://api.themoviedb.org/3/movie/";
+
+    /** the following 2 strings will be used to determine
+     *  which information/json Object must be queried from the
+     *  API. This will help to build the right Url*/
+
+    private static String GET_CREDIT = "credit";
+    private static String GET_EXTENDED_DETAILS ="details";
 
     // The key can not appear on github as this is a public repo
     private static String API_KEY ="";
@@ -59,6 +65,9 @@ public final class QueryUtils {
 
     /** This will contain the director of a given movie*/
     private static String mMovieDirector;
+
+    /**This will contain the length of a given movie */
+    private static String mMovieLength;
 
     /**
      *
@@ -222,14 +231,12 @@ public final class QueryUtils {
                     // Get the cast as an ArrayList of String and set the value of the "movieDirector"
                     // This will use the id of the movie to make an second API call and get back informations
                     // related to the movie credits
-                List<String>movieCast  = extractCastandDirector(JSONmovieArray.optJSONObject(i).optInt("id"));
+                List<String>movieCast  = extractCastAndSetExtraDetails(JSONmovieArray.optJSONObject(i).optInt("id"));
                     // get the rating of the movie
                 float movieRating = (float) JSONmovieArray.optJSONObject(i).optDouble("vote_average"); // this is the vote_average and the vote_count
 
                 movies.add(new AMovie(movieTitle,posterCompletePath,movieYear,
-                        synopsis,mMovieDirector,movieCast,movieRating));
-
-                Log.e("the director","bisou " + mMovieDirector);
+                        mMovieLength,synopsis,mMovieDirector,movieCast,movieRating));
                 // The function goes into the "if" but the value doesn't change, why ?
             }
 
@@ -241,50 +248,36 @@ public final class QueryUtils {
             // with the message from the exception.
             Log.e("QueryUtils", "Problem parsing the movie JSON results", e);
         }
-
         return movies;
     }
 
     /**
-     * This function will extract the authors from the JsonArray and return a List of String
-     * that contains all the authors
+     * This function will get the cast members from the API and return them as
+     * a List of String. Also, it will set the values of mMovieLenght and mMovieDirector,
+     * which will be used to build movie objects.
      */
-    private static List<String> extractCastandDirector(int id) {
-        // I can get the director name inside the list as the first
 
-        // Put together the base credit url and the movie id
-        // followed by "/credit". This way,we will get the
-        // json related to the movie credit only
-        String BaseCreditUrlWithMovieId = BASE_CREDIT_REQUEST_URL
-                + String.valueOf(id)
-                + "/credits";
-
-        // Build the URI that will be use to get the credit part of the movie
-        Uri movieBaseCreditUri = Uri.parse(BaseCreditUrlWithMovieId);
-        Uri.Builder uriBuilder = movieBaseCreditUri.buildUpon();
-
-        // Add some relevant information the finalize the Uri
-        uriBuilder.appendQueryParameter("api_key",API_KEY);
-
-        // Create URL object by converting the uri to a String
-        URL url = createUrl(uriBuilder.toString());
-
-        // Perform HTTP request to the URL and receive a JSON response back
-        String movieCreditJsonResponse = "";
-
-        try {
-            movieCreditJsonResponse = makeHttpRequest(url);
-        } catch (IOException e) {
-            //  Handle the IOException
-            Log.e(LOG_TAG, "Problem retrieving the targeted Movie JSON results.", e);
-        }
+    private static List<String> extractCastAndSetExtraDetails(int id) {
 
         // The list that will contain all the cast member of a movie
         List<String> cast = new ArrayList<String>();
 
         try {
             // Get the main Json object returned by the Request
-            JSONObject movieCreditJsonObject = new JSONObject(movieCreditJsonResponse);
+            JSONObject movieCreditJsonObject = new JSONObject(MakeTheRightQuery(id,GET_CREDIT));
+
+            // Get the extended details json from the API.
+            // This json contains the information about the movie length
+            JSONObject movieExtendedDetailJsonObject = new JSONObject(MakeTheRightQuery(id,GET_EXTENDED_DETAILS));
+
+            // From the extended detail Json, get the movie length in minutes
+            int lengthInMinute = movieExtendedDetailJsonObject.optInt("runtime");
+
+            // Turn the movie lenght to the standardized format of "0h00",
+            // for example, if a movie takes 123 minutes,
+            // it will turned into "1h03"
+            mMovieLength = formatMovieLength(lengthInMinute);
+
             // Get the Array of the entire movie cast
             JSONArray movieCastJsonArray = movieCreditJsonObject.optJSONArray("cast");
             // Get the Array of the movie crew
@@ -323,8 +316,77 @@ public final class QueryUtils {
 
         }
 
-        //Log.e("director from function",directorName);
         return cast;
+    }
+
+    /** This will be used to format the movie length with the
+     * following type "0h00" instead of a number that represent */
+
+    private static String formatMovieLength(int movieLength) {
+
+        String formatedLength = "";
+
+        // Format the movie accordingly, based on
+        // the total length
+        if (movieLength > 60 || movieLength == 60) {
+            formatedLength = String.valueOf(movieLength / 60) + "h"
+                    + String.format("%02d", movieLength % 60);
+        } else {
+            formatedLength = "0h" + String.format("%02d", movieLength);
+        }
+
+        return formatedLength;
+    }
+
+    /** Return the Json Response based on the information the information
+     *  needed from the API */
+    private static String MakeTheRightQuery(int id,String infoToGet) {
+
+        String MovieUrlTextWithId = MOVIE_BASE_REQUEST_URL
+                + String.valueOf(id);
+
+        // If the user want to get the credit information,
+        // add the "/credits" to the url text
+        if(infoToGet == GET_CREDIT){
+            MovieUrlTextWithId += "/credits";
+        }
+
+        // Create the variables that will hold
+        // the Uri and the uri Builder needed
+        // to construct the full link
+
+        Uri movieInfoBaseUri;
+        Uri.Builder uriBuilder;
+
+        // Build the URI that will be use to get the credit of the movie
+        // from the API
+        movieInfoBaseUri = Uri.parse(MovieUrlTextWithId);
+        uriBuilder = movieInfoBaseUri.buildUpon();
+
+        // Add some relevant information to finalize the Uri
+        uriBuilder.appendQueryParameter("api_key",API_KEY);
+
+        // If the user want to get extended details of a movie,
+        // instead of the credit, then add the following
+        // parameter to the uriBuilder
+        if (infoToGet == GET_EXTENDED_DETAILS) {
+            uriBuilder.appendQueryParameter("language","en-US");
+        }
+
+        // Create URL object by using the uriBuilder
+        URL url = createUrl(uriBuilder.toString());
+        String movieJsonResponse ="";
+
+        // Make the network request to the API
+        // and get back the json.
+        try {
+            movieJsonResponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            //  Handle the IOException
+            Log.e(LOG_TAG, "Problem retrieving the targeted Movie JSON results.", e);
+        }
+
+        return movieJsonResponse;
     }
 
     /**

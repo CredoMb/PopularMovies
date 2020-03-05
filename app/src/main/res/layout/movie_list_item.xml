@@ -34,7 +34,7 @@
         </androidx.cardview.widget.CardView>
             <!-- Make 2 textViews -->
             <TextView
-                android:id="@+id/title_text_view"
+                android:id="@+id/title_text_view_main"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -52,7 +52,7 @@
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:text="2010"
-                android:layout_below="@id/title_text_view"
+                android:layout_below="@id/title_text_view_main"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
 

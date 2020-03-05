@@ -15,9 +15,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.android.popularmovies.Data.MovieLoader;
 import com.example.android.popularmovies.Data.QueryUtils;
@@ -30,8 +32,8 @@ import java.util.List;
 import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<List<AMovie>>,
-        MovieAdapter.MovieAdapterOnClickHandler {
+        MovieAdapter.MovieAdapterOnClickHandler,
+        LoaderManager.LoaderCallbacks<List<AMovie>> {
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
@@ -206,8 +208,11 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(int position) {
+        Toast.makeText(this,"was clicked",Toast.LENGTH_LONG).show();
+        Log.e("The click happened","yeah");
         Intent intent = new Intent(MainActivity.this,DetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_POSITION,position);
         startActivity(intent);
     }
+
 }
