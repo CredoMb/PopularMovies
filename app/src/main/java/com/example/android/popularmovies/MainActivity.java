@@ -17,6 +17,8 @@ import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -55,6 +57,20 @@ public class MainActivity extends AppCompatActivity implements
      * The progress Spinner
      */
     private ProgressBar mProgressSpinner;
+
+    /**
+     * Will be used as values for the mSort variable.
+     * This will determine the order with which the movies
+     * are displayed inside the Main Activity
+     * */
+    private String BY_POPULARITY = "popularity.desc";
+    private String BY_RATINGS = "vote_average.desc";
+
+    /** Will store the sorting option.
+     *  The popularity is the default
+     *  way of displaying the movies in the main
+     *  Activity. */
+    private String sortBy = BY_POPULARITY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements
 
         uriBuilder.appendQueryParameter("api_key", API_KEY);
         uriBuilder.appendQueryParameter("language", "en-US");
-        uriBuilder.appendQueryParameter("sort_by", "popularity.desc");
+        uriBuilder.appendQueryParameter("sort_by", sortBy);
         uriBuilder.appendQueryParameter("include_adult", "false");
         uriBuilder.appendQueryParameter("include_video", "false");
         uriBuilder.appendQueryParameter("page", "1");
@@ -233,5 +249,37 @@ public class MainActivity extends AppCompatActivity implements
         intent.putExtra(DetailActivity.EXTRA_POSITION,position);
         startActivity(intent);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu options from the res/menu/activity_main_menu.xml file.
+        // This adds menu items to the app bar.
+        getMenuInflater().inflate(R.menu.activity_main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // User clicked on a menu option in the app bar overflow menu
+        switch (item.getItemId()) {
+            // Respond to a click on the "Popularity" menu option
+            case R.id.action_popularity:
+                // Set the "" parameter to "" on the url
+                // used to query the API.
+                // This way, the movies will be displayed
+                // according to the sort preference.
+                sortBy = BY_POPULARITY;
+                startLoaderOrEmptyState(0, 0, 0);
+                return true;
+            // Respond to a click on the "Ratings" menu option
+            case R.id.action_ratings:
+                // Do nothing for now
+                sortBy = BY_RATINGS;
+                startLoaderOrEmptyState(0, 0, 0);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
 
 }

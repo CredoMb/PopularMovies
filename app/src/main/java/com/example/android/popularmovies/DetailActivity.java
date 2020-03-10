@@ -8,6 +8,8 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -155,7 +157,6 @@ public class DetailActivity extends AppCompatActivity {
         mMovieRatingBar = (RatingBar) findViewById(R.id.rating_bar);
         mMovieRatingBar.setRating(clickedMovie.getMovieRating());
     }
-
 
     private void closeOnError(){
         finish();

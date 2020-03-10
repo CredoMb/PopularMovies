@@ -7,10 +7,25 @@
 
     <item
         android:id="@+id/action_settings"
-        android:title="@string/settings_menu_item"
+        android:title="@string/sort_by_menu_item"
         android:icon="@drawable/ic_filter"
         android:orderInCategory="1"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom" >
+        <menu>
+            <item
+            android:id="@+id/action_popularity"
+            android:title="@string/popularity"
+            android:orderInCategory="1"
+            app:showAsAction="always"/>
+
+            <item
+                android:id="@+id/action_ratings"
+                android:title="@string/ratings"
+                android:orderInCategory="2"
+                app:showAsAction="always"/>
+        </menu>
+
+    </item>
     <!-- Sort by : Popularity and Likes-->
     <!--- Include Adult : Yes or no -->
 
