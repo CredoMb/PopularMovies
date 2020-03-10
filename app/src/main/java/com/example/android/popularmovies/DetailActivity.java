@@ -4,6 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.RatingBar;
@@ -13,6 +16,8 @@ import android.widget.Toast;
 import com.example.android.popularmovies.Data.GlideHelperClass;
 
 import java.util.List;
+
+import static android.graphics.Typeface.BOLD;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -38,7 +43,19 @@ public class DetailActivity extends AppCompatActivity {
     // the network request made inside the MovieLoader
     public static List<AMovie> movieList;
 
-    private int FOUR_STARS = 4;
+    private final int FOUR_STARS = 4;
+
+    // The last index of the word "Director"
+    // Will be used to make the word bold
+    private final int DIRECTOR_TEXT_LAST_INDEX = 7;
+
+    // The last index of the word "Synopsis"
+    // Will be used to make the word bold
+    private final int SYNOPSIS_TEXT_LAST_INDEX = 7;
+
+    // The last index of the string "Main Stars"
+    // Will be used to make the word bold
+    private final int MAIN_STARS_TEXT_LAST_INDEX = 9;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +100,7 @@ public class DetailActivity extends AppCompatActivity {
         //  the Back Drop Image of the movie ok
         mBackDropIv = (ImageView) findViewById(R.id.backdrop_image);
         GlideHelperClass glideHelper = new GlideHelperClass(this,
-                "https://image.tmdb.org/t/p/original/qonBhlm0UjuKX2sH7e73pnG0454.jpg",
+                clickedMovie.getBackDropImagePath(),
                 R.drawable.ic_launcher_background,
                 mBackDropIv);
 
@@ -92,9 +109,11 @@ public class DetailActivity extends AppCompatActivity {
         /** The trailer will not be part of the this app version.
          *  The next version will be capable of playing the movie trailer*/
         // the Play Icon on the movie BackDrop Image
+/*
         mPlayIcon = (ImageView) findViewById(R.id.play_trailer_iv);
         // the "Play Trailer" overlapping the Image BackDrop Image View ok
         mPlayTrailerTv = (TextView) findViewById(R.id.play_trailer_tv);
+*/
 
         // the TextView containing the movie's title ok
         mMovieTitleTv = (TextView) findViewById(R.id.movie_title_tv_detail);
@@ -111,7 +130,8 @@ public class DetailActivity extends AppCompatActivity {
 
         // the TextView with the movie Synopsis
         mMovieSynopsisTv = (TextView) findViewById(R.id.movie_synopsis_tv);
-        mMovieSynopsisTv.setText(clickedMovie.getSynopsis());
+        mMovieSynopsisTv.append(clickedMovie.getSynopsis());
+        makeTheTitleBold(mMovieSynopsisTv,SYNOPSIS_TEXT_LAST_INDEX);
 
         // the TextView that contains the movie's length
         mMovieLenghtTv = (TextView) findViewById(R.id.movie_length_tv);
@@ -119,7 +139,8 @@ public class DetailActivity extends AppCompatActivity {
 
         // the TextView with the movie's Director Name
         mMovieDirectorTv = (TextView) findViewById(R.id.movie_director_tv);
-        mMovieDirectorTv.setText(clickedMovie.getDirector());
+        mMovieDirectorTv.append(clickedMovie.getDirector());
+        makeTheTitleBold(mMovieDirectorTv,DIRECTOR_TEXT_LAST_INDEX);
 
         // the TextView that contains the list of the movie stars
         mMovieStarsTv = (TextView) findViewById(R.id.movie_stars_tv);
@@ -128,6 +149,7 @@ public class DetailActivity extends AppCompatActivity {
         for(int i=0 ; i < FOUR_STARS; i++) {
             mMovieStarsTv.append(clickedMovie.getMovieStars().get(i) + ", ");
         }
+        makeTheTitleBold(mMovieStarsTv,MAIN_STARS_TEXT_LAST_INDEX);
 
         // the rating Bar for the movie ratings
         mMovieRatingBar = (RatingBar) findViewById(R.id.rating_bar);
@@ -139,6 +161,15 @@ public class DetailActivity extends AppCompatActivity {
         finish();
         Toast.makeText(this, "Movie Data is not available", Toast.LENGTH_SHORT).show();
     }
-}
 
-// /s8qRIwA0zDPbnRekeU0rDwWE7q7.jpg
+    private void makeTheTitleBold(TextView textView, int end){
+
+        String originalText = textView.getText().toString();
+
+        SpannableString spannableString = new SpannableString(originalText);
+        StyleSpan styleSpanBold = new StyleSpan(BOLD);
+
+        spannableString.setSpan(styleSpanBold,0,end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        textView.setText(spannableString);
+    }
+}

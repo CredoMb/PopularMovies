@@ -50,10 +50,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
             /*mMovieTitleTv = (TextView) view.findViewById(); */
             // Get the ImageView from the list item layout
-              mMovieThumbnailIv = (ImageView) view.findViewById(R.id.movieThumbnail_Iv);
-                mMovietitleTv = (TextView) view.findViewById(R.id.title_text_view_main);
-                mMovieyearTv = (TextView) view.findViewById(R.id.year_text_view);
-
+                mMovieThumbnailIv = (ImageView) view.findViewById(R.id.movieThumbnail_Iv);
+               //  mMovietitleTv = (TextView) view.findViewById(R.id.title_text_view_main);
+              //  mMovieyearTv = (TextView) view.findViewById(R.id.year_text_view);
 
                 view.setOnClickListener(this);              // What to do now ? Why not setting the content here ?
         }
@@ -111,14 +110,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
                     .load("http://via.placeholder.com/300.png")
                     .into(movieAdapterViewHolder.mMovieThumbnailIv);*/
 
-
-
+        /*
         movieAdapterViewHolder.mMovietitleTv.setText(currentMovie.getTitle());
-        movieAdapterViewHolder.mMovieyearTv.setText(currentMovie.getYear());
+        movieAdapterViewHolder.mMovieyearTv.setText(currentMovie.getYear());*/
+
         // iV.setImageResource(R.drawable.ic_launcher_foreground);
         // movieAdapterViewHolder.mMovieThumbnailIv.getContext()
         int id = R.drawable.ic_launcher_background;
-
     }
 
     /**

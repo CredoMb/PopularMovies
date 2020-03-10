@@ -17,6 +17,7 @@ public class AMovie {
 
     /** Theses other attributes will be used
      * inside the DetailActivity only*/
+    private String mBackDropImagePath;
     // The synopsis of the movie
     private String mSynopsis;
     // The Director of the movie
@@ -49,6 +50,7 @@ public class AMovie {
     public AMovie(String title, String posterImagePath,
                   String year,
                   String lenght,
+                  String backDropImagePath,
                   String synopsis,
                   String movieDirector,
                   List<String> movieStars,
@@ -56,6 +58,7 @@ public class AMovie {
 
         this(title,posterImagePath,year);
         mMovieLenght = lenght;
+        mBackDropImagePath = backDropImagePath;
         mSynopsis = synopsis;
         mMovieDirector = movieDirector;
         mMovieStars = movieStars;
@@ -77,6 +80,8 @@ public class AMovie {
 
     public String getYear(){return mYear;}
 
+    public String getBackDropImagePath(){return mBackDropImagePath;}
+
     public String getSynopsis() {
         return mSynopsis;
     }
@@ -94,7 +99,7 @@ public class AMovie {
     public float getMovieRating() {
         // Divide the current rating by 2,
         // to have a rating out of 5
-        return mMovieRating/2f;
+        return mMovieRating/2;
     }
 
     /**

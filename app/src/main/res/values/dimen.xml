@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="sidePadding">24dp</dimen>
+    <dimen name="quick_infos_right_margin">56dp</dimen>
+
+    <dimen name="recycler_spacing">16dp</dimen>
+</resources>

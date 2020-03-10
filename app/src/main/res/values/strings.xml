@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">PopularMovies</string>
+    <string name="synopsis">Synopsis:&#160;</string>
+    <string name="director">Director:&#160;</string>
+    <string name="mainStars">Main Stars:&#160;</string>
+
+    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
+    <string name="settings_menu_item">Settings</string>
+
+    <!-- Sort by + maximum of results ? -->
 </resources>

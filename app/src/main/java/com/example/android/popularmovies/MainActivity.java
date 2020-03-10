@@ -11,6 +11,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -20,6 +21,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.example.android.popularmovies.Data.MovieLoader;
 import com.example.android.popularmovies.Data.QueryUtils;
@@ -59,6 +61,10 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Hide the action bar to let more space for
+        // the GridLayout
+        //getSupportActionBar().hide();
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_mainactivity);
 
         // The progress spinner to use for a good
@@ -71,10 +77,10 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setHasFixedSize(true);
 
         int spanCount = 3; // 3 columns
-        int spacing = dpToPx(6); // 6dp
-        boolean includeEdge = true;
+       // int spacing = 50;//dpToPx(2); // 6dp
+        boolean includeEdge = false;
 
-        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+      //  mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
 
         /* */
         mRecyclerView.setLayoutManager(layoutManager);
@@ -92,6 +98,19 @@ public class MainActivity extends AppCompatActivity implements
 
         /** Start the Loader */
         startLoaderOrEmptyState(0,0,0);
+
+        final int spacing = getResources().getDimensionPixelSize(R.dimen.recycler_spacing) / 2;
+
+// apply spacing
+        mRecyclerView.setPadding(spacing, spacing, spacing, spacing);
+        mRecyclerView.setClipToPadding(false);
+        mRecyclerView.setClipChildren(false);
+        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                outRect.set(spacing, spacing, spacing, spacing);
+            }
+        });
     }
 
     /**
@@ -186,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements
                 R.string.no_results_subtitle);*/
 
         // Hide the loading spinner
-        /*mProgressSpinner.setVisibility(View.GONE);*/
+        mProgressSpinner.setVisibility(View.GONE);
 
         /** If there is a valid list of {@link AMovie}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.*/

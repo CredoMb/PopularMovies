@@ -53,6 +53,7 @@ public final class QueryUtils {
 
     // The key can not appear on github as this is a public repo
     private static String API_KEY ="";
+
     /**
      * This is a sample json response to help us test the last function
      */
@@ -236,7 +237,7 @@ public final class QueryUtils {
                 float movieRating = (float) JSONmovieArray.optJSONObject(i).optDouble("vote_average"); // this is the vote_average and the vote_count
 
                 movies.add(new AMovie(movieTitle,posterCompletePath,movieYear,
-                        mMovieLength,synopsis,mMovieDirector,movieCast,movieRating));
+                        mMovieLength,backDropPathCompletePath,synopsis,mMovieDirector,movieCast,movieRating));
                 // The function goes into the "if" but the value doesn't change, why ?
             }
 
