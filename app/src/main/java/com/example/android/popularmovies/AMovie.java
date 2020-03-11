@@ -99,7 +99,7 @@ public class AMovie {
     public float getMovieRating() {
         // Divide the current rating by 2,
         // to have a rating out of 5
-        return mMovieRating/2;
+        return mMovieRating/2f;
     }
 
     /**

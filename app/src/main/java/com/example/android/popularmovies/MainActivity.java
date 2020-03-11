@@ -1,11 +1,8 @@
 package com.example.android.popularmovies;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.RecyclerView.ItemDecoration;
 
 import android.app.LoaderManager;
 import android.content.Context;
@@ -23,17 +20,12 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.android.popularmovies.Data.MovieLoader;
-import com.example.android.popularmovies.Data.QueryUtils;
 import com.example.android.popularmovies.Fragment.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class MainActivity extends AppCompatActivity implements
         MovieAdapter.MovieAdapterOnClickHandler,
@@ -70,12 +62,15 @@ public class MainActivity extends AppCompatActivity implements
      *  The popularity is the default
      *  way of displaying the movies in the main
      *  Activity. */
-    private String sortBy = BY_POPULARITY;
+    private String mSortBy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //
+        mSortBy = BY_RATINGS;
 
         // Hide the action bar to let more space for
         // the GridLayout
@@ -93,10 +88,10 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setHasFixedSize(true);
 
         int spanCount = 3; // 3 columns
-       // int spacing = 50;//dpToPx(2); // 6dp
+        int spacing = dpToPx(8); // 6dp
         boolean includeEdge = false;
 
-      //  mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
+        mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
 
         /* */
         mRecyclerView.setLayoutManager(layoutManager);
@@ -115,9 +110,9 @@ public class MainActivity extends AppCompatActivity implements
         /** Start the Loader */
         startLoaderOrEmptyState(0,0,0);
 
-        final int spacing = getResources().getDimensionPixelSize(R.dimen.recycler_spacing) / 2;
+        /*final int spacing = getResources().getDimensionPixelSize(R.dimen.recycler_spacing) / 2;
 
-// apply spacing
+        // apply spacing
         mRecyclerView.setPadding(spacing, spacing, spacing, spacing);
         mRecyclerView.setClipToPadding(false);
         mRecyclerView.setClipChildren(false);
@@ -126,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements
             public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
                 outRect.set(spacing, spacing, spacing, spacing);
             }
-        });
+        });*/
     }
 
     /**
@@ -157,15 +152,19 @@ public class MainActivity extends AppCompatActivity implements
      * other wise, display the empty state view
      */
 
-    private void startLoaderOrEmptyState(int emptyStateImageId, int emptyStateTitleId, int emptyStateSubtitleId) {
+    private void startLoaderOrEmptyState(int loaderId,int emptyStateImageId, int emptyStateTitleId) {
 
         // Check the status of the network, then either launch the Loader or
         // display the Empty State
 
         if (isNetworkConnected()) {
-            getLoaderManager().initLoader(MOVIE_LOADER_ID, null, MainActivity.this).forceLoad();
+            getLoaderManager().initLoader(MOVIE_LOADER_ID + loaderId, null, MainActivity.this).forceLoad();
         } else {
 
+            mProgressSpinner.setVisibility(View.GONE);
+            Toast.makeText(this,"No Internet connexion",Toast.LENGTH_LONG).show();
+
+            // Make a refresh button
             /*
 
             // Remove the progress spinner
@@ -183,6 +182,8 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public Loader<List<AMovie>> onCreateLoader(int i, Bundle bundle) {
 
+        // Set the visibility of the spinner.
+
         // The key can not appear on github as this is a public repo
         String API_KEY = "";
 
@@ -199,10 +200,15 @@ public class MainActivity extends AppCompatActivity implements
 
         uriBuilder.appendQueryParameter("api_key", API_KEY);
         uriBuilder.appendQueryParameter("language", "en-US");
-        uriBuilder.appendQueryParameter("sort_by", sortBy);
-        uriBuilder.appendQueryParameter("include_adult", "false");
+
+        // Change this to vote average desc
+        uriBuilder.appendQueryParameter("sort_by", mSortBy);
+        uriBuilder.appendQueryParameter("include_adult", "true");
         uriBuilder.appendQueryParameter("include_video", "false");
         uriBuilder.appendQueryParameter("page", "1");
+
+
+        Log.e("The sort in loader",mSortBy);
 
         // This will execute the network request needed to get the data
         // from the API and return the data to onLoadFinished
@@ -222,6 +228,9 @@ public class MainActivity extends AppCompatActivity implements
 
         // Hide the loading spinner
         mProgressSpinner.setVisibility(View.GONE);
+
+        // Clear the adapter by setting an empty ArrayList
+        mMovietAdapter.setMovieData(new ArrayList<AMovie>());
 
         /** If there is a valid list of {@link AMovie}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.*/
@@ -268,18 +277,20 @@ public class MainActivity extends AppCompatActivity implements
                 // used to query the API.
                 // This way, the movies will be displayed
                 // according to the sort preference.
-                sortBy = BY_POPULARITY;
-                startLoaderOrEmptyState(0, 0, 0);
+                mSortBy = BY_POPULARITY;
+
+                Log.e("sort option in method",BY_POPULARITY);
+                startLoaderOrEmptyState(1, 0, 0);
+
                 return true;
             // Respond to a click on the "Ratings" menu option
             case R.id.action_ratings:
                 // Do nothing for now
-                sortBy = BY_RATINGS;
-                startLoaderOrEmptyState(0, 0, 0);
+                mSortBy = BY_RATINGS;
+                Toast.makeText(this,"Ratings was clicked",Toast.LENGTH_LONG).show();
+                startLoaderOrEmptyState(2, 0, 0);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
-
 }

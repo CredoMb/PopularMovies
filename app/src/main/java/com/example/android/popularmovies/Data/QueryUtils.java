@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.example.android.popularmovies.AMovie;
 import com.example.android.popularmovies.MainActivity;
+import com.example.android.popularmovies.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,6 +70,9 @@ public final class QueryUtils {
 
     /**This will contain the length of a given movie */
     private static String mMovieLength;
+
+    /** Will be used wherever we don't have a date*/
+    private static String NOT_SPECIFIED = "Not Specified";
 
     /**
      *
@@ -218,8 +222,12 @@ public final class QueryUtils {
                 // Extract the movie title's String
                 String movieTitle = JSONmovieArray.optJSONObject(i).optString("title");
                 // Extract the movie Year
-                String movieYear = JSONmovieArray.optJSONObject(i).optString("release_date").substring(MOVIE_YEAR_START_INDEX,MOVIE_YEAR_END_INDEX);
-
+                String fullReleaseDate = JSONmovieArray.optJSONObject(i).optString("release_date");
+                String movieYear =  NOT_SPECIFIED;
+                    // Make sure that the movie has a valid release date
+                if(!TextUtils.isEmpty(fullReleaseDate)){
+                     movieYear = fullReleaseDate.substring(MOVIE_YEAR_START_INDEX,MOVIE_YEAR_END_INDEX);
+                }
 
                 /** The following group of informations will only be used in the DetailActivity */
 
@@ -327,7 +335,7 @@ public final class QueryUtils {
 
         String formatedLength = "";
 
-        // Format the movie accordingly, based on
+        // Format the movie length (duration), based on
         // the total length
         if (movieLength > 60 || movieLength == 60) {
             formatedLength = String.valueOf(movieLength / 60) + "h"

@@ -36,7 +36,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mMovieDirectorTv;
 
     // The key for the extra in the intent
-    public static String EXTRA_POSITION ="movie position";
+    public static String EXTRA_POSITION = "movie position";
 
     //The default position of a movie inside the movie list
     private int DEFAULT_POSITION = -1;
@@ -49,22 +49,21 @@ public class DetailActivity extends AppCompatActivity {
 
     // The last index of the word "Director"
     // Will be used to make the word bold
-    private final int DIRECTOR_TEXT_LAST_INDEX = 7;
+    private final int DIRECTOR_TEXT_LAST_INDEX = 8;
 
     // The last index of the word "Synopsis"
     // Will be used to make the word bold
-    private final int SYNOPSIS_TEXT_LAST_INDEX = 7;
+    private final int SYNOPSIS_TEXT_LAST_INDEX = 8;
 
     // The last index of the string "Main Stars"
     // Will be used to make the word bold
-    private final int MAIN_STARS_TEXT_LAST_INDEX = 9;
+    private final int MAIN_STARS_TEXT_LAST_INDEX = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        Log.e("the list of movies",movieList.get(0).getTitle());
         // Receive the intent from the Main Activity
         Intent intent = getIntent();
         // If the intent is null, display a toast with an error message
@@ -97,7 +96,7 @@ public class DetailActivity extends AppCompatActivity {
 
         // Get the movie at "position"
 
-        AMovie clickedMovie =  movieList.get(position);
+        AMovie clickedMovie = movieList.get(position);
 
         //  the Back Drop Image of the movie ok
         mBackDropIv = (ImageView) findViewById(R.id.backdrop_image);
@@ -133,7 +132,7 @@ public class DetailActivity extends AppCompatActivity {
         // the TextView with the movie Synopsis
         mMovieSynopsisTv = (TextView) findViewById(R.id.movie_synopsis_tv);
         mMovieSynopsisTv.append(clickedMovie.getSynopsis());
-        makeTheTitleBold(mMovieSynopsisTv,SYNOPSIS_TEXT_LAST_INDEX);
+        makeTheTitleBold(mMovieSynopsisTv, SYNOPSIS_TEXT_LAST_INDEX);
 
         // the TextView that contains the movie's length
         mMovieLenghtTv = (TextView) findViewById(R.id.movie_length_tv);
@@ -142,35 +141,48 @@ public class DetailActivity extends AppCompatActivity {
         // the TextView with the movie's Director Name
         mMovieDirectorTv = (TextView) findViewById(R.id.movie_director_tv);
         mMovieDirectorTv.append(clickedMovie.getDirector());
-        makeTheTitleBold(mMovieDirectorTv,DIRECTOR_TEXT_LAST_INDEX);
+        makeTheTitleBold(mMovieDirectorTv, DIRECTOR_TEXT_LAST_INDEX);
 
         // the TextView that contains the list of the movie stars
         mMovieStarsTv = (TextView) findViewById(R.id.movie_stars_tv);
         // This will append the four main starts of the movie
         // inside the "stars" TextView
-        for(int i=0 ; i < FOUR_STARS; i++) {
-            mMovieStarsTv.append(clickedMovie.getMovieStars().get(i) + ", ");
+        if (clickedMovie.getMovieStars().size() > FOUR_STARS) {
+            appendStarNames(clickedMovie, mMovieStarsTv, FOUR_STARS);
+        } else {
+            appendStarNames(clickedMovie, mMovieStarsTv, clickedMovie.getMovieStars().size());
         }
-        makeTheTitleBold(mMovieStarsTv,MAIN_STARS_TEXT_LAST_INDEX);
+        makeTheTitleBold(mMovieStarsTv, MAIN_STARS_TEXT_LAST_INDEX);
 
         // the rating Bar for the movie ratings
         mMovieRatingBar = (RatingBar) findViewById(R.id.rating_bar);
         mMovieRatingBar.setRating(clickedMovie.getMovieRating());
     }
 
-    private void closeOnError(){
+    private void closeOnError() {
         finish();
         Toast.makeText(this, "Movie Data is not available", Toast.LENGTH_SHORT).show();
     }
 
-    private void makeTheTitleBold(TextView textView, int end){
+    private void appendStarNames(AMovie clickedMovie, TextView tv, int maxStars) {
+
+        for (int i = 0; i < maxStars; i++) {
+            tv.append(clickedMovie.getMovieStars().get(i));
+
+            if (i < maxStars - 1) {
+                tv.append(", ");
+            }
+        }
+    }
+
+    private void makeTheTitleBold(TextView textView, int end) {
 
         String originalText = textView.getText().toString();
 
         SpannableString spannableString = new SpannableString(originalText);
         StyleSpan styleSpanBold = new StyleSpan(BOLD);
 
-        spannableString.setSpan(styleSpanBold,0,end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(styleSpanBold, 0, end, Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         textView.setText(spannableString);
     }
 }
