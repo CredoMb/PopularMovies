@@ -72,6 +72,9 @@ public class MainActivity extends AppCompatActivity implements
         //
         mSortBy = BY_RATINGS;
 
+        // Remove the shadow under the app bar
+        getSupportActionBar().setElevation(0);
+
         // Hide the action bar to let more space for
         // the GridLayout
         //getSupportActionBar().hide();

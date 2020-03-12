@@ -5,18 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mainBackground">
+    <!--The new background : #475B87 -->
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-
-        <ProgressBar
-            android:id="@+id/loading_spinner"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_mainactivity"
@@ -25,6 +19,79 @@
             android:paddingStart="8dp"
             android:paddingTop="16dp"
             android:paddingEnd="8dp" />
+
+        <ProgressBar
+            android:id="@+id/loading_spinner"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerInParent="true"/>
+
+        <!-- Content for the empty state when there is no internet connection-->
+        <RelativeLayout
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <ImageView
+                android:id="@+id/empty_state_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/no_iternet_image"
+                android:scaleType="centerCrop"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_above="@id/refresh_tv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="80dp">
+            <!-- How to align this in the center ? IDK -->
+            <TextView
+                android:id="@+id/empty_state_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="8dp"
+                android:textAlignment="center"
+                android:fontFamily="roboto"
+                android:text="@string/no_internet_title"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="@color/ColorEmptyStateTitle"/>
+
+
+                <TextView
+                    android:id="@+id/empty_state_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="roboto"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="4dp"
+                    android:text="@string/no_internet_text"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="@color/ColorEmptyStateText" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/refresh_tv"
+                android:layout_width="match_parent"
+                android:layout_height="92dp"
+                android:layout_alignParentBottom="true"
+                android:gravity="center"
+                android:text="@string/refresh_text"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:fontFamily="roboto"
+                android:background="@color/ColorEmptyStateRefresh"
+                />
+        </RelativeLayout>
+
     </LinearLayout>
 
 </FrameLayout>

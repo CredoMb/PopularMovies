@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Make the colorPrimary more bright then that! Please !-->
-    <color name="colorPrimary">#000000</color>
+    <!-- Make the colorPrimary more bright then that! Please ! 3C3E5B -->
+    <color name="colorPrimary">#4D5078</color>
     <color name="colorPrimaryDark">#0E0E0E</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorAccent">#4D5078</color>
 
     <color name="mainBackground">#0E0E0E</color>
+
+    <!-- Colors of the three elements of the empty states-->
+
+    <color name="ColorEmptyStateTitle">#4D5078</color>
+    <color name="ColorEmptyStateText">#3C3E5B</color>
+    <color name="ColorEmptyStateRefresh">#4D5078</color>
+
 </resources>
