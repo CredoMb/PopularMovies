@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <!--<androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_mainactivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"/>-->
 
         <!-- Content for the empty state when there is no internet connection-->
         <RelativeLayout
@@ -39,7 +39,7 @@
                 android:id="@+id/empty_state_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/no_iternet_image"
+                android:src = "@drawable/no_internet_image"
                 android:scaleType="centerCrop"/>
 
             <LinearLayout

@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Make the colorPrimary more bright then that! Please ! 3C3E5B -->
-    <color name="colorPrimary">#4D5078</color>
-    <color name="colorPrimaryDark">#0E0E0E</color>
-    <color name="colorAccent">#4D5078</color>
+    <color name="colorPrimary">#030202</color>
+    <color name="colorPrimaryDark">#030202</color>
+    <color name="colorAccent">#FB4A4A</color>
 
-    <color name="mainBackground">#0E0E0E</color>
+    <color name="mainBackground">#323232</color>
 
+    <!--
+          0E0E0E
+          C1C2D0
+          8286A2
+          0E0E0E-->
     <!-- Colors of the three elements of the empty states-->
 
-    <color name="ColorEmptyStateTitle">#4D5078</color>
-    <color name="ColorEmptyStateText">#3C3E5B</color>
-    <color name="ColorEmptyStateRefresh">#4D5078</color>
+    <color name="ColorEmptyStateTitle">#686868</color>
+    <color name="ColorEmptyStateText">#424242</color>
+    <color name="ColorEmptyStateRefresh">#686868</color>
 
 </resources>
