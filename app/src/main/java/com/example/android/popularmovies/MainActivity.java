@@ -8,7 +8,6 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
-import android.graphics.Rect;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -18,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,10 +36,6 @@ public class MainActivity extends AppCompatActivity implements
     private MovieAdapter mMovietAdapter;
 
     private String baseUrlForImage = "https://image.tmdb.org/t/p/original";
-
-    private TextView mErrorMessageDisplay;
-
-    private ProgressBar mLoadingIndicator;
 
     private static final int MOVIE_LOADER_ID = 0;
 
@@ -64,13 +60,36 @@ public class MainActivity extends AppCompatActivity implements
      *  Activity. */
     private String mSortBy;
 
+    /** The group view that will contain the
+     *  empty state for a bad internet connection*/
+
+    private RelativeLayout emptyStateRl;
+
+    /** This is the textview present inside the
+     *  empty state's group view */
+
+    private TextView mRefreshTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //
-        mSortBy = BY_RATINGS;
+        // The empty state group view
+        emptyStateRl = (RelativeLayout) findViewById(R.id.empty_group_view);
+
+        // The refresh textView from the empty State
+        mRefreshTv = findViewById(R.id.refresh_tv);
+
+        mRefreshTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                   startLoaderOrEmptyState(MOVIE_LOADER_ID);
+            }
+        });
+
+        // Those
+        mSortBy = BY_POPULARITY;
 
         // Remove the shadow under the app bar
         getSupportActionBar().setElevation(0);
@@ -83,9 +102,6 @@ public class MainActivity extends AppCompatActivity implements
 
         // The progress spinner to use for a good
         mProgressSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
-
-        // Remove the progress spinner to display the empty state view properly
-        //mProgressSpinner.setVisibility(View.INVISIBLE);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this,3);
         mRecyclerView.setHasFixedSize(true);
@@ -103,7 +119,7 @@ public class MainActivity extends AppCompatActivity implements
          * The MovieAdapter is responsible for linking our movie data with the Views that
          * will end up displaying our movie data.
          */
-        mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>(),this);//new ArrayList<AMovie>());
+        mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>(),this);
         // How about putting a list inside the movie adapter ?
         // I don't know about that, really !
 
@@ -111,20 +127,7 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setAdapter(mMovietAdapter);
 
         /** Start the Loader */
-        startLoaderOrEmptyState(0,0,0);
-
-        /*final int spacing = getResources().getDimensionPixelSize(R.dimen.recycler_spacing) / 2;
-
-        // apply spacing
-        mRecyclerView.setPadding(spacing, spacing, spacing, spacing);
-        mRecyclerView.setClipToPadding(false);
-        mRecyclerView.setClipChildren(false);
-        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
-            @Override
-            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-                outRect.set(spacing, spacing, spacing, spacing);
-            }
-        });*/
+        startLoaderOrEmptyState(MOVIE_LOADER_ID);
     }
 
     /**
@@ -155,29 +158,17 @@ public class MainActivity extends AppCompatActivity implements
      * other wise, display the empty state view
      */
 
-    private void startLoaderOrEmptyState(int loaderId,int emptyStateImageId, int emptyStateTitleId) {
+    private void startLoaderOrEmptyState(int loaderId) {
 
         // Check the status of the network, then either launch the Loader or
         // display the Empty State
 
         if (isNetworkConnected()) {
-            getLoaderManager().initLoader(MOVIE_LOADER_ID + loaderId, null, MainActivity.this).forceLoad();
+            getLoaderManager().initLoader(loaderId, null, MainActivity.this).forceLoad();
         } else {
 
-            mProgressSpinner.setVisibility(View.GONE);
-            Toast.makeText(this,"No Internet connexion",Toast.LENGTH_LONG).show();
-
-            // Make a refresh button
-            /*
-
-            // Remove the progress spinner
-            mProgressSpinner.setVisibility(View.GONE);
-
-            // Fill the empty state view with its resources,
-            // one image and 2 strings
-            fillEmptyStateView(emptyStateImageId,
-                    emptyStateTitleId,
-                    emptyStateSubtitleId);*/
+            //.setVisibility(View.GONE);
+            emptyStateRl.setVisibility(View.VISIBLE);
         }
     }
 
@@ -185,7 +176,11 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public Loader<List<AMovie>> onCreateLoader(int i, Bundle bundle) {
 
+        // Remove the empty state view
+        emptyStateRl.setVisibility(View.GONE);
+
         // Set the visibility of the spinner.
+        mProgressSpinner.setVisibility(View.VISIBLE);
 
         // The key can not appear on github as this is a public repo
         String API_KEY = "";
@@ -222,25 +217,15 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onLoadFinished(Loader<List<AMovie>> loader, List<AMovie> data) {
 
-        // Set empty state view with the content of the "no result" state
-        // This will explain to the user that no result where found for the
-        // key word he entered
-        /*fillEmptyStateView(R.drawable.empty_state_search,
-                R.string.no_results_title,
-                R.string.no_results_subtitle);*/
-
-        // Hide the loading spinner
         mProgressSpinner.setVisibility(View.GONE);
 
         // Clear the adapter by setting an empty ArrayList
-        mMovietAdapter.setMovieData(new ArrayList<AMovie>());
+        mMovietAdapter.setMovieData(null);
 
         /** If there is a valid list of {@link AMovie}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.*/
 
         if (data != null && !data.isEmpty()) {
-
-            mProgressSpinner.setVisibility(View.GONE);
             mMovietAdapter.setMovieData(data);
         }
     }
@@ -251,6 +236,8 @@ public class MainActivity extends AppCompatActivity implements
 
         // Create a new empty Movie list for the Adapter
         mMovietAdapter =  new MovieAdapter(this,new ArrayList<AMovie>(),this);
+
+        // Make the empty
     }
 
     @Override
@@ -272,26 +259,36 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
+
             // Respond to a click on the "Popularity" menu option
             case R.id.action_popularity:
-                // Set the "" parameter to "" on the url
+                // Set the "mSortBy" parameter to "popularity.desc" on the url
                 // used to query the API.
                 // This way, the movies will be displayed
                 // according to the sort preference.
                 mSortBy = BY_POPULARITY;
+                mMovietAdapter.setMovieData(new ArrayList<AMovie>());
 
-                Log.e("sort option in method",BY_POPULARITY);
-                startLoaderOrEmptyState(1, 0, 0);
+                // Start the loader
+                startLoaderOrEmptyState(MOVIE_LOADER_ID);
 
                 return true;
+
             // Respond to a click on the "Ratings" menu option
             case R.id.action_ratings:
-                // Do nothing for now
+                // Make this to sort the movies by ratings
+
+                // Set the "mSortBy" parameter to "vote_average.desc" on the url
+                // used to query the API.
+                // This way, the movies will be displayed
+                // according to the sort preference.
                 mSortBy = BY_RATINGS;
-                Toast.makeText(this,"Ratings was clicked",Toast.LENGTH_LONG).show();
-                startLoaderOrEmptyState(2, 0, 0);
+
+                startLoaderOrEmptyState(MOVIE_LOADER_ID+1);
+
                 return true;
         }
         return super.onOptionsItemSelected(item);

@@ -11,11 +11,42 @@
           0E0E0E
           C1C2D0
           8286A2
-          0E0E0E-->
+          0E0E0E
+          202022
+          030202 : une des palettes-->
     <!-- Colors of the three elements of the empty states-->
+    <!-- The title and refresh were 686868
+    The title use to be 030202-->
 
-    <color name="ColorEmptyStateTitle">#686868</color>
+    <color name="ColorEmptyStateTitle">#424242</color>
     <color name="ColorEmptyStateText">#424242</color>
-    <color name="ColorEmptyStateRefresh">#686868</color>
+    <color name="ColorEmptyStateRefresh">#424242</color>
 
 </resources>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
