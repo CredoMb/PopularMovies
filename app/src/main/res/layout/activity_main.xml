@@ -10,13 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+    <!-- Recycler view that will display the list of movies-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_mainactivity"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="8dp"
-            android:paddingStart="8dp"
-            android:paddingEnd="8dp" />
+            android:paddingTop="@dimen/recycler_spacing"
+            android:paddingStart="@dimen/recycler_spacing"
+            android:paddingEnd="@dimen/recycler_spacing" />
 
         <ProgressBar
             android:id="@+id/loading_spinner"
@@ -41,6 +42,7 @@
                 android:src = "@drawable/no_internet_image"
                 android:scaleType="centerCrop"/>
 
+            <!-- Group View that contains all the texts of the empty state-->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -48,7 +50,7 @@
                 android:layout_above="@id/refresh_tv"
                 android:layout_centerHorizontal="true"
                 android:layout_marginBottom="80dp">
-            <!-- How to align this in the center ? IDK -->
+
             <TextView
                 android:id="@+id/empty_state_title"
                 android:layout_width="wrap_content"
@@ -60,7 +62,7 @@
                 android:text="@string/no_internet_title"
                 android:textSize="26sp"
                 android:textStyle="bold"
-                android:textColor="@color/ColorEmptyStateTitle"/>
+                android:textColor="@color/colorEmptyStateTitle"/>
 
 
                 <TextView
@@ -73,7 +75,7 @@
                     android:text="@string/no_internet_text"
                     android:textAlignment="center"
                     android:textAppearance="?android:textAppearanceSmall"
-                    android:textColor="@color/ColorEmptyStateText" />
+                    android:textColor="@color/colorEmptyStateText" />
             </LinearLayout>
 
             <TextView
@@ -87,7 +89,7 @@
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:fontFamily="roboto"
-                android:background="@color/ColorEmptyStateRefresh"
+                android:background="@color/colorEmptyStateRefresh"
                 />
         </RelativeLayout>
 

@@ -1,7 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Side padding used for the majority of views in the
+         DetailActivity-->
     <dimen name="sidePadding">24dp</dimen>
-    <dimen name="quick_infos_right_margin">56dp</dimen>
+    <!-- Right padding for the group view displaying movie's
+         quick details in the DetailActivity-->
+    <dimen name="quick_infos_right_padding">56dp</dimen>
 
+    <!-- Height for the backdrop image inside the detail activity-->
+    <dimen name="backdrop_heigh">200dp</dimen>
+    <!-- Margin used on the bottom of the backdrop image view-->
+    <dimen name="backdrop_bottom_margin">8dp</dimen>
+
+    <!--Text size for the body text -->
+    <dimen name="bodyTextSize">14sp</dimen>
+
+    <!--Spacing used around the recycler inside the MainActivity -->
     <dimen name="recycler_spacing">8dp</dimen>
+
+    <!-- &lt;!&ndash; &ndash;&gt;
+    <dimen name="backdrop_heigh">200dp</dimen>
+    &lt;!&ndash; &ndash;&gt;
+    <dimen name="backdrop_heigh">200dp</dimen>
+    &lt;!&ndash; &ndash;&gt;
+    <dimen name="backdrop_heigh">200dp</dimen>-->
+
+
 </resources>

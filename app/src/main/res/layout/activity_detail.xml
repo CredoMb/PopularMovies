@@ -15,30 +15,10 @@
         <ImageView
             android:id="@+id/backdrop_image"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_marginBottom="8dp"
+            android:layout_height="@dimen/backdrop_heigh"
+            android:layout_marginBottom="@dimen/backdrop_bottom_margin"
             android:scaleType="centerCrop" />
 
-        <!--<ImageView
-            android:id="@+id/play_trailer_iv"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_alignParentBottom="true"
-            />
-
-        <TextView
-            android:id="@+id/play_trailer_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="Play the trailer"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_alignParentBottom="true"
-            android:layout_toRightOf="@id/play_trailer_iv"/>
--->
         <!--The movie Title -->
         <TextView
             android:id="@+id/movie_title_tv_detail"
@@ -51,7 +31,7 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
-        <!-- Movie Quick Details -->
+        <!-- GroupView for the movie Quick Details -->
         <LinearLayout
             android:id="@+id/quick_infos_group_view"
             android:layout_width="match_parent"
@@ -59,7 +39,7 @@
             android:layout_marginBottom="16dp"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/sidePadding"
-            android:paddingRight="@dimen/quick_infos_right_margin">
+            android:paddingRight="@dimen/quick_infos_right_padding">
 
             <TextView
                 android:id="@+id/release_year_tv"
@@ -67,17 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
-
-            <!--
-                    <TextView
-                        android:id="@+id/public_allowed_tv"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="14sp"
-                        android:textColor="@android:color/darker_gray" />
-            -->
+                android:textSize="@dimen/bodyTextSize" />
 
             <TextView
                 android:id="@+id/movie_length_tv"
@@ -85,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="@dimen/bodyTextSize" />
 
             <FrameLayout
                 android:layout_width="0dp"
@@ -95,14 +65,13 @@
                 <RatingBar
                     android:id="@+id/rating_bar"
                     style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:theme="@style/RatingBar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:isIndicator="true"
-                    android:numStars="5"
-                    android:theme="@style/RatingBar" />
+                    android:numStars="5" />
             </FrameLayout>
 
-            <!-- android:theme="@style/RatingBar" -->
 
         </LinearLayout>
 
@@ -116,7 +85,7 @@
             android:paddingEnd="@dimen/sidePadding"
             android:text="@string/synopsis"
             android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            android:textSize="@dimen/bodyTextSize" />
 
         <!-- This will contain the name of the movie's director -->
         <TextView
@@ -128,7 +97,7 @@
             android:paddingEnd="@dimen/sidePadding"
             android:text="@string/director"
             android:textColor="@android:color/white"
-            android:textSize="14sp" />
+            android:textSize="@dimen/bodyTextSize" />
 
         <!-- This will contain the names of the movie's stars -->
         <TextView
@@ -140,9 +109,7 @@
             android:paddingEnd="@dimen/sidePadding"
             android:text="@string/mainStars"
             android:textColor="@android:color/white"
-            android:textSize="14sp" />
-
-        <!--Make a similar movie window -->
+            android:textSize="@dimen/bodyTextSize" />
 
     </LinearLayout>
 </ScrollView>

@@ -237,7 +237,12 @@ public class MainActivity extends AppCompatActivity implements
         // Create a new empty Movie list for the Adapter
         mMovietAdapter =  new MovieAdapter(this,new ArrayList<AMovie>(),this);
 
-        // Make the empty
+        // If there's no internet connection display the emptystate view
+        if (!isNetworkConnected()) {
+            emptyStateRl.setVisibility(View.VISIBLE);
+        }
+
+        // What to do now bicth ?
     }
 
     @Override

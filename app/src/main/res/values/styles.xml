@@ -15,7 +15,10 @@
     <!-- Style for the rating bar -->
     <style name="RatingBar" parent="Theme.AppCompat">
         <item name="colorControlNormal">@android:color/darker_gray</item>
-        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorRating</item>
     </style>
+
+    <!-- E6D685 -->
+    <!-- Style for the rating bar -->
 
 </resources>

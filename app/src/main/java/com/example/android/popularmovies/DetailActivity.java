@@ -102,7 +102,7 @@ public class DetailActivity extends AppCompatActivity {
         mBackDropIv = (ImageView) findViewById(R.id.backdrop_image);
         GlideHelperClass glideHelper = new GlideHelperClass(this,
                 clickedMovie.getBackDropImagePath(),
-                R.drawable.ic_launcher_background,
+                R.drawable.placeholder_image,
                 mBackDropIv);
 
         glideHelper.loadImage();

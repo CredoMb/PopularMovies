@@ -99,7 +99,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
         GlideHelperClass glideHelper = new GlideHelperClass(mContext,
                 currentMovie.getPosterPath(),
-                R.drawable.ic_launcher_background,
+                R.drawable.placeholder_image,
                 movieAdapterViewHolder.mMovieThumbnailIv);
         //Log.e("the path",ImagebaseUrl + currentMovie.getPosterPath());
 
