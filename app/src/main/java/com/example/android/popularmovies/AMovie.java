@@ -16,7 +16,7 @@ public class AMovie {
     private String mYear;
 
     /** Theses other attributes will be used
-     * inside the DetailActivity only*/
+     * inside the DetailActivity only */
     private String mBackDropImagePath;
     // The synopsis of the movie
     private String mSynopsis;
@@ -106,10 +106,10 @@ public class AMovie {
      * Defining setters for certain attributes of the "AMovie" class.
      * We will define setters only for a certain attributes.
      */
-    public void setSynopsis(String synopsis) {
+    // Won't be used in this app version
+    /*public void setSynopsis(String synopsis) {
         mSynopsis = synopsis;
     }
-
     public void setMovieStars(List<String> movieStars) {
 
         // Initialise the list before putting values in
@@ -122,5 +122,6 @@ public class AMovie {
 
     public void setMovieRating(float movieRating) {
         mMovieRating = movieRating;
-    }
+    }*/
+
 }

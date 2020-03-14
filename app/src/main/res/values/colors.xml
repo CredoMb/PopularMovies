@@ -6,17 +6,7 @@
     <color name="colorAccent">#FB4A4A</color>
 
     <color name="mainBackground">#323232</color>
-
-    <!--
-          0E0E0E
-          C1C2D0
-          8286A2
-          0E0E0E
-          202022
-          030202 : une des palettes-->
-    <!-- Colors of the three elements of the empty states-->
-    <!-- The title and refresh were 686868
-    The title use to be 030202-->
+    <!-- color for the launcher background -->
 
     <!-- colors for the text in the empty state -->
     <color name="colorEmptyStateTitle">#424242</color>

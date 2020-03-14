@@ -36,7 +36,9 @@ public class MainActivity extends AppCompatActivity implements
     private MovieAdapter mMovietAdapter;
     private static final int MOVIE_LOADER_ID = 0;
 
-    /** Will be used as the base url and parameter will be */
+    /**
+     * Will be used as the base url and parameter will be
+     */
     private String MOVIE_REQUEST_URL = "https://api.themoviedb.org/3/discover/movie?";
 
     /**
@@ -48,23 +50,29 @@ public class MainActivity extends AppCompatActivity implements
      * Will be used as values for the mSort variable.
      * This will determine the order with which the movies
      * are displayed inside the Main Activity
-     * */
+     */
     private String BY_POPULARITY = "popularity.desc";
     private String BY_RATINGS = "vote_average.desc";
 
-    /** Will store the sorting option.
-     *  The popularity is the default
-     *  way of displaying the movies in the main
-     *  Activity. */
+    /**
+     * Will store the sorting option.
+     * The popularity is the default
+     * way of displaying the movies in the main
+     * Activity.
+     */
     private String mSortBy;
 
-    /** The group view that will contain the
-     *  empty state for a bad internet connection*/
+    /**
+     * The group view that will contain the
+     * empty state for a bad internet connection
+     */
 
     private RelativeLayout emptyStateRl;
 
-    /** This is the textview present inside the
-     *  empty state's group view */
+    /**
+     * This is the textview present inside the
+     * empty state's group view
+     */
 
     private TextView mRefreshTv;
 
@@ -83,7 +91,7 @@ public class MainActivity extends AppCompatActivity implements
         mRefreshTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                   startLoaderOrEmptyState(MOVIE_LOADER_ID);
+                startLoaderOrEmptyState(MOVIE_LOADER_ID);
             }
         });
 
@@ -100,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements
         // The progress spinner to use for a good
         mProgressSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
 
-        GridLayoutManager layoutManager = new GridLayoutManager(this,3);
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         mRecyclerView.setHasFixedSize(true);
 
         int spanCount = 3; // 3 columns
@@ -116,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements
          * The MovieAdapter is responsible for linking our movie data with the Recycler that
          * will end up displaying our movie data.
          */
-        mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>(),this);
+        mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>(), this);
 
         /* Set the adapter of the Recycler view */
         mRecyclerView.setAdapter(mMovietAdapter);
@@ -138,12 +146,14 @@ public class MainActivity extends AppCompatActivity implements
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
-    /** Convert a dp value to a px value.
+    /**
+     * Convert a dp value to a px value.
      * Will be used to set the margins between each views
-     * of the gridLayout*/
+     * of the gridLayout
+     */
 
     private int dpToPx(int dp) {
-        float px = dp* this.getResources().getDisplayMetrics().density;
+        float px = dp * this.getResources().getDisplayMetrics().density;
         return (int) px;
     }
 
@@ -166,7 +176,9 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    /** Get executed when the loader is initiated */
+    /**
+     * Get executed when the loader is initiated
+     */
     @Override
     public Loader<List<AMovie>> onCreateLoader(int i, Bundle bundle) {
 
@@ -199,15 +211,14 @@ public class MainActivity extends AppCompatActivity implements
         uriBuilder.appendQueryParameter("include_video", "false");
         uriBuilder.appendQueryParameter("page", "1");
 
-
-        Log.e("The sort in loader",mSortBy);
-
         // This will execute the network request needed to get the data
         // from the API and return the data to onLoadFinished
         return new MovieLoader(this, uriBuilder.toString());
     }
 
-    /** Get executed when the background thread finishes the work */
+    /**
+     * Get executed when the background thread finishes the work
+     */
     @Override
     public void onLoadFinished(Loader<List<AMovie>> loader, List<AMovie> data) {
 
@@ -217,19 +228,21 @@ public class MainActivity extends AppCompatActivity implements
         mMovietAdapter.setMovieData(null);
 
         /** If there is a valid list of {@link AMovie}s, then add them to the adapter's
-        // data set. This will trigger the ListView to update.*/
+         // data set. This will trigger the ListView to update.*/
 
         if (data != null && !data.isEmpty()) {
             mMovietAdapter.setMovieData(data);
         }
     }
 
-    /** This will reset the previous created loader */
+    /**
+     * This will reset the previous created loader
+     */
     @Override
     public void onLoaderReset(Loader<List<AMovie>> loader) {
 
         // Create a new empty Movie list for the Adapter
-        mMovietAdapter =  new MovieAdapter(this,new ArrayList<AMovie>(),this);
+        mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>(), this);
         mRecyclerView.setAdapter(mMovietAdapter);
 
         // If there's no internet connection display the emptystate view
@@ -240,10 +253,8 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(int position) {
-        Toast.makeText(this,"was clicked",Toast.LENGTH_LONG).show();
-        Log.e("The click happened","yeah");
-        Intent intent = new Intent(MainActivity.this,DetailActivity.class);
-        intent.putExtra(DetailActivity.EXTRA_POSITION,position);
+        Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+        intent.putExtra(DetailActivity.EXTRA_POSITION, position);
         startActivity(intent);
     }
 

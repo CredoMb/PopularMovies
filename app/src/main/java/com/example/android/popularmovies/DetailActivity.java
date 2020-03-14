@@ -23,6 +23,8 @@ import static android.graphics.Typeface.BOLD;
 
 public class DetailActivity extends AppCompatActivity {
 
+    private static final String TAG = DetailActivity.class.getSimpleName();
+
     private ImageView mBackDropIv;
     private ImageView mPlayIcon;
     private TextView mPlayTrailerTv;
@@ -109,6 +111,7 @@ public class DetailActivity extends AppCompatActivity {
 
         /** The trailer will not be part of the this app version.
          *  The next version will be capable of playing the movie trailer*/
+
         // the Play Icon on the movie BackDrop Image
         /*
         mPlayIcon = (ImageView) findViewById(R.id.play_trailer_iv);
@@ -170,7 +173,9 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-    /** Will be used to make a small set of the textView become bold */
+    /**
+     * Will be used to make a small set of the textView become bold
+     */
     private void makeTheTitleBold(TextView textView, int end) {
 
         String originalText = textView.getText().toString();
