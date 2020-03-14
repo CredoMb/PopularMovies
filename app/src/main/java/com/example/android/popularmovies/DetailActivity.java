@@ -35,7 +35,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView mMovieStarsTv;
     private TextView mMovieDirectorTv;
 
-    // The key for the extra in the intent
+    // The key to get the extra date our of the intent
     public static String EXTRA_POSITION = "movie position";
 
     //The default position of a movie inside the movie list
@@ -45,18 +45,20 @@ public class DetailActivity extends AppCompatActivity {
     // the network request made inside the MovieLoader
     public static List<AMovie> movieList;
 
+    // The maximum number of movie stars to
+    // display on the detail activity
     private final int FOUR_STARS = 4;
 
-    // The last index of the word "Director"
-    // Will be used to make the word bold
+    // The last index of the word "Director".
+    // Will be used to make that text chunk bold
     private final int DIRECTOR_TEXT_LAST_INDEX = 8;
 
     // The last index of the word "Synopsis"
-    // Will be used to make the word bold
+    // Will be used to make that text chunk bold
     private final int SYNOPSIS_TEXT_LAST_INDEX = 8;
 
     // The last index of the string "Main Stars"
-    // Will be used to make the word bold
+    // Will be used to make that text chunk bold
     private final int MAIN_STARS_TEXT_LAST_INDEX = 10;
 
     @Override
@@ -66,6 +68,7 @@ public class DetailActivity extends AppCompatActivity {
 
         // Receive the intent from the Main Activity
         Intent intent = getIntent();
+
         // If the intent is null, display a toast with an error message
         if (intent == null) {
             closeOnError();
@@ -88,14 +91,11 @@ public class DetailActivity extends AppCompatActivity {
             closeOnError();
             return;
         }
-        // How about getting the json again ?
-        // How to create a String ressource
 
         // From the XML layout file inflate the view that will be used
         // on the Detail Activity of any given movie
 
         // Get the movie at "position"
-
         AMovie clickedMovie = movieList.get(position);
 
         //  the Back Drop Image of the movie ok
@@ -110,11 +110,11 @@ public class DetailActivity extends AppCompatActivity {
         /** The trailer will not be part of the this app version.
          *  The next version will be capable of playing the movie trailer*/
         // the Play Icon on the movie BackDrop Image
-/*
+        /*
         mPlayIcon = (ImageView) findViewById(R.id.play_trailer_iv);
         // the "Play Trailer" overlapping the Image BackDrop Image View ok
         mPlayTrailerTv = (TextView) findViewById(R.id.play_trailer_tv);
-*/
+        */
 
         // the TextView containing the movie's title ok
         mMovieTitleTv = (TextView) findViewById(R.id.movie_title_tv_detail);
@@ -123,11 +123,6 @@ public class DetailActivity extends AppCompatActivity {
         // the release date's TextView ok
         mMovieYearTv = (TextView) findViewById(R.id.release_year_tv);
         mMovieYearTv.setText(clickedMovie.getYear());
-
-/*
-        // the TextView that contains the type of public allowed to view this movie ok
-        mMoviePublicTv = (TextView) findViewById(R.id.public_allowed_tv);
-*/
 
         // the TextView with the movie Synopsis
         mMovieSynopsisTv = (TextView) findViewById(R.id.movie_synopsis_tv);
@@ -161,7 +156,7 @@ public class DetailActivity extends AppCompatActivity {
 
     private void closeOnError() {
         finish();
-        Toast.makeText(this, "Movie Data is not available", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Movie Data is not available", Toast.LENGTH_LONG).show();
     }
 
     private void appendStarNames(AMovie clickedMovie, TextView tv, int maxStars) {
@@ -175,6 +170,7 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
+    /** Will be used to make a small set of the textView become bold */
     private void makeTheTitleBold(TextView textView, int end) {
 
         String originalText = textView.getText().toString();

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/recycler_spacing"
     android:background="@color/mainBackground">
 
     <RelativeLayout
@@ -17,7 +18,8 @@
             android:layout_height="match_parent"
             android:paddingTop="@dimen/recycler_spacing"
             android:paddingStart="@dimen/recycler_spacing"
-            android:paddingEnd="@dimen/recycler_spacing" />
+            android:paddingEnd="@dimen/recycler_spacing"
+            />
 
         <ProgressBar
             android:id="@+id/loading_spinner"
@@ -32,7 +34,6 @@
             android:id="@+id/empty_group_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
             >
 
             <ImageView
@@ -49,18 +50,18 @@
                 android:orientation="vertical"
                 android:layout_above="@id/refresh_tv"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="80dp">
+                android:layout_marginBottom="@dimen/empty_state_bottom_margin">
 
             <TextView
                 android:id="@+id/empty_state_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:paddingBottom="8dp"
+                android:paddingBottom="@dimen/empty_state_title_padding"
                 android:textAlignment="center"
                 android:fontFamily="roboto"
                 android:text="@string/no_internet_title"
-                android:textSize="26sp"
+                android:textSize="@dimen/empty_state_title_textsize"
                 android:textStyle="bold"
                 android:textColor="@color/colorEmptyStateTitle"/>
 
@@ -71,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="roboto"
                     android:layout_gravity="center_horizontal"
-                    android:paddingTop="4dp"
+                    android:paddingTop="@dimen/empty_state_subtitle_padding"
                     android:text="@string/no_internet_text"
                     android:textAlignment="center"
                     android:textAppearance="?android:textAppearanceSmall"
@@ -81,12 +82,12 @@
             <TextView
                 android:id="@+id/refresh_tv"
                 android:layout_width="match_parent"
-                android:layout_height="92dp"
+                android:layout_height="@dimen/refresh_textView_height"
                 android:layout_alignParentBottom="true"
                 android:gravity="center"
                 android:text="@string/refresh_text"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/refresh_textView_textsize"
                 android:textStyle="bold"
                 android:fontFamily="roboto"
                 android:background="@color/colorEmptyStateRefresh"

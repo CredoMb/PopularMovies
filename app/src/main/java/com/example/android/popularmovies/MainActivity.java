@@ -34,11 +34,9 @@ public class MainActivity extends AppCompatActivity implements
 
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovietAdapter;
-
-    private String baseUrlForImage = "https://image.tmdb.org/t/p/original";
-
     private static final int MOVIE_LOADER_ID = 0;
 
+    /** Will be used as the base url and parameter will be */
     private String MOVIE_REQUEST_URL = "https://api.themoviedb.org/3/discover/movie?";
 
     /**
@@ -81,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements
         // The refresh textView from the empty State
         mRefreshTv = findViewById(R.id.refresh_tv);
 
+        // Will start the loader
         mRefreshTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,15 +87,13 @@ public class MainActivity extends AppCompatActivity implements
             }
         });
 
-        // Those
+        // Set the default movie sortage.
+        // This will be used as a paramater inside the
+        // query url, to classify movies based on their popularity
         mSortBy = BY_POPULARITY;
 
         // Remove the shadow under the app bar
         getSupportActionBar().setElevation(0);
-
-        // Hide the action bar to let more space for
-        // the GridLayout
-        //getSupportActionBar().hide();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_mainactivity);
 
@@ -107,26 +104,24 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView.setHasFixedSize(true);
 
         int spanCount = 3; // 3 columns
-        int spacing = dpToPx(8); // 6dp
+        int spacing = dpToPx(8); // 8dp
         boolean includeEdge = false;
 
+        //This is needed to manage spacing between views
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
 
-        /* */
         mRecyclerView.setLayoutManager(layoutManager);
 
         /*
-         * The MovieAdapter is responsible for linking our movie data with the Views that
+         * The MovieAdapter is responsible for linking our movie data with the Recycler that
          * will end up displaying our movie data.
          */
         mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>(),this);
-        // How about putting a list inside the movie adapter ?
-        // I don't know about that, really !
 
-        /* Setting the adapter attaches it to the RecyclerView in our layout. */
+        /* Set the adapter of the Recycler view */
         mRecyclerView.setAdapter(mMovietAdapter);
 
-        /** Start the Loader */
+        /// Start the Loader
         startLoaderOrEmptyState(MOVIE_LOADER_ID);
     }
 
@@ -159,7 +154,6 @@ public class MainActivity extends AppCompatActivity implements
      */
 
     private void startLoaderOrEmptyState(int loaderId) {
-
         // Check the status of the network, then either launch the Loader or
         // display the Empty State
 
@@ -185,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements
         // The key can not appear on github as this is a public repo
         String API_KEY = "";
 
-        // Make an Uri Builder with the Google Request Url as the base Uri
+        // Make an Uri Builder with the MOVIE_REQUEST_URL as the base Uri
         Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
@@ -236,13 +230,12 @@ public class MainActivity extends AppCompatActivity implements
 
         // Create a new empty Movie list for the Adapter
         mMovietAdapter =  new MovieAdapter(this,new ArrayList<AMovie>(),this);
+        mRecyclerView.setAdapter(mMovietAdapter);
 
         // If there's no internet connection display the emptystate view
         if (!isNetworkConnected()) {
             emptyStateRl.setVisibility(View.VISIBLE);
         }
-
-        // What to do now bicth ?
     }
 
     @Override
@@ -277,7 +270,8 @@ public class MainActivity extends AppCompatActivity implements
                 mSortBy = BY_POPULARITY;
                 mMovietAdapter.setMovieData(new ArrayList<AMovie>());
 
-                // Start the loader
+                // Destroy the previous loader and start a new one
+                getLoaderManager().destroyLoader(MOVIE_LOADER_ID);
                 startLoaderOrEmptyState(MOVIE_LOADER_ID);
 
                 return true;
@@ -292,7 +286,9 @@ public class MainActivity extends AppCompatActivity implements
                 // according to the sort preference.
                 mSortBy = BY_RATINGS;
 
-                startLoaderOrEmptyState(MOVIE_LOADER_ID+1);
+                // Destroy the previous loader and start a new one
+                getLoaderManager().destroyLoader(MOVIE_LOADER_ID);
+                startLoaderOrEmptyState(MOVIE_LOADER_ID);
 
                 return true;
         }

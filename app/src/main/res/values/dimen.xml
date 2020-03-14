@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
+    Dimensions for the activity_detail.xml
+    -->
+
     <!-- Side padding used for the majority of views in the
          DetailActivity-->
     <dimen name="sidePadding">24dp</dimen>
@@ -18,12 +22,34 @@
     <!--Spacing used around the recycler inside the MainActivity -->
     <dimen name="recycler_spacing">8dp</dimen>
 
-    <!-- &lt;!&ndash; &ndash;&gt;
-    <dimen name="backdrop_heigh">200dp</dimen>
-    &lt;!&ndash; &ndash;&gt;
-    <dimen name="backdrop_heigh">200dp</dimen>
-    &lt;!&ndash; &ndash;&gt;
-    <dimen name="backdrop_heigh">200dp</dimen>-->
 
+    <!--
+    Dimensions for the activity_main.xml
+    -->
+
+    <!-- The margin for the bottom of the empty state group view-->
+    <dimen name="empty_state_bottom_margin">80dp</dimen>
+
+    <!-- The padding for the bottom of the empty state title-->
+    <dimen name="empty_state_title_padding">8dp</dimen>
+
+    <!-- The textSize of the empty state title-->
+    <dimen name="empty_state_title_textsize">26sp</dimen>
+
+    <!-- The Top padding of the empty state subtitle-->
+    <dimen name="empty_state_subtitle_padding">4dp</dimen>
+
+    <!-- The textSize of the refresh textView-->
+    <dimen name="refresh_textView_textsize">24sp</dimen>
+
+    <!-- The height of the refresh textView-->
+    <dimen name="refresh_textView_height">92dp</dimen>
+
+    <!--
+    Dimensions for the movie_list_item.xml
+    -->
+
+    <!-- Height of the movie Thumbnail image view -->
+    <dimen name="movieThumbnail_IV_height">160dp</dimen>
 
 </resources>
