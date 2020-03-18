@@ -4,7 +4,7 @@
 
 An app that gives an overview of most popular and top rated movies. 
 
-The main screen provides a list of movies by displaying their poster image.
+The main screen provides a list of movies by displaying their poster images.
 
 Depending on the user preferences, the movies are displayed either by popularity or rating. 
 
