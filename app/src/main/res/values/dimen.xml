@@ -22,6 +22,13 @@
     <!--Spacing used around the recycler inside the MainActivity -->
     <dimen name="recycler_spacing">8dp</dimen>
 
+    <!--Spacing used around the button inside the MainActivity -->
+    <dimen name="button_padding">8dp</dimen>
+    <!--Margin used on top of the Button inside the MainActivity -->
+    <dimen name="button_top_margin">16dp</dimen>
+    <!--Height of the button inside the MainActivity -->
+    <dimen name="button_height">48dp</dimen>
+
 
     <!--
     Dimensions for the activity_main.xml

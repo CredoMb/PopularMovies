@@ -111,5 +111,22 @@
             android:textColor="@android:color/white"
             android:textSize="@dimen/bodyTextSize" />
 
+        <!-- The dimensions are will be removed to the
+          dimen.xml file very soon -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/button_height"
+            android:layout_marginStart="@dimen/sidePadding"
+            android:layout_marginTop="@dimen/button_top_margin"
+            android:layout_marginEnd="@dimen/sidePadding"
+            android:paddingStart="@dimen/button_padding"
+            android:paddingTop="@dimen/button_padding"
+            android:paddingBottom="@dimen/button_padding"
+            android:drawableLeft="@drawable/baseline_play_arrow_white_48"
+            android:text="Play Trailer"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:textColor="@android:color/white"/>
+
     </LinearLayout>
 </ScrollView>
