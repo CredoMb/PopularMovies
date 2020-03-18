@@ -53,8 +53,8 @@ public final class QueryUtils {
     private static String GET_EXTENDED_DETAILS ="details";
 
     // The key can not appear on github as this is a public repo
-    private static String API_KEY ="";
 
+    private static String API_KEY ="";
     /**
      * This is a sample json response to help us test the last function
      */

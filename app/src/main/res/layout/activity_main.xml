@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/recycler_spacing"
     android:background="@color/mainBackground">
 
     <RelativeLayout
@@ -19,6 +18,7 @@
             android:paddingTop="@dimen/recycler_spacing"
             android:paddingStart="@dimen/recycler_spacing"
             android:paddingEnd="@dimen/recycler_spacing"
+            android:paddingBottom="@dimen/recycler_spacing"
             />
 
         <ProgressBar
