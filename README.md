@@ -3,9 +3,13 @@
 # PopularMovies
 
 An app that gives an overview of most popular and top rated movies. 
+
 The main screen provides a list of movies by displaying their poster image.
+
 Depending on the user preferences, the movies are displayed either by popularity or rating. 
+
 By clicking on a movie poster, the app displays details about the movie.
+
 In the next version of the app, the user will be able to play the movie's trailer.
 
 The data are queried from the themoviedb.org' API
