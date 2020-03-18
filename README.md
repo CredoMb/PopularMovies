@@ -23,8 +23,7 @@ P.S. This App was not created for commercial use.
 
 ## Contributors
 
-The mockup used to draw the application's layout was made by , click the 
-following link for more information
+The mockup used to draw the application's layout was inspired by multiple templates available online and the Netflix application. 
 
 Exept for the mockup, the owner of this github profile is the only contributor to this app.
 New Ideas and innovative concepts are welcomed :)
