@@ -15,6 +15,7 @@ In the next version of the app, the user will be able to play the movie's traile
 The data are queried from the themoviedb.org' API
 
 The App was not created for commercial use.
+
 **P.S.This project is still under construction**.
 
 ## Prerequisites 
