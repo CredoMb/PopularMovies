@@ -2,6 +2,8 @@
 
 # PopularMovies
 
+**This project is still under construction**
+
 An app that gives an overview of most popular and top rated movies. 
 
 The main screen provides a list of movies by displaying their poster images.
