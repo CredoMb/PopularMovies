@@ -1,4 +1,4 @@
-package com.example.android.popularmovies.Fragment;
+package com.example.android.popularmovies;
 
 import android.graphics.Rect;
 import android.view.View;

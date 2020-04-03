@@ -12,17 +12,14 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.popularmovies.Data.MovieLoader;
-import com.example.android.popularmovies.Fragment.GridSpacingItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +27,11 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements
         MovieAdapter.MovieAdapterOnClickHandler,
         LoaderManager.LoaderCallbacks<List<AMovie>> {
+
     private static final String TAG = MainActivity.class.getSimpleName();
 
     private RecyclerView mRecyclerView;
-    private MovieAdapter mMovietAdapter;
+    private MovieAdapter mMovieAdapter;
     private static final int MOVIE_LOADER_ID = 0;
 
     /**
@@ -124,10 +122,10 @@ public class MainActivity extends AppCompatActivity implements
          * The MovieAdapter is responsible for linking our movie data with the Recycler that
          * will end up displaying our movie data.
          */
-        mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>(), this);
+        mMovieAdapter = new MovieAdapter(this, new ArrayList<AMovie>(), this);
 
         /* Set the adapter of the Recycler view */
-        mRecyclerView.setAdapter(mMovietAdapter);
+        mRecyclerView.setAdapter(mMovieAdapter);
 
         /// Start the Loader
         startLoaderOrEmptyState(MOVIE_LOADER_ID);
@@ -171,7 +169,6 @@ public class MainActivity extends AppCompatActivity implements
             getLoaderManager().initLoader(loaderId, null, MainActivity.this).forceLoad();
         } else {
 
-            //.setVisibility(View.GONE);
             emptyStateRl.setVisibility(View.VISIBLE);
         }
     }
@@ -225,13 +222,13 @@ public class MainActivity extends AppCompatActivity implements
         mProgressSpinner.setVisibility(View.GONE);
 
         // Clear the adapter by setting an empty ArrayList
-        mMovietAdapter.setMovieData(null);
+        mMovieAdapter.setMovieData(null);
 
         /** If there is a valid list of {@link AMovie}s, then add them to the adapter's
          // data set. This will trigger the ListView to update.*/
 
         if (data != null && !data.isEmpty()) {
-            mMovietAdapter.setMovieData(data);
+            mMovieAdapter.setMovieData(data);
         }
     }
 
@@ -242,8 +239,8 @@ public class MainActivity extends AppCompatActivity implements
     public void onLoaderReset(Loader<List<AMovie>> loader) {
 
         // Create a new empty Movie list for the Adapter
-        mMovietAdapter = new MovieAdapter(this, new ArrayList<AMovie>(), this);
-        mRecyclerView.setAdapter(mMovietAdapter);
+        mMovieAdapter = new MovieAdapter(this, new ArrayList<AMovie>(), this);
+        mRecyclerView.setAdapter(mMovieAdapter);
 
         // If there's no internet connection display the emptystate view
         if (!isNetworkConnected()) {
@@ -279,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements
                 // This way, the movies will be displayed
                 // according to the sort preference.
                 mSortBy = BY_POPULARITY;
-                mMovietAdapter.setMovieData(new ArrayList<AMovie>());
+                mMovieAdapter.setMovieData(new ArrayList<AMovie>());
 
                 // Destroy the previous loader and start a new one
                 getLoaderManager().destroyLoader(MOVIE_LOADER_ID);

@@ -25,7 +25,6 @@ public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
     public MovieLoader(Context context, String url) {
         super(context);
         mUrl = url;
-
     }
 
     /** This will help load the data */

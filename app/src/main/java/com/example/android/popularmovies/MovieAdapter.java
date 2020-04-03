@@ -17,7 +17,6 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapterViewHolder> {
 
-    private String ImagebaseUrl = "https://image.tmdb.org/t/p/original";
     private List<AMovie> mMovieData = new ArrayList<AMovie>();
     private Context mContext;
 
