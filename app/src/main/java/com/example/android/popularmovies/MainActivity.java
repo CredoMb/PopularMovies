@@ -1,6 +1,7 @@
 package com.example.android.popularmovies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -299,6 +300,7 @@ public class MainActivity extends AppCompatActivity implements
                 startLoaderOrEmptyState(MOVIE_LOADER_ID);
 
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }

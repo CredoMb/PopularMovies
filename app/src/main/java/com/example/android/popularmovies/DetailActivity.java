@@ -1,6 +1,7 @@
 package com.example.android.popularmovies;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NavUtils;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -155,6 +156,16 @@ public class DetailActivity extends AppCompatActivity {
         // the rating Bar for the movie ratings
         mMovieRatingBar = (RatingBar) findViewById(R.id.rating_bar);
         mMovieRatingBar.setRating(clickedMovie.getMovieRating());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        // When the home button is pressed, take the user back to the MainActivity
+        if (id == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void closeOnError() {
