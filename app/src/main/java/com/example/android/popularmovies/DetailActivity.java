@@ -1,5 +1,6 @@
 package com.example.android.popularmovies;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NavUtils;
 
@@ -156,7 +157,20 @@ public class DetailActivity extends AppCompatActivity {
         // the rating Bar for the movie ratings
         mMovieRatingBar = (RatingBar) findViewById(R.id.rating_bar);
         mMovieRatingBar.setRating(clickedMovie.getMovieRating());
+
+        /*Override the back button so that it looks like
+        * an up button. It will go back the Parent Activity
+        * and not exit the app*/
+
+        ActionBar actionBar = this.getSupportActionBar();
+
+        if(actionBar!=null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
+
+    /*We want the back button to the parent activity.
+     * It will behave like the up Button*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
