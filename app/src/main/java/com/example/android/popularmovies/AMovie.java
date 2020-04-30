@@ -130,6 +130,19 @@ public class AMovie /*implements Parcelable*/ {
      * Defining setters for certain attributes of the "AMovie" class.
      * We will define setters only for a certain attributes.
      */
+
+    public void setMovieDirector(String director) {
+        mMovieDirector = director;
+    }
+
+    public void setMovieLenght(String movieLenght) {
+        mMovieLenght = movieLenght;
+    }
+
+    public void setMovieStars(List<String> movieStars) {
+        mMovieStars = movieStars;
+    }
+
     // Won't be used in this app version
     /*public void setSynopsis(String synopsis) {
         mSynopsis = synopsis;
