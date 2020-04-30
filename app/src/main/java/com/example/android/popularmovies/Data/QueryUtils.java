@@ -215,6 +215,9 @@ public final class QueryUtils {
 
                 JSONcurrentMovieObject = JSONmovieArray.optJSONObject(i);
 
+                //Extract the movie Id
+                int movieId = JSONmovieArray.optJSONObject(i).optInt("id");
+
                 // Extract the path of the Poster Image for the movie positionned at the index "i"
                 String posterPath = JSONmovieArray.optJSONObject(i).optString("poster_path");
                 // Build the complete link to get the poster Image
@@ -244,9 +247,10 @@ public final class QueryUtils {
                     // get the rating of the movie
                 float movieRating = (float) JSONmovieArray.optJSONObject(i).optDouble("vote_average"); // this is the vote_average and the vote_count
 
-                movies.add(new AMovie(movieTitle,posterCompletePath,movieYear,
+                movies.add(new AMovie(movieId,movieTitle,posterCompletePath,movieYear,
                         mMovieLength,backDropPathCompletePath,synopsis,mMovieDirector,movieCast,movieRating));
                 // The function goes into the "if" but the value doesn't change, why ?
+
             }
 
             }
@@ -398,6 +402,7 @@ public final class QueryUtils {
 
         return movieJsonResponse;
     }
+
 
     /**
      * Returns a String that represent a Json Response from the Movie DataBase API

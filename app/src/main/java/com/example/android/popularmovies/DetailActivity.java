@@ -88,10 +88,10 @@ public class DetailActivity extends AppCompatActivity {
             return;
         }
 
-        // Get the array that contains the Json for all the sandwiches
+        // Get the array that contains the Json for all the movies
         // present on the screen
         if (movieList == null) {
-            // Sandwich data unavailable
+            // movie data unavailable
             closeOnError();
             return;
         }

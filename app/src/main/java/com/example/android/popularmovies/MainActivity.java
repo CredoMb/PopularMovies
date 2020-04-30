@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.android.popularmovies.Data.MovieLoader;
+import com.example.android.popularmovies.Data.QueryUtils;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -255,9 +256,16 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onClick(int position) {
+
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_POSITION, position);
+
         // Should we launch an other
+
+        // we should actually update the
+        // movie here by setting its informations
+        List <AMovie> completeMovieList = DetailActivity.movieList;
+
 
         // Make an other API call &
         // update the list with that

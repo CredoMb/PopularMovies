@@ -11,6 +11,7 @@ public class AMovie /*implements Parcelable*/ {
     /** Except the mPosterImagePath theses attributes
      * will be used on the MainActivity and the DetailActivity */
 
+    private int mMovieId;
     // The id of the movie's image
     private String mPosterImagePath;
     // The movie's name
@@ -40,8 +41,9 @@ public class AMovie /*implements Parcelable*/ {
     /**
      * Constructor with the 3 main attribute of the class
      */
-    public AMovie(String title, String PosterImagePath,
+    public AMovie(int movieId, String title, String PosterImagePath,
                   String year) {
+        mMovieId = movieId;
         mTitle = title;
         mPosterImagePath = PosterImagePath;
         mYear = year;
@@ -50,7 +52,8 @@ public class AMovie /*implements Parcelable*/ {
     /**
      * Constructor with all the attributes of the class
      */
-    public AMovie(String title, String posterImagePath,
+    public AMovie(int movieId, String title,
+                  String posterImagePath,
                   String year,
                   String lenght,
                   String backDropImagePath,
@@ -59,7 +62,7 @@ public class AMovie /*implements Parcelable*/ {
                   List<String> movieStars,
                   float movieRating) {
 
-        this(title,posterImagePath,year);
+        this(movieId,title,posterImagePath,year);
         mMovieLenght = lenght;
         mBackDropImagePath = backDropImagePath;
         mSynopsis = synopsis;
@@ -87,6 +90,9 @@ public class AMovie /*implements Parcelable*/ {
     /**
      * Defining getters for the "AMovie" Class
      */
+    public int getMovieId() {
+        return mMovieId;
+    }
 
     public String getPosterPath() {
         return mPosterImagePath;

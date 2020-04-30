@@ -48,7 +48,6 @@ public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
         // movieList is ready but misses certain things
 
 
-
         // Set the list of movie on the
         // "movieList" static attribute of
         // the DetailActivity. This way, the
