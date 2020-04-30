@@ -162,10 +162,9 @@ public class DetailActivity extends AppCompatActivity {
         * an up button. It will go back the Parent Activity
         * and not exit the app*/
 
-        ActionBar actionBar = this.getSupportActionBar();
-
-        if(actionBar!=null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
+        if(this.getSupportActionBar()!=null) {
+            this.getSupportActionBar()
+                    .setDisplayHomeAsUpEnabled(true);
         }
     }
 
@@ -176,8 +175,12 @@ public class DetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         // When the home button is pressed, take the user back to the MainActivity
+        // android.R.id.home represents the up button, the one located at the app bar
+
         if (id == android.R.id.home) {
             NavUtils.navigateUpFromSameTask(this);
+            // onBackPressed(); this will make the
+            // up button behave like the back button
         }
         return super.onOptionsItemSelected(item);
     }

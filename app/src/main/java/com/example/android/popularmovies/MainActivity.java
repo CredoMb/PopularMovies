@@ -13,6 +13,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,6 +25,7 @@ import android.widget.TextView;
 import com.example.android.popularmovies.Data.MovieLoader;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
@@ -212,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements
         // This will execute the network request needed to get the data
         // from the API and return the data to onLoadFinished
         return new MovieLoader(this, uriBuilder.toString());
+
     }
 
     /**
@@ -253,6 +257,8 @@ public class MainActivity extends AppCompatActivity implements
     public void onClick(int position) {
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_POSITION, position);
+        // Should we launch an other
+
         startActivity(intent);
     }
 

@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_marginBottom="@dimen/recycler_spacing">
 
         <!--The movie backdrop image -->
 
@@ -24,7 +25,7 @@
             android:id="@+id/movie_title_tv_detail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/title_bottom_margin"
             android:paddingStart="@dimen/sidePadding"
             android:paddingEnd="@dimen/sidePadding"
             android:textColor="@android:color/white"
@@ -36,7 +37,7 @@
             android:id="@+id/quick_infos_group_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="@dimen/quick_details_bottom_margin"
             android:orientation="horizontal"
             android:paddingLeft="@dimen/sidePadding"
             android:paddingRight="@dimen/quick_infos_right_padding">
@@ -62,6 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
+
                 <RatingBar
                     android:id="@+id/rating_bar"
                     style="@style/Widget.AppCompat.RatingBar.Small"
@@ -80,7 +82,7 @@
             android:id="@+id/movie_synopsis_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_marginBottom="@dimen/synopsis_bottom_margin"
             android:paddingStart="@dimen/sidePadding"
             android:paddingEnd="@dimen/sidePadding"
             android:text="@string/synopsis"
@@ -92,7 +94,7 @@
             android:id="@+id/movie_director_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="@dimen/director_and_cast_bottom_margin"
             android:paddingStart="@dimen/sidePadding"
             android:paddingEnd="@dimen/sidePadding"
             android:text="@string/director"
@@ -104,7 +106,7 @@
             android:id="@+id/movie_stars_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="@dimen/director_and_cast_bottom_margin"
             android:paddingStart="@dimen/sidePadding"
             android:paddingEnd="@dimen/sidePadding"
             android:text="@string/mainStars"

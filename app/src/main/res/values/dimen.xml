@@ -16,17 +16,32 @@
     <!-- Margin used on the bottom of the backdrop image view-->
     <dimen name="backdrop_bottom_margin">8dp</dimen>
 
+    <!-- Used on the bottom of the title's TextView-->
+    <dimen name="title_bottom_margin">16dp</dimen>
+
+    <!-- Used on the bottom of the GroupView containing
+         the movie Quick Details -->
+    <dimen name="quick_details_bottom_margin">16dp</dimen>
+
+    <!-- Used by the textview that contains the Synopsis -->
+    <dimen name="synopsis_bottom_margin">8dp</dimen>
+
+    <!-- Used on the bottom of the director and cast textViews-->
+    <dimen name="director_and_cast_bottom_margin">4dp</dimen>
+
+    <!-- -->
+
     <!--Text size for the body text -->
     <dimen name="bodyTextSize">14sp</dimen>
 
     <!--Spacing used around the recycler inside the MainActivity -->
     <dimen name="recycler_spacing">8dp</dimen>
 
-    <!--Spacing used around the button inside the MainActivity -->
+    <!--Spacing used around the button inside of the DetailActivity -->
     <dimen name="button_padding">8dp</dimen>
-    <!--Margin used on top of the Button inside the MainActivity -->
+    <!--Margin used on top of the Button inside of the DetailActivity -->
     <dimen name="button_top_margin">16dp</dimen>
-    <!--Height of the button inside the MainActivity -->
+    <!--Height of the button inside of the DetailActivity -->
     <dimen name="button_height">48dp</dimen>
 
 

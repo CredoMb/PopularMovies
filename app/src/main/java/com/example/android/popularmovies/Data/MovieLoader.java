@@ -43,6 +43,12 @@ public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
         // Make the network request and
         // return a list of movie
         List <AMovie> movieList = QueryUtils.fetchMoviesData(mUrl);
+
+        // The list should already be ready
+        // movieList is ready but misses certain things
+
+
+
         // Set the list of movie on the
         // "movieList" static attribute of
         // the DetailActivity. This way, the

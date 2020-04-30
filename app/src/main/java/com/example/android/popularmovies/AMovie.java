@@ -1,9 +1,12 @@
 package com.example.android.popularmovies;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class AMovie {
+public class AMovie /*implements Parcelable*/ {
 
     /** Except the mPosterImagePath theses attributes
      * will be used on the MainActivity and the DetailActivity */
@@ -65,6 +68,21 @@ public class AMovie {
         mMovieRating = movieRating;
 
     }
+
+    /** Private constructor to be used
+     *  by the createFromParcel methode of
+     *  Parcelable Creator*/
+
+/*    private AMovie (Parcel in) {
+        this(in.readString(),
+                in.readString(),
+                in.readString(),
+                in.readString(),
+                in.readString(),
+                in.readString(),
+                in.readString(),
+                in.readList(new ArrayList<String>(),String.class.getClassLoader()))
+    }*/
 
     /**
      * Defining getters for the "AMovie" Class
