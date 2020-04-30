@@ -54,7 +54,7 @@ public final class QueryUtils {
 
     // The key can not appear on github as this is a public repo
 
-    private static String API_KEY ="";
+    private static String API_KEY ="cd401ba98e50ce8bf913cdce912aa430";
     /**
      * This is a sample json response to help us test the last function
      */
@@ -66,10 +66,10 @@ public final class QueryUtils {
     private static int MOVIE_YEAR_END_INDEX = 4;
 
     /** This will contain the director of a given movie*/
-    private static String mMovieDirector;
+    private static String mMovieDirector = "";
 
     /**This will contain the length of a given movie */
-    private static String mMovieLength;
+    private static String mMovieLength = "";
 
     /** Will be used wherever we don't have a date*/
     private static String NOT_SPECIFIED = "Not Specified";
@@ -240,7 +240,7 @@ public final class QueryUtils {
                     // Get the cast as an ArrayList of String and set the value of the "movieDirector"
                     // This will use the id of the movie to make an second API call and get back informations
                     // related to the movie credits
-                List<String>movieCast  = extractCastAndSetExtraDetails(JSONmovieArray.optJSONObject(i).optInt("id"));
+                List<String>movieCast  = new ArrayList<String>(); // extractCastAndSetExtraDetails(JSONmovieArray.optJSONObject(i).optInt("id"));
                     // get the rating of the movie
                 float movieRating = (float) JSONmovieArray.optJSONObject(i).optDouble("vote_average"); // this is the vote_average and the vote_count
 
@@ -359,6 +359,7 @@ public final class QueryUtils {
         if(infoToGet == GET_CREDIT){
             MovieUrlTextWithId += "/credits";
         }
+
 
         // Create the variables that will hold
         // the Uri and the uri Builder needed

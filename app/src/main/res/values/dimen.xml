@@ -19,7 +19,7 @@
     <!-- Used on the bottom of the title's TextView-->
     <dimen name="title_bottom_margin">16dp</dimen>
 
-    <!-- Used on the bottom of the GroupView containing
+    <!-- Used as the bottom margin of the GroupView that contains
          the movie Quick Details -->
     <dimen name="quick_details_bottom_margin">16dp</dimen>
 
@@ -28,8 +28,6 @@
 
     <!-- Used on the bottom of the director and cast textViews-->
     <dimen name="director_and_cast_bottom_margin">4dp</dimen>
-
-    <!-- -->
 
     <!--Text size for the body text -->
     <dimen name="bodyTextSize">14sp</dimen>

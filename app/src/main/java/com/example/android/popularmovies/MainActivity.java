@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements
         mProgressSpinner.setVisibility(View.VISIBLE);
 
         // The key can not appear on github as this is a public repo
-        String API_KEY = "";
+        String API_KEY = "cd401ba98e50ce8bf913cdce912aa430";
 
         // Make an Uri Builder with the MOVIE_REQUEST_URL as the base Uri
         Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);
@@ -259,6 +259,13 @@ public class MainActivity extends AppCompatActivity implements
         intent.putExtra(DetailActivity.EXTRA_POSITION, position);
         // Should we launch an other
 
+        // Make an other API call &
+        // update the list with that
+        // Create an Async Task to get the
+        // crew detail
+
+        // then set the value inside of the
+        // list
         startActivity(intent);
     }
 

@@ -63,7 +63,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1">
 
-
                 <RatingBar
                     android:id="@+id/rating_bar"
                     style="@style/Widget.AppCompat.RatingBar.Small"
