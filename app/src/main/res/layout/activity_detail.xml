@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginBottom="@dimen/recycler_spacing">
+        android:paddingBottom="@dimen/recycler_spacing">
 
         <!--The movie backdrop image -->
 
@@ -120,9 +120,8 @@
             android:layout_marginStart="@dimen/sidePadding"
             android:layout_marginTop="@dimen/button_top_margin"
             android:layout_marginEnd="@dimen/sidePadding"
+            android:layout_marginBottom="@dimen/button_padding"
             android:paddingStart="@dimen/button_padding"
-            android:paddingTop="@dimen/button_padding"
-            android:paddingBottom="@dimen/button_padding"
             android:drawableLeft="@drawable/baseline_play_arrow_white_48"
             android:text="Play Trailer"
             android:gravity="center"
