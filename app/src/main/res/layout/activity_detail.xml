@@ -5,193 +5,197 @@
     android:layout_height="match_parent"
     android:background="@color/mainBackground">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/recycler_spacing">
-
-        <!--The movie backdrop image -->
-
-        <ImageView
-            android:id="@+id/backdrop_image"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/backdrop_heigh"
-            android:layout_marginBottom="@dimen/backdrop_bottom_margin"
-            android:scaleType="centerCrop" />
-
-        <!--The movie Title -->
-        <TextView
-            android:id="@+id/movie_title_tv_detail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/title_bottom_margin"
-            android:paddingStart="@dimen/sidePadding"
-            android:paddingEnd="@dimen/sidePadding"
-            android:textColor="@android:color/white"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <!-- GroupView for the movie Quick Details -->
-        <LinearLayout
-            android:id="@+id/quick_infos_group_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/quick_details_bottom_margin"
-            android:orientation="horizontal"
-            android:paddingLeft="@dimen/sidePadding"
-            android:paddingRight="@dimen/quick_infos_right_padding">
-
-            <TextView
-                android:id="@+id/release_year_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/bodyTextSize" />
-
-            <TextView
-                android:id="@+id/movie_length_tv"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="@dimen/bodyTextSize" />
-
-            <FrameLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1">
-
-                <RatingBar
-                    android:id="@+id/rating_bar"
-                    style="@style/Widget.AppCompat.RatingBar.Small"
-                    android:theme="@style/RatingBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:isIndicator="true"
-                    android:numStars="5" />
-            </FrameLayout>
-
-
-        </LinearLayout>
-
-        <!-- This will contain the synopsis of the movie -->
-        <TextView
-            android:id="@+id/movie_synopsis_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/synopsis_bottom_margin"
-            android:paddingStart="@dimen/sidePadding"
-            android:paddingEnd="@dimen/sidePadding"
-            android:text="@string/synopsis"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/bodyTextSize" />
-
-        <!-- This will contain the name of the movie's director -->
-        <TextView
-            android:id="@+id/movie_director_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/director_and_cast_bottom_margin"
-            android:paddingStart="@dimen/sidePadding"
-            android:paddingEnd="@dimen/sidePadding"
-            android:text="@string/director"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/bodyTextSize" />
-
-        <!-- This will contain the names of the movie's stars -->
-        <TextView
-            android:id="@+id/movie_stars_tv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/director_and_cast_bottom_margin"
-            android:paddingStart="@dimen/sidePadding"
-            android:paddingEnd="@dimen/sidePadding"
-            android:text="@string/mainStars"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/bodyTextSize" />
-
-        <!-- The dimensions are will be removed to the
-          dimen.xml file very soon -->
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/button_height"
-            android:layout_marginStart="@dimen/sidePadding"
-            android:layout_marginTop="@dimen/button_top_margin"
-            android:layout_marginEnd="@dimen/sidePadding"
-            android:layout_marginBottom="@dimen/button_padding"
-            android:paddingStart="@dimen/button_padding"
-            android:drawableLeft="@drawable/baseline_play_arrow_white_48"
-            android:text="Play Trailer"
-            android:gravity="center"
-            android:background="@color/colorAccent"
-            android:textColor="@android:color/white"/>
-
-    </LinearLayout>
-    <!-- Content for the empty state when there is no internet connection-->
     <RelativeLayout
-        android:id="@+id/empty_group_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/empty_state_image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src = "@drawable/no_internet_image"
-            android:scaleType="centerCrop"/>
-
-        <!-- Group View that contains all the texts of the empty state-->
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_above="@id/refresh_tv"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/empty_state_bottom_margin">
+            android:paddingBottom="@dimen/recycler_spacing">
 
+            <!--The movie backdrop image -->
+
+            <ImageView
+                android:id="@+id/backdrop_image"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/backdrop_heigh"
+                android:layout_marginBottom="@dimen/backdrop_bottom_margin"
+                android:scaleType="centerCrop" />
+
+            <!--The movie Title -->
             <TextView
-                android:id="@+id/empty_state_title"
+                android:id="@+id/movie_title_tv_detail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingBottom="@dimen/empty_state_title_padding"
-                android:textAlignment="center"
-                android:fontFamily="roboto"
-                android:text="@string/no_internet_title"
-                android:textSize="@dimen/empty_state_title_textsize"
-                android:textStyle="bold"
-                android:textColor="@color/colorEmptyStateTitle"/>
+                android:layout_marginBottom="@dimen/title_bottom_margin"
+                android:paddingStart="@dimen/sidePadding"
+                android:paddingEnd="@dimen/sidePadding"
+                android:textColor="@android:color/white"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-
-            <TextView
-                android:id="@+id/empty_state_subtitle"
-                android:layout_width="wrap_content"
+            <!-- GroupView for the movie Quick Details -->
+            <LinearLayout
+                android:id="@+id/quick_infos_group_view"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="roboto"
-                android:layout_gravity="center_horizontal"
-                android:paddingTop="@dimen/empty_state_subtitle_padding"
-                android:text="@string/no_internet_text"
-                android:textAlignment="center"
-                android:textAppearance="?android:textAppearanceSmall"
-                android:textColor="@color/colorEmptyStateText" />
+                android:layout_marginBottom="@dimen/quick_details_bottom_margin"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/sidePadding"
+                android:paddingRight="@dimen/quick_infos_right_padding">
+
+                <TextView
+                    android:id="@+id/release_year_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/bodyTextSize" />
+
+                <TextView
+                    android:id="@+id/movie_length_tv"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="@dimen/bodyTextSize" />
+
+                <FrameLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                    <RatingBar
+                        android:id="@+id/rating_bar"
+                        style="@style/Widget.AppCompat.RatingBar.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:isIndicator="true"
+                        android:numStars="5"
+                        android:theme="@style/RatingBar" />
+                </FrameLayout>
+
+
+            </LinearLayout>
+
+            <!-- This will contain the synopsis of the movie -->
+            <TextView
+                android:id="@+id/movie_synopsis_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/synopsis_bottom_margin"
+                android:paddingStart="@dimen/sidePadding"
+                android:paddingEnd="@dimen/sidePadding"
+                android:text="@string/synopsis"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/bodyTextSize" />
+
+            <!-- This will contain the name of the movie's director -->
+            <TextView
+                android:id="@+id/movie_director_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/director_and_cast_bottom_margin"
+                android:paddingStart="@dimen/sidePadding"
+                android:paddingEnd="@dimen/sidePadding"
+                android:text="@string/director"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/bodyTextSize" />
+
+            <!-- This will contain the names of the movie's stars -->
+            <TextView
+                android:id="@+id/movie_stars_tv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/director_and_cast_bottom_margin"
+                android:paddingStart="@dimen/sidePadding"
+                android:paddingEnd="@dimen/sidePadding"
+                android:text="@string/mainStars"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/bodyTextSize" />
+
+            <!-- The dimensions are will be removed to the
+              dimen.xml file very soon -->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginStart="@dimen/sidePadding"
+                android:layout_marginTop="@dimen/button_top_margin"
+                android:layout_marginEnd="@dimen/sidePadding"
+                android:layout_marginBottom="@dimen/button_padding"
+                android:background="@color/colorAccent"
+                android:drawableLeft="@drawable/baseline_play_arrow_white_48"
+                android:gravity="center"
+                android:paddingStart="@dimen/button_padding"
+                android:text="Play Trailer"
+                android:textColor="@android:color/white" />
+
         </LinearLayout>
-
-        <TextView
-            android:id="@+id/refresh_tv"
+        <!-- Content for the empty state when there is no internet connection-->
+        <RelativeLayout
+            android:id="@+id/empty_group_view"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/refresh_textView_height"
-            android:layout_alignParentBottom="true"
-            android:gravity="center"
-            android:text="@string/refresh_text"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/refresh_textView_textsize"
-            android:textStyle="bold"
-            android:fontFamily="roboto"
-            android:background="@color/colorEmptyStateRefresh"
-            />
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/empty_state_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_internet_image" />
+
+            <!-- Group View that contains all the texts of the empty state-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/refresh_tv"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/empty_state_bottom_margin"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/empty_state_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="roboto"
+                    android:paddingBottom="@dimen/empty_state_title_padding"
+                    android:text="@string/no_internet_title"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorEmptyStateTitle"
+                    android:textSize="@dimen/empty_state_title_textsize"
+                    android:textStyle="bold" />
+
+
+                <TextView
+                    android:id="@+id/empty_state_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="roboto"
+                    android:paddingTop="@dimen/empty_state_subtitle_padding"
+                    android:text="@string/no_internet_text"
+                    android:textAlignment="center"
+                    android:textAppearance="?android:textAppearanceSmall"
+                    android:textColor="@color/colorEmptyStateText" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/refresh_tv"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/refresh_textView_height"
+                android:layout_alignParentBottom="true"
+                android:background="@color/colorEmptyStateRefresh"
+                android:fontFamily="roboto"
+                android:gravity="center"
+                android:text="@string/refresh_text"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/refresh_textView_textsize"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
     </RelativeLayout>
 
 </FrameLayout>
