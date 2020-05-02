@@ -39,7 +39,6 @@
     <!--Height of the button inside of the DetailActivity -->
     <dimen name="button_height">48dp</dimen>
 
-
     <!--
     Dimensions for the activity_main.xml
     -->
