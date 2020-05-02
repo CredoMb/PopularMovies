@@ -14,8 +14,8 @@
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_centerInParent="true"/>
+            android:layout_centerInParent="true"
+            android:layout_gravity="center_horizontal" />
 
         <LinearLayout
             android:id="@+id/detail_main_layout"
@@ -141,12 +141,12 @@
                 android:textColor="@android:color/white" />
 
         </LinearLayout>
+
         <!-- Content for the empty state when there is no internet connection-->
         <RelativeLayout
             android:id="@+id/detail_empty_group_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/empty_state_image"
@@ -191,7 +191,7 @@
                     android:textColor="@color/colorEmptyStateText" />
             </LinearLayout>
 
-            <TextView
+            <Button
                 android:id="@+id/refresh_tv"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/refresh_textView_height"
@@ -204,7 +204,6 @@
                 android:textSize="@dimen/refresh_textView_textsize"
                 android:textStyle="bold" />
         </RelativeLayout>
-
     </RelativeLayout>
 
 </FrameLayout>
