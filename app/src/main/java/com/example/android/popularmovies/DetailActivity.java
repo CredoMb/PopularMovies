@@ -131,9 +131,13 @@ public class DetailActivity extends AppCompatActivity
             return;
         }
 
-        // Store the EmptyState RelativeLayout
+        // Stores the EmptyState RelativeLayout
         mEmptyStateRl = (RelativeLayout) findViewById(R.id.detail_empty_group_view);
 
+        // Stores the refresh button
+        mEmptyStateRefreshButton = (Button) findViewById(R.id.detail_refresh_tv);
+
+        // Stores the progress spinner of the layout
         mProgressSpinner = (ProgressBar) findViewById(R.id.detail_loading_spinner);
         mProgressSpinner.setVisibility(View.VISIBLE);
 
