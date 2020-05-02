@@ -190,7 +190,7 @@ public class MainActivity extends AppCompatActivity implements
         mProgressSpinner.setVisibility(View.VISIBLE);
 
         // The key can not appear on github as this is a public repo
-        String API_KEY = "cd401ba98e50ce8bf913cdce912aa430";
+        String API_KEY = "";
 
         // Make an Uri Builder with the MOVIE_REQUEST_URL as the base Uri
         Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);

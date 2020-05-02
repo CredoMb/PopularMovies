@@ -53,7 +53,7 @@ public final class QueryUtils {
 
     // The key can not appear on github as this is a public repo
 
-    private static String API_KEY ="cd401ba98e50ce8bf913cdce912aa430";
+    private static String API_KEY ="";
     /**
      * This is a sample json response to help us test the last function
      */
