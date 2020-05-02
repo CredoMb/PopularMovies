@@ -200,6 +200,7 @@
                 android:fontFamily="roboto"
                 android:gravity="center"
                 android:text="@string/refresh_text"
+                android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/refresh_textView_textsize"
                 android:textStyle="bold" />
