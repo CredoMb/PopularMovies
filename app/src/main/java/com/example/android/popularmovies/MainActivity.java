@@ -1,7 +1,6 @@
 package com.example.android.popularmovies;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NavUtils;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,8 +12,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.provider.CalendarContract;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +23,6 @@ import com.example.android.popularmovies.Data.MovieLoader;
 import com.example.android.popularmovies.Data.QueryUtils;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
@@ -35,9 +31,13 @@ public class MainActivity extends AppCompatActivity implements
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
+    /** The Ids for the 2 Loaders to be used in
+     * this activity. */
+    private static final int MOVIE_LOADER_ID = 0;
+
+    /** The Recycler and its Adapter*/
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovieAdapter;
-    private static final int MOVIE_LOADER_ID = 0;
 
     /**
      * Will be used as the base url and parameter will be
@@ -132,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements
         /* Set the adapter of the Recycler view */
         mRecyclerView.setAdapter(mMovieAdapter);
 
-        /// Start the Loader
+        // Start the Loader
         startLoaderOrEmptyState(MOVIE_LOADER_ID);
     }
 
@@ -260,20 +260,6 @@ public class MainActivity extends AppCompatActivity implements
         Intent intent = new Intent(MainActivity.this, DetailActivity.class);
         intent.putExtra(DetailActivity.EXTRA_POSITION, position);
 
-        // Should we launch an other
-
-        // we should actually update the
-        // movie here by setting its informations
-        List <AMovie> completeMovieList = DetailActivity.movieList;
-
-
-        // Make an other API call &
-        // update the list with that
-        // Create an Async Task to get the
-        // crew detail
-
-        // then set the value inside of the
-        // list
         startActivity(intent);
     }
 

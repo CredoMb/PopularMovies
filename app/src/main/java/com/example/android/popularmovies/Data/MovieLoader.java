@@ -2,7 +2,6 @@ package com.example.android.popularmovies.Data;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.graphics.Movie;
 
 import com.example.android.popularmovies.AMovie;
 import com.example.android.popularmovies.DetailActivity;
@@ -45,15 +44,15 @@ public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
         List <AMovie> movieList = QueryUtils.fetchMoviesData(mUrl);
 
         // The list should already be ready
-        // movieList is ready but misses certain things
+        // mMovieList is ready but misses certain things
 
 
         // Set the list of movie on the
-        // "movieList" static attribute of
+        // "mMovieList" static attribute of
         // the DetailActivity. This way, the
         // DetailActivity could use the list to
         // show details about a movie that was clicked
-        DetailActivity.movieList = movieList;
+        DetailActivity.mMovieList = movieList;
         return movieList;
 
         // Pourquoi est ce qu'il n'y a pas assez de "movie" dans la liste ?
@@ -63,3 +62,5 @@ public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
     // Open dater
 
 }
+
+

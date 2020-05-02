@@ -6,7 +6,6 @@ import android.util.Log;
 
 import com.example.android.popularmovies.AMovie;
 import com.example.android.popularmovies.MainActivity;
-import com.example.android.popularmovies.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -49,8 +48,8 @@ public final class QueryUtils {
      *  which information/json Object must be queried from the
      *  API. This will help to build the right Url*/
 
-    private static String GET_CREDIT = "credit";
-    private static String GET_EXTENDED_DETAILS ="details";
+    public static String GET_CREDIT = "credit";
+    public static String GET_EXTENDED_DETAILS ="details";
 
     // The key can not appear on github as this is a public repo
 
@@ -66,10 +65,10 @@ public final class QueryUtils {
     private static int MOVIE_YEAR_END_INDEX = 4;
 
     /** This will contain the director of a given movie*/
-    private static String mMovieDirector = "";
+    public static String mMovieDirector = "";
 
     /**This will contain the length of a given movie */
-    private static String mMovieLength = "";
+    public static String mMovieLength = "";
 
     /** Will be used wherever we don't have a date*/
     private static String NOT_SPECIFIED = "Not Specified";
@@ -243,12 +242,12 @@ public final class QueryUtils {
                     // Get the cast as an ArrayList of String and set the value of the "movieDirector"
                     // This will use the id of the movie to make an second API call and get back informations
                     // related to the movie credits
-                List<String>movieCast  = new ArrayList<String>(); // extractCastAndSetExtraDetails(JSONmovieArray.optJSONObject(i).optInt("id"));
+                List<String>movieCast  = new ArrayList<String>();
                     // get the rating of the movie
                 float movieRating = (float) JSONmovieArray.optJSONObject(i).optDouble("vote_average"); // this is the vote_average and the vote_count
 
                 movies.add(new AMovie(movieId,movieTitle,posterCompletePath,movieYear,
-                        mMovieLength,backDropPathCompletePath,synopsis,mMovieDirector,movieCast,movieRating));
+                        "",backDropPathCompletePath,synopsis,"",movieCast,movieRating));
                 // The function goes into the "if" but the value doesn't change, why ?
 
             }
@@ -270,7 +269,7 @@ public final class QueryUtils {
      * which will be used to build movie objects.
      */
 
-    private static List<String> extractCastAndSetExtraDetails(int id) {
+    public static List<String> extractCastAndSetExtraDetails(int id) {
 
         // The list that will contain all the cast member of a movie
         List<String> cast = new ArrayList<String>();

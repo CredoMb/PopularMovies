@@ -135,7 +135,7 @@ public class AMovie /*implements Parcelable*/ {
         mMovieDirector = director;
     }
 
-    public void setMovieLenght(String movieLenght) {
+    public void setMovieLength(String movieLenght) {
         mMovieLenght = movieLenght;
     }
 
