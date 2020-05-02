@@ -43,7 +43,6 @@
     Dimensions for the activity_main.xml
     -->
 
-
     <!--Spacing used around the recycler inside the MainActivity -->
     <dimen name="recycler_spacing">8dp</dimen>
 

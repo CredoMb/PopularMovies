@@ -18,8 +18,10 @@ import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +54,13 @@ public class DetailActivity extends AppCompatActivity
     /** The Id for the Loader that should extract
      *  the cast and details about the movie*/
     private static final int EXTRACT_CAST_LOADER_ID = 1;
+
+    /** Will store the groupview of the empty state*/
+    private RelativeLayout mEmptyStateRl;
+
+    /** The Refresh button of the empty state in the
+     *  DetailActivity*/
+    private Button mEmptyStateRefreshButton;
 
     /***/
     // The key to get the extra date our of the intent
@@ -117,6 +126,9 @@ public class DetailActivity extends AppCompatActivity
             closeOnError();
             return;
         }
+
+        // Store the EmptyState RelativeLayout
+        mEmptyStateRl = (RelativeLayout) findViewById(R.id.detail_empty_group_view);
 
         // Get the movie at "mPosition"
         mClickedMovie = mMovieList.get(mPosition);
@@ -286,7 +298,7 @@ public class DetailActivity extends AppCompatActivity
         if (isNetworkConnected()) {
             getLoaderManager().initLoader(loaderId, null, DetailActivity.this).forceLoad();
         } else {
-
+            mEmptyStateRl.setVisibility(View.VISIBLE);
         }
     }
 
