@@ -20,7 +20,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.android.popularmovies.Data.MovieLoader;
-import com.example.android.popularmovies.Data.QueryUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity implements
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview_mainactivity);
 
         // The progress spinner to use for a good
-        mProgressSpinner = (ProgressBar) findViewById(R.id.loading_spinner);
+        mProgressSpinner = (ProgressBar) findViewById(R.id.main_loading_spinner);
 
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         mRecyclerView.setHasFixedSize(true);

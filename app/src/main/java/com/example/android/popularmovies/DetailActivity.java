@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -215,6 +216,7 @@ public class DetailActivity extends AppCompatActivity
     }
 
         /** The loader call backs */
+        /**Check the Loader Id*/
         @Override
         public Loader<List<String>> onCreateLoader(int i, Bundle bundle) {
 

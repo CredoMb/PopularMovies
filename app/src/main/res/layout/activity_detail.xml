@@ -9,7 +9,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ProgressBar
+            android:id="@+id/detail_loading_spinner"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_centerInParent="true"/>
+
         <LinearLayout
+            android:id="@+id/detail_main_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -76,7 +85,6 @@
                         android:numStars="5"
                         android:theme="@style/RatingBar" />
                 </FrameLayout>
-
 
             </LinearLayout>
 
