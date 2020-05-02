@@ -135,9 +135,10 @@
         </LinearLayout>
         <!-- Content for the empty state when there is no internet connection-->
         <RelativeLayout
-            android:id="@+id/empty_group_view"
+            android:id="@+id/detail_empty_group_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
             <ImageView
                 android:id="@+id/empty_state_image"
