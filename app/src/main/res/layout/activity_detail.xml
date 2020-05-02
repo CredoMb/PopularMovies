@@ -129,4 +129,80 @@
             android:textColor="@android:color/white"/>
 
     </LinearLayout>
+
+    <!-- This group View will contain the empty state
+     of the application -->
+
+    <RelativeLayout
+        android:id="@+id/empty_group_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/empty_state_bottom_padding"
+        android:paddingStart="@dimen/empty_state_start_padding"
+        android:paddingEnd="@dimen/empty_state_end_padding"
+        android:layout_gravity="center_horizontal"
+        >
+
+        <ImageView
+            android:id="@+id/empty_state_image"
+            android:layout_width="@dimen/empty_state_image_dimension"
+            android:layout_height="@dimen/empty_state_image_dimension"
+            android:layout_above="@id/EmptyStateText_GV"
+            android:layout_centerHorizontal="true"
+            android:src = "@drawable/outline_wifi_off_black_48"
+            android:scaleType="centerCrop"
+            />
+
+        <!-- Group View that contains all the texts of the empty state-->
+        <LinearLayout
+            android:id="@+id/EmptyStateText_GV"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/EmptyStateText_GV_top_padding"
+            android:paddingBottom="@dimen/EmptyStateText_GV_bottom_padding"
+            android:layout_above="@id/refresh_B"
+            android:layout_centerHorizontal="true"
+            >
+
+            <TextView
+                android:id="@+id/empty_state_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:paddingBottom="@dimen/empty_state_title_padding"
+                android:textAlignment="center"
+                android:fontFamily="roboto"
+                android:text="@string/no_internet_title"
+                android:textSize="@dimen/empty_state_title_textsize"
+                android:textStyle="bold"
+                android:textColor="@color/colorEmptyStateTitle"/>
+
+            <TextView
+                android:id="@+id/empty_state_subtitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="roboto"
+                android:layout_gravity="center_horizontal"
+                android:paddingTop="@dimen/empty_state_subtitle_padding"
+                android:text="@string/no_internet_text"
+                android:textAlignment="center"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/colorEmptyStateText" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/refresh_B"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center"
+            android:text="@string/refresh_text"
+            android:textColor="@color/colorRefreshButtonText"
+            android:textSize="@dimen/refresh_textView_textsize"
+            android:textStyle="bold"
+            android:fontFamily="roboto"
+            android:background="@color/colorEmptyStateRefresh"
+            />
+    </RelativeLayout>
+
 </ScrollView>

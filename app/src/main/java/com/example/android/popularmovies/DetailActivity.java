@@ -122,22 +122,6 @@ public class DetailActivity extends AppCompatActivity
         mClickedMovie = mMovieList.get(mPosition);
 
         // When
-
-        // If the movie already has a Length, Director
-        // and a list of Stars, don't run the Loader.
-        // This will avoid making API calls everytime a
-        // movie is clicked.
-        if(TextUtils.isEmpty(mClickedMovie.getmMovieLenght())
-                && TextUtils.isEmpty(mClickedMovie.getDirector())
-                && mClickedMovie.getMovieStars().size() == 0) {
-
-            // Start the Loader to update the clickedMovie.
-            startLoaderOrEmptyState(EXTRACT_CAST_LOADER_ID);
-
-            Log.e("API call was made","Da");
-        }
-
-
         //  The Back Drop Image of the movie ok
         mBackDropIv = (ImageView) findViewById(R.id.backdrop_image);
         GlideHelperClass glideHelper = new GlideHelperClass(this,
@@ -182,6 +166,18 @@ public class DetailActivity extends AppCompatActivity
         // the rating Bar for the movie ratings
         mMovieRatingBar = (RatingBar) findViewById(R.id.rating_bar);
         mMovieRatingBar.setRating(mClickedMovie.getMovieRating());
+
+        // If the movie already has a Length, Director
+        // and a list of Stars, don't run the Loader.
+        // This will avoid making API calls everytime a
+        // movie is clicked.
+        if(TextUtils.isEmpty(mClickedMovie.getmMovieLenght())
+                && TextUtils.isEmpty(mClickedMovie.getDirector())
+                && mClickedMovie.getMovieStars().size() == 0) {
+
+            // Start the Loader to update the clickedMovie.
+            startLoaderOrEmptyState(EXTRACT_CAST_LOADER_ID);
+        }
 
         /*Override the back button so that it looks like
         * an up button. It will go back the Parent Activity
@@ -290,7 +286,7 @@ public class DetailActivity extends AppCompatActivity
         if (isNetworkConnected()) {
             getLoaderManager().initLoader(loaderId, null, DetailActivity.this).forceLoad();
         } else {
-            mBackDropIv.setVisibility(View.GONE);
+
         }
     }
 

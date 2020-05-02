@@ -5,7 +5,7 @@
     -->
 
     <!-- Side padding used for the majority of views in the
-         DetailActivity-->
+         DetailActivity -->
     <dimen name="sidePadding">24dp</dimen>
     <!-- Right padding for the group view displaying movie's
          quick details in the DetailActivity-->
@@ -32,9 +32,6 @@
     <!--Text size for the body text -->
     <dimen name="bodyTextSize">14sp</dimen>
 
-    <!--Spacing used around the recycler inside the MainActivity -->
-    <dimen name="recycler_spacing">8dp</dimen>
-
     <!--Spacing used around the button inside of the DetailActivity -->
     <dimen name="button_padding">8dp</dimen>
     <!--Margin used on top of the Button inside of the DetailActivity -->
@@ -46,6 +43,10 @@
     <!--
     Dimensions for the activity_main.xml
     -->
+
+
+    <!--Spacing used around the recycler inside the MainActivity -->
+    <dimen name="recycler_spacing">8dp</dimen>
 
     <!-- The margin for the bottom of the empty state group view-->
     <dimen name="empty_state_bottom_margin">80dp</dimen>
