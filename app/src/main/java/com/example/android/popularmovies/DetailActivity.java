@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,6 +56,8 @@ public class DetailActivity extends AppCompatActivity
     /** The Id for the Loader that should extract
      *  the cast and details about the movie*/
     private static final int EXTRACT_CAST_LOADER_ID = 1;
+
+    private ProgressBar mProgressSpinner;
 
     /** Will store the groupview of the empty state*/
     private RelativeLayout mEmptyStateRl;
@@ -130,6 +133,9 @@ public class DetailActivity extends AppCompatActivity
 
         // Store the EmptyState RelativeLayout
         mEmptyStateRl = (RelativeLayout) findViewById(R.id.detail_empty_group_view);
+
+        mProgressSpinner = (ProgressBar) findViewById(R.id.detail_loading_spinner);
+        mProgressSpinner.setVisibility(View.VISIBLE);
 
         // Get the movie at "mPosition"
         mClickedMovie = mMovieList.get(mPosition);
@@ -220,6 +226,9 @@ public class DetailActivity extends AppCompatActivity
         @Override
         public Loader<List<String>> onCreateLoader(int i, Bundle bundle) {
 
+            // Set the visibility of the spinner.
+            mProgressSpinner.setVisibility(View.VISIBLE);
+
              AsyncTaskLoader<List<String>> movieDetailsLoader =
                     new AsyncTaskLoader<List<String>>(this) {
                         @Override
@@ -241,6 +250,8 @@ public class DetailActivity extends AppCompatActivity
 
         @Override
         public void onLoadFinished(Loader<List<String>> loader, List<String> clickedMovieCast) {
+
+            mProgressSpinner.setVisibility(View.GONE);
 
             // mMovieDirector and mMovieLength are 2 global variables located in
             // QueryUtils. Those 2 variables were updated
