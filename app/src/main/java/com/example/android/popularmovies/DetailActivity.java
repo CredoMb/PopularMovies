@@ -196,14 +196,32 @@ public class DetailActivity extends AppCompatActivity
         mMovieSynopsisTv.append(mClickedMovie.getSynopsis());
         makeTheTitleBold(mMovieSynopsisTv, SYNOPSIS_TEXT_LAST_INDEX);
 
+        /** The length, the director and the stars
+        will also be set inside "onLoadFinished"*/
         // The TextView that contains the movie's length.
-        // The length, the director and the stars
-        // will be set inside "onLoadFinished"
         mMovieLenghtTv = (TextView) findViewById(R.id.movie_length_tv);
+        // Set the MovieLength onto it view
+        mMovieLenghtTv.setText(mClickedMovie.getmMovieLenght());
+
         // the TextView with the movie's Director Name
         mMovieDirectorTv = (TextView) findViewById(R.id.movie_director_tv);
+        // Set the MovieDirector onto it view
+        mMovieDirectorTv.append(mClickedMovie.getDirector());
+        // Will only make the "Director" label bold
+        makeTheTitleBold(mMovieDirectorTv, DIRECTOR_TEXT_LAST_INDEX);
+
         // the TextView that contains the list of the movie stars
         mMovieStarsTv = (TextView) findViewById(R.id.movie_stars_tv);
+        // This will append the four main starts of the movie
+        // inside the "stars" TextView
+        if (mClickedMovie.getMovieStars().size() > FOUR_STARS) {
+            appendStarNames(mClickedMovie, mMovieStarsTv, FOUR_STARS);
+        } else {
+            appendStarNames(mClickedMovie, mMovieStarsTv, mClickedMovie.getMovieStars().size());
+        }
+        // Will only make the "main stars" label bold
+        makeTheTitleBold(mMovieStarsTv, MAIN_STARS_TEXT_LAST_INDEX);
+
 
         // the rating Bar for the movie ratings
         mMovieRatingBar = (RatingBar) findViewById(R.id.rating_bar);
@@ -219,6 +237,9 @@ public class DetailActivity extends AppCompatActivity
 
             // Start the Loader to update the clickedMovie.
             startLoaderOrEmptyState(EXTRACT_CAST_LOADER_ID);
+
+            // How are they going to be filled ? By "they", I mean the
+            // Director, Cast & Lenght ?
         }
 
         /*Override the back button so that it looks like
@@ -245,12 +266,13 @@ public class DetailActivity extends AppCompatActivity
     }
 
     /** The loader call backs */
-    /**
-     * Check the Loader Id
-     */
+
     @Override
     public Loader<List<String>> onCreateLoader(int loaderId, Bundle bundle) {
 
+        /**
+         * Check the Loader Id
+         */
         switch (loaderId) {
 
             case EXTRACT_CAST_LOADER_ID:
@@ -258,6 +280,8 @@ public class DetailActivity extends AppCompatActivity
                 // Set the visibility of the spinner.
                 mProgressSpinner.setVisibility(View.VISIBLE);
 
+                // Create a Loader that should execute the
+                // API calls to get the remaining infos.
                 AsyncTaskLoader<List<String>> movieDetailsLoader =
                         new AsyncTaskLoader<List<String>>(this) {
                             @Override
@@ -311,8 +335,6 @@ public class DetailActivity extends AppCompatActivity
 
         // Set the MovieDirector onto it view
         mMovieDirectorTv.append(mClickedMovie.getDirector());
-        // Will only make the "Director" label bold
-        makeTheTitleBold(mMovieDirectorTv, DIRECTOR_TEXT_LAST_INDEX);
 
         // This will append the four main starts of the movie
         // inside the "stars" TextView
@@ -321,10 +343,6 @@ public class DetailActivity extends AppCompatActivity
         } else {
             appendStarNames(mClickedMovie, mMovieStarsTv, mClickedMovie.getMovieStars().size());
         }
-
-        // Will only make the "main stars" label bold
-        makeTheTitleBold(mMovieStarsTv, MAIN_STARS_TEXT_LAST_INDEX);
-
     }
 
     @Override
