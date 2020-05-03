@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
@@ -39,8 +40,10 @@ public class DetailActivity extends AppCompatActivity
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
-    /** The following variables will store
-     *  all the views of the DetailActivity*/
+    /**
+     * The following variables will store
+     * all the views of the DetailActivity
+     */
     private ImageView mBackDropIv;
     private ImageView mPlayIcon;
     private TextView mPlayTrailerTv;
@@ -53,17 +56,23 @@ public class DetailActivity extends AppCompatActivity
     private TextView mMovieStarsTv;
     private TextView mMovieDirectorTv;
 
-    /** The Id for the Loader that should extract
-     *  the cast and details about the movie*/
+    /**
+     * The Id for the Loader that should extract
+     * the cast and details about the movie
+     */
     private static final int EXTRACT_CAST_LOADER_ID = 1;
 
     private ProgressBar mProgressSpinner;
 
-    /** Will store the groupview of the empty state*/
+    /**
+     * Will store the groupview of the empty state
+     */
     private RelativeLayout mEmptyStateRl;
 
-    /** The Refresh button of the empty state in the
-     *  DetailActivity*/
+    /**
+     * The Refresh button of the empty state in the
+     * DetailActivity
+     */
     private Button mEmptyStateRefreshButton;
 
     /***/
@@ -134,12 +143,22 @@ public class DetailActivity extends AppCompatActivity
         // Stores the EmptyState RelativeLayout
         mEmptyStateRl = (RelativeLayout) findViewById(R.id.detail_empty_group_view);
 
-        // Stores the refresh button
-        mEmptyStateRefreshButton = (Button) findViewById(R.id.detail_refresh_tv);
-
         // Stores the progress spinner of the layout
         mProgressSpinner = (ProgressBar) findViewById(R.id.detail_loading_spinner);
         mProgressSpinner.setVisibility(View.VISIBLE);
+
+        // Stores the refresh button of the emtpy state view
+        mEmptyStateRefreshButton = (Button) findViewById(R.id.detail_refresh_tv);
+
+        // Set an onclick listener to define the bejabiour of the
+        // refresh button of the empoty state view
+        mEmptyStateRefreshButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mEmptyStateRl.setVisibility(View.GONE);
+                startLoaderOrEmptyState(EXTRACT_CAST_LOADER_ID);
+            }
+        });
 
         // Get the movie at "mPosition"
         mClickedMovie = mMovieList.get(mPosition);
@@ -194,7 +213,7 @@ public class DetailActivity extends AppCompatActivity
         // and a list of Stars, don't run the Loader.
         // This will avoid making API calls everytime a
         // movie is clicked.
-        if(TextUtils.isEmpty(mClickedMovie.getmMovieLenght())
+        if (TextUtils.isEmpty(mClickedMovie.getmMovieLenght())
                 && TextUtils.isEmpty(mClickedMovie.getDirector())
                 && mClickedMovie.getMovieStars().size() == 0) {
 
@@ -203,10 +222,10 @@ public class DetailActivity extends AppCompatActivity
         }
 
         /*Override the back button so that it looks like
-        * an up button. It will go back the Parent Activity
-        * and not exit the app*/
+         * an up button. It will go back the Parent Activity
+         * and not exit the app*/
 
-        if(this.getSupportActionBar()!=null) {
+        if (this.getSupportActionBar() != null) {
             this.getSupportActionBar()
                     .setDisplayHomeAsUpEnabled(true);
         }
@@ -225,82 +244,93 @@ public class DetailActivity extends AppCompatActivity
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
-        /** The loader call backs */
-        /**Check the Loader Id*/
-        @Override
-        public Loader<List<String>> onCreateLoader(int i, Bundle bundle) {
+    /** The loader call backs */
+    /**
+     * Check the Loader Id
+     */
+    @Override
+    public Loader<List<String>> onCreateLoader(int loaderId, Bundle bundle) {
 
-            // Set the visibility of the spinner.
-            mProgressSpinner.setVisibility(View.VISIBLE);
+        switch (loaderId) {
 
-             AsyncTaskLoader<List<String>> movieDetailsLoader =
-                    new AsyncTaskLoader<List<String>>(this) {
-                        @Override
-                        public List<String> loadInBackground() {
-                            // We will get the cast of the clicked movie,
-                            // by calling the method QueryUtils.extractCastAndSetExtraDetails().
-                            // This method makes 2 API calls, so it should to be
-                            // executed in a background thread.
+            case EXTRACT_CAST_LOADER_ID:
 
-                            List <String> clickedMovieCast = QueryUtils.extractCastAndSetExtraDetails(
-                                    mClickedMovie.getMovieId());
+                // Set the visibility of the spinner.
+                mProgressSpinner.setVisibility(View.VISIBLE);
 
-                            return clickedMovieCast;
-                        }
-                    };
+                AsyncTaskLoader<List<String>> movieDetailsLoader =
+                        new AsyncTaskLoader<List<String>>(this) {
+                            @Override
+                            public List<String> loadInBackground() {
+                                // We will get the cast of the clicked movie,
+                                // by calling the method QueryUtils.extractCastAndSetExtraDetails().
+                                // This method makes 2 API calls, so it should to be
+                                // executed in a background thread.
 
-        return movieDetailsLoader;
-        }
+                                List<String> clickedMovieCast = QueryUtils.extractCastAndSetExtraDetails(
+                                        mClickedMovie.getMovieId());
 
-        @Override
-        public void onLoadFinished(Loader<List<String>> loader, List<String> clickedMovieCast) {
+                                return clickedMovieCast;
+                            }
+                        };
 
-            mProgressSpinner.setVisibility(View.GONE);
+                return movieDetailsLoader;
 
-            // mMovieDirector and mMovieLength are 2 global variables located in
-            // QueryUtils. Those 2 variables were updated
-            // when we called extractCastAndSetExtraDetails().
-            // This way, we can easily set the director and the length of the
-            // movie into our clickedMovie.
-
-            String movieDirector = QueryUtils.mMovieDirector;
-            String movieLength = QueryUtils.mMovieLength;
-
-            // After getting those 3 main informations, which are
-            // the cast the director and the length,
-            // we will update the clickedMovie.
-            mClickedMovie.setMovieStars(clickedMovieCast);
-            mClickedMovie.setMovieDirector(movieDirector);
-            mClickedMovie.setMovieLength(movieLength);
-
-            // Update the movie list of the DetailActivity.
-            mMovieList.set(mPosition,mClickedMovie);
-
-            // Set the MovieLength onto it view
-            mMovieLenghtTv.setText(mClickedMovie.getmMovieLenght());
-
-            // Set the MovieDirector onto it view
-            mMovieDirectorTv.append(mClickedMovie.getDirector());
-            // Will only make the "Director" label bold
-            makeTheTitleBold(mMovieDirectorTv, DIRECTOR_TEXT_LAST_INDEX);
-
-            // This will append the four main starts of the movie
-            // inside the "stars" TextView
-            if (mClickedMovie.getMovieStars().size() > FOUR_STARS) {
-                appendStarNames(mClickedMovie, mMovieStarsTv, FOUR_STARS);
-            } else {
-                appendStarNames(mClickedMovie, mMovieStarsTv, mClickedMovie.getMovieStars().size());
-            }
-
-            // Will only make the "main stars" label bold
-            makeTheTitleBold(mMovieStarsTv, MAIN_STARS_TEXT_LAST_INDEX);
+            default:
+                throw new RuntimeException("Loader Not Implemented: " + loaderId);
 
         }
+    }
 
-        @Override
-        public void onLoaderReset(Loader<List<String>> loader) {
-            //
+    @Override
+    public void onLoadFinished(Loader<List<String>> loader, List<String> clickedMovieCast) {
+
+        mProgressSpinner.setVisibility(View.GONE);
+
+        // mMovieDirector and mMovieLength are 2 global variables located in
+        // QueryUtils. Those 2 variables were updated
+        // when we called extractCastAndSetExtraDetails().
+        // This way, we can easily set the director and the length of the
+        // movie into our clickedMovie.
+
+        String movieDirector = QueryUtils.mMovieDirector;
+        String movieLength = QueryUtils.mMovieLength;
+
+        // After getting those 3 main informations, which are
+        // the cast the director and the length,
+        // we will update the clickedMovie.
+        mClickedMovie.setMovieStars(clickedMovieCast);
+        mClickedMovie.setMovieDirector(movieDirector);
+        mClickedMovie.setMovieLength(movieLength);
+
+        // Update the movie list of the DetailActivity.
+        mMovieList.set(mPosition, mClickedMovie);
+
+        // Set the MovieLength onto it view
+        mMovieLenghtTv.setText(mClickedMovie.getmMovieLenght());
+
+        // Set the MovieDirector onto it view
+        mMovieDirectorTv.append(mClickedMovie.getDirector());
+        // Will only make the "Director" label bold
+        makeTheTitleBold(mMovieDirectorTv, DIRECTOR_TEXT_LAST_INDEX);
+
+        // This will append the four main starts of the movie
+        // inside the "stars" TextView
+        if (mClickedMovie.getMovieStars().size() > FOUR_STARS) {
+            appendStarNames(mClickedMovie, mMovieStarsTv, FOUR_STARS);
+        } else {
+            appendStarNames(mClickedMovie, mMovieStarsTv, mClickedMovie.getMovieStars().size());
         }
+
+        // Will only make the "main stars" label bold
+        makeTheTitleBold(mMovieStarsTv, MAIN_STARS_TEXT_LAST_INDEX);
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<List<String>> loader) {
+        //
+    }
 
     /**
      * Execute certain task based on the internet connection status.
