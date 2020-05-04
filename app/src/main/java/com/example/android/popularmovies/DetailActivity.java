@@ -143,6 +143,14 @@ public class DetailActivity extends AppCompatActivity
         // Stores the EmptyState RelativeLayout
         mEmptyStateRl = (RelativeLayout) findViewById(R.id.detail_empty_group_view);
 
+        // Before Laying out all the views
+        // Make sure that there'a an internet connection.
+        // If so, the empty state will be made invisible,
+        // else, it will appear as the first layout of the DetailActivity
+        if(isNetworkConnected()) {
+            mEmptyStateRl.setVisibility(View.GONE);
+        }
+
         // Stores the progress spinner of the layout
         mProgressSpinner = (ProgressBar) findViewById(R.id.detail_loading_spinner);
         mProgressSpinner.setVisibility(View.VISIBLE);
@@ -230,7 +238,8 @@ public class DetailActivity extends AppCompatActivity
         // If the movie already has a Length, Director
         // and a list of Stars, don't run the Loader.
         // This will avoid making API calls everytime a
-        // movie is clicked.
+        // movie is clicked. Instead the Activity will
+        // the data that has been already cached
         if (TextUtils.isEmpty(mClickedMovie.getmMovieLenght())
                 && TextUtils.isEmpty(mClickedMovie.getDirector())
                 && mClickedMovie.getMovieStars().size() == 0) {
@@ -240,6 +249,10 @@ public class DetailActivity extends AppCompatActivity
 
             // How are they going to be filled ? By "they", I mean the
             // Director, Cast & Lenght ?
+        }
+
+        else {
+            mProgressSpinner.setVisibility(View.GONE);
         }
 
         /*Override the back button so that it looks like
@@ -337,7 +350,7 @@ public class DetailActivity extends AppCompatActivity
         mMovieDirectorTv.append(mClickedMovie.getDirector());
 
         // This will append the four main starts of the movie
-        // inside the "stars" TextView
+        // inside the "stars" TextView.
         if (mClickedMovie.getMovieStars().size() > FOUR_STARS) {
             appendStarNames(mClickedMovie, mMovieStarsTv, FOUR_STARS);
         } else {

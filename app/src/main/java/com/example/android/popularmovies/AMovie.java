@@ -6,7 +6,7 @@ import android.os.Parcelable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AMovie /*implements Parcelable*/ {
+public class AMovie implements Parcelable {
 
     /** Except the mPosterImagePath theses attributes
      * will be used on the MainActivity and the DetailActivity */
@@ -74,18 +74,65 @@ public class AMovie /*implements Parcelable*/ {
 
     /** Private constructor to be used
      *  by the createFromParcel methode of
-     *  Parcelable Creator*/
+     *  Parcelable Creator. Will create the object from the
+     *  Parcel*/
 
-/*    private AMovie (Parcel in) {
-        this(in.readString(),
-                in.readString(),
-                in.readString(),
-                in.readString(),
-                in.readString(),
-                in.readString(),
-                in.readString(),
-                in.readList(new ArrayList<String>(),String.class.getClassLoader()))
-    }*/
+    private AMovie (Parcel in) {
+
+        this(in.readInt(), // The id
+                in.readString(), // The title
+                in.readString(), // The poster Image Path
+                in.readString(), // The year
+                in.readString(), // The movie Length
+                in.readString(), // The backdrop image Path
+                in.readString(), // The synopsis
+                in.readString(), // The Movie Director
+                in.readArrayList(String.class.getClassLoader()), // Star list
+                in.readFloat()); // The movie rating
+
+    }
+
+    /**Overriding this method is mandatory in
+     * order to implement the "Parcelable" class
+     * */
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    /**Will be used to turn the object into a parcel.*/
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+
+        parcel.writeInt(mMovieId); // Id
+        parcel.writeString(mTitle); // Title
+        parcel.writeString(mPosterImagePath); // Poster Image Path
+        parcel.writeString(mYear); // Year
+        parcel.writeString(mMovieLenght); // Movie Length
+        parcel.writeString(mBackDropImagePath); // Backdrop Image Path
+        parcel.writeString(mSynopsis); // Synopsis
+        parcel.writeString(mMovieDirector); // Movie Director
+        parcel.writeList(mMovieStars); // Movie stars
+        parcel.writeFloat(mMovieRating); // Movie's rating
+    }
+
+    /** Will help us generate an instance of
+     *  "AMovie" from a Parcel,
+     *  by using the constructor "AMovie (Parcel in)". */
+
+    public final Parcelable.Creator<AMovie> CREATOR = new Parcelable.Creator<AMovie>() {
+        @Override
+        public AMovie createFromParcel(Parcel parcel) {
+            return new AMovie(parcel);
+        }
+
+        @Override
+        public AMovie[] newArray(int i) {
+            return new AMovie[i];
+        }
+
+    };
 
     /**
      * Defining getters for the "AMovie" Class

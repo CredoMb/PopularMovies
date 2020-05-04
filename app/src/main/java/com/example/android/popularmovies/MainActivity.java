@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        /**We should verify the network state to
+         * know if we should display the emptystate or not.
+         * This is the most intelligent thing we can do*/
         // The empty state group view
         emptyStateRl = (RelativeLayout) findViewById(R.id.empty_group_view);
 
