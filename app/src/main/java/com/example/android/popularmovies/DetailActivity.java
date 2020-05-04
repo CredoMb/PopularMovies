@@ -31,6 +31,7 @@ import android.widget.Toast;
 import com.example.android.popularmovies.Data.GlideHelperClass;
 import com.example.android.popularmovies.Data.QueryUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.graphics.Typeface.BOLD;
@@ -91,7 +92,11 @@ public class DetailActivity extends AppCompatActivity
 
     // Will store the list of movies gotten from
     // the network request made inside the MovieLoader
-    public static List<AMovie> mMovieList;
+    public static ArrayList<AMovie> mMovieList;
+
+    // The key used to save the movie list as
+    // a bundle.
+    public String MOVIE_LIST = "movie_list";
 
     // The maximum number of movie stars to
     // display on the detail activity
@@ -113,6 +118,11 @@ public class DetailActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
+
+        //Retrieve the ArrayList that was saved as bundle
+        if( !(savedInstanceState ==  null) || savedInstanceState.containsKey(MOVIE_LIST)){
+            mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
+        }
 
         // Receive the intent from the Main Activity
         Intent intent = getIntent();
@@ -263,6 +273,12 @@ public class DetailActivity extends AppCompatActivity
             this.getSupportActionBar()
                     .setDisplayHomeAsUpEnabled(true);
         }
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        outState.putParcelableArrayList(MOVIE_LIST,mMovieList);
+        super.onSaveInstanceState(outState);
     }
 
     /**
