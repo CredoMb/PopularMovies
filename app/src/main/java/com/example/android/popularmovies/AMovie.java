@@ -34,7 +34,7 @@ public class AMovie implements Parcelable {
     private String mMovieLenght;
 
     // A list that contains all the movie stars
-    private List<String> mMovieStars;
+    private ArrayList<String> mMovieStars;
     // The average rating of the movie
     private float mMovieRating;
 
@@ -59,7 +59,7 @@ public class AMovie implements Parcelable {
                   String backDropImagePath,
                   String synopsis,
                   String movieDirector,
-                  List<String> movieStars,
+                  ArrayList<String> movieStars,
                   float movieRating) {
 
         this(movieId,title,posterImagePath,year);
@@ -163,7 +163,7 @@ public class AMovie implements Parcelable {
         return mMovieDirector;
     }
 
-    public List<String> getMovieStars() {
+    public ArrayList<String> getMovieStars() {
         return mMovieStars;
     }
 
@@ -186,7 +186,7 @@ public class AMovie implements Parcelable {
         mMovieLenght = movieLenght;
     }
 
-    public void setMovieStars(List<String> movieStars) {
+    public void setMovieStars(ArrayList<String> movieStars) {
         mMovieStars = movieStars;
     }
 

@@ -6,6 +6,7 @@ import android.content.Context;
 import com.example.android.popularmovies.AMovie;
 import com.example.android.popularmovies.DetailActivity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
@@ -41,7 +42,7 @@ public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
         }
         // Make the network request and
         // return a list of movie
-        List <AMovie> movieList = QueryUtils.fetchMoviesData(mUrl);
+        ArrayList<AMovie> movieList = QueryUtils.fetchMoviesData(mUrl);
 
         // The list should already be ready
         // mMovieList is ready but misses certain things

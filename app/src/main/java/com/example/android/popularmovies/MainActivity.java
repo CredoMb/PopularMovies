@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovieAdapter;
 
+    // Est ce prudent de rendre l'Adapter public ?
+
     /**
      * Will be used as the base url and parameter will be
      */
@@ -193,7 +195,7 @@ public class MainActivity extends AppCompatActivity implements
         mProgressSpinner.setVisibility(View.VISIBLE);
 
         // The key can not appear on github as this is a public repo
-        String API_KEY = "";
+        String API_KEY = "cd401ba98e50ce8bf913cdce912aa430";
 
         // Make an Uri Builder with the MOVIE_REQUEST_URL as the base Uri
         Uri baseUri = Uri.parse(MOVIE_REQUEST_URL);

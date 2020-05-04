@@ -37,7 +37,7 @@ import java.util.List;
 import static android.graphics.Typeface.BOLD;
 
 public class DetailActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<List<String>> {
+        implements LoaderManager.LoaderCallbacks<ArrayList<String>> {
 
     private static final String TAG = DetailActivity.class.getSimpleName();
 
@@ -120,8 +120,11 @@ public class DetailActivity extends AppCompatActivity
         setContentView(R.layout.activity_detail);
 
         //Retrieve the ArrayList that was saved as bundle
-        if( !(savedInstanceState ==  null) || savedInstanceState.containsKey(MOVIE_LIST)){
-            mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
+        if (!(savedInstanceState == null)) {
+
+            if (savedInstanceState.containsKey(MOVIE_LIST)) {
+                mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
+            }
         }
 
         // Receive the intent from the Main Activity
@@ -136,6 +139,8 @@ public class DetailActivity extends AppCompatActivity
         // This extra represent the mPosition of the movie
         // that was clicked on
         mPosition = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
+
+        Log.v("position yangoyo",String.valueOf(mPosition));
 
         if (mPosition == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
@@ -157,7 +162,7 @@ public class DetailActivity extends AppCompatActivity
         // Make sure that there'a an internet connection.
         // If so, the empty state will be made invisible,
         // else, it will appear as the first layout of the DetailActivity
-        if(isNetworkConnected()) {
+        if (isNetworkConnected()) {
             mEmptyStateRl.setVisibility(View.GONE);
         }
 
@@ -215,7 +220,7 @@ public class DetailActivity extends AppCompatActivity
         makeTheTitleBold(mMovieSynopsisTv, SYNOPSIS_TEXT_LAST_INDEX);
 
         /** The length, the director and the stars
-        will also be set inside "onLoadFinished"*/
+         will also be set inside "onLoadFinished"*/
         // The TextView that contains the movie's length.
         mMovieLenghtTv = (TextView) findViewById(R.id.movie_length_tv);
         // Set the MovieLength onto it view
@@ -259,9 +264,7 @@ public class DetailActivity extends AppCompatActivity
 
             // How are they going to be filled ? By "they", I mean the
             // Director, Cast & Lenght ?
-        }
-
-        else {
+        } else {
             mProgressSpinner.setVisibility(View.GONE);
         }
 
@@ -277,7 +280,7 @@ public class DetailActivity extends AppCompatActivity
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
-        outState.putParcelableArrayList(MOVIE_LIST,mMovieList);
+        outState.putParcelableArrayList(MOVIE_LIST, mMovieList);
         super.onSaveInstanceState(outState);
     }
 
@@ -294,10 +297,12 @@ public class DetailActivity extends AppCompatActivity
         return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 
-    /** The loader call backs */
+    /**
+     * The loader call backs
+     */
 
     @Override
-    public Loader<List<String>> onCreateLoader(int loaderId, Bundle bundle) {
+    public Loader<ArrayList<String>> onCreateLoader(int loaderId, Bundle bundle) {
 
         /**
          * Check the Loader Id
@@ -309,18 +314,20 @@ public class DetailActivity extends AppCompatActivity
                 // Set the visibility of the spinner.
                 mProgressSpinner.setVisibility(View.VISIBLE);
 
+                Log.v("Azo salel'ango dé fwa", "Biatch");
+
                 // Create a Loader that should execute the
                 // API calls to get the remaining infos.
-                AsyncTaskLoader<List<String>> movieDetailsLoader =
-                        new AsyncTaskLoader<List<String>>(this) {
+                AsyncTaskLoader<ArrayList<String>> movieDetailsLoader =
+                        new AsyncTaskLoader<ArrayList<String>>(this) {
                             @Override
-                            public List<String> loadInBackground() {
+                            public ArrayList<String> loadInBackground() {
                                 // We will get the cast of the clicked movie,
                                 // by calling the method QueryUtils.extractCastAndSetExtraDetails().
                                 // This method makes 2 API calls, so it should to be
                                 // executed in a background thread.
 
-                                List<String> clickedMovieCast = QueryUtils.extractCastAndSetExtraDetails(
+                                ArrayList<String> clickedMovieCast = QueryUtils.extractCastAndSetExtraDetails(
                                         mClickedMovie.getMovieId());
 
                                 return clickedMovieCast;
@@ -336,7 +343,7 @@ public class DetailActivity extends AppCompatActivity
     }
 
     @Override
-    public void onLoadFinished(Loader<List<String>> loader, List<String> clickedMovieCast) {
+    public void onLoadFinished(Loader<ArrayList<String>> loader, ArrayList<String> clickedMovieCast) {
 
         mProgressSpinner.setVisibility(View.GONE);
 
@@ -375,7 +382,7 @@ public class DetailActivity extends AppCompatActivity
     }
 
     @Override
-    public void onLoaderReset(Loader<List<String>> loader) {
+    public void onLoaderReset(Loader<ArrayList<String>> loader) {
         //
     }
 

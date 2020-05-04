@@ -20,7 +20,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
-import java.util.List;
 
 public final class QueryUtils {
 
@@ -53,7 +52,7 @@ public final class QueryUtils {
 
     // The key can not appear on github as this is a public repo
 
-    private static String API_KEY ="";
+    private static String API_KEY ="cd401ba98e50ce8bf913cdce912aa430";
     /**
      * This is a sample json response to help us test the last function
      */
@@ -167,7 +166,7 @@ public final class QueryUtils {
      * Return a list of {@link AMovie} by Fetching data from the USGS server
      */
 
-    public static List<AMovie> fetchMoviesData(String requestUrl) {
+    public static ArrayList<AMovie> fetchMoviesData(String requestUrl) {
 
         // Create URL object
         URL url = createUrl(requestUrl);
@@ -188,7 +187,7 @@ public final class QueryUtils {
      * Return a list of {@link AMovie} objects that has been built up from
      * parsing a JSON response.
      */
-    public static List<AMovie> extractMovies(String jsonResponse) {
+    public static ArrayList<AMovie> extractMovies(String jsonResponse) {
 
         // If the JSON string is empty or null, then return null.
         if (TextUtils.isEmpty(jsonResponse)) {
@@ -196,7 +195,7 @@ public final class QueryUtils {
         }
 
         // Create an empty ArrayList that we can start adding Movies to
-        List<AMovie> movies = new ArrayList<AMovie>();
+        ArrayList<AMovie> movies = new ArrayList<AMovie>();
 
         // Try to parse the jsonResponse. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
@@ -242,7 +241,7 @@ public final class QueryUtils {
                     // Get the cast as an ArrayList of String and set the value of the "movieDirector"
                     // This will use the id of the movie to make an second API call and get back informations
                     // related to the movie credits
-                List<String>movieCast  = new ArrayList<String>();
+                ArrayList<String>movieCast  = new ArrayList<String>();
                     // get the rating of the movie
                 float movieRating = (float) JSONmovieArray.optJSONObject(i).optDouble("vote_average"); // this is the vote_average and the vote_count
 
@@ -269,10 +268,10 @@ public final class QueryUtils {
      * which will be used to build movie objects.
      */
 
-    public static List<String> extractCastAndSetExtraDetails(int id) {
+    public static ArrayList<String> extractCastAndSetExtraDetails(int id) {
 
         // The list that will contain all the cast member of a movie
-        List<String> cast = new ArrayList<String>();
+        ArrayList<String> cast = new ArrayList<String>();
 
         try {
             // Get the main Json object returned by the Request
