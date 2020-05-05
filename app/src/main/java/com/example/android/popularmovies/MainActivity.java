@@ -175,6 +175,12 @@ public class MainActivity extends AppCompatActivity implements
         if(mMovieList.isEmpty()) {
             startLoaderOrEmptyState(MOVIE_LOADER_ID);
         }
+        else {
+            // Remove the progress from the screen.
+            // As we already have data to display,
+            // we will not need it.
+            mProgressSpinner.setVisibility(View.GONE);
+        }
 
     }
 
