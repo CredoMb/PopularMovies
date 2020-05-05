@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.example.android.popularmovies.Data.MovieLoader;
 
 import java.util.ArrayList;
+import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements
         MovieAdapter.MovieAdapterOnClickHandler,
@@ -95,27 +96,36 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Verify if the movie list was saved as a bundle
+        // and retrieve the data.
         if (savedInstanceState != null) {
+
             if (savedInstanceState.containsKey(MOVIE_LIST)) {
+
+                mMovieList = new ArrayList<AMovie>();
                 mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
             }
         } else {
 
             // If there are no saved state,
-            // Initialize the mMovieList with an empty
+            // initialize the mMovieList with an empty
             // ArrayList. This list will then be
             // filled with data inside "onLoadFinished"
             mMovieList = new ArrayList<AMovie>();
         }
 
+        // Store the entire emptyState view inside a variable
         emptyStateRl = (RelativeLayout) findViewById(R.id.empty_group_view);
-        /**Check the Network state to
-         * know if we should display the emptystate or not. */
+        // Make the empty state invisible by default.
+        // It will only become visible
+        // if the API call is not successful.
+        emptyStateRl.setVisibility(View.INVISIBLE);
 
         // The refresh textView from the empty State
         mRefreshTv = findViewById(R.id.refresh_tv);
 
-        // Will start the loader
+        // Once clicked, the refresh textView will
+        // trigger the Loader to start
         mRefreshTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -145,7 +155,6 @@ public class MainActivity extends AppCompatActivity implements
 
         //This is needed to manage spacing between views
         mRecyclerView.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
-
         mRecyclerView.setLayoutManager(layoutManager);
 
         /*
@@ -157,12 +166,12 @@ public class MainActivity extends AppCompatActivity implements
         // Set the movie list as the data of the adapter
         mMovieAdapter.setMovieData(mMovieList);
 
-        /* Set the adapter of the Recycler view */
+        // Set the adapter onto its RecyclerView
         mRecyclerView.setAdapter(mMovieAdapter);
 
         // Start the Loader only if there's no element
-        // inside our movie list.
-
+        // inside our movie list. Otherwise,
+        // remove the spinner from the screen
         if(mMovieList.isEmpty()) {
             startLoaderOrEmptyState(MOVIE_LOADER_ID);
         }
@@ -199,12 +208,39 @@ public class MainActivity extends AppCompatActivity implements
     }
 */
 
+
     @Override
-    protected void onSaveInstanceState(Bundle outState) {
+    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
+
+        // It's only call upon device configuration
+        // only then, it's called! Bitch !
+        // When we quit and come back to the activity,
+        // this doesn't work
+        if (savedInstanceState.containsKey(MOVIE_LIST)) {
+            Log.e("Ristori","petit");
+        }
+        super.onRestoreInstanceState(savedInstanceState);
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
 
         outState.putParcelableArrayList(MOVIE_LIST,mMovieList);
         super.onSaveInstanceState(outState);
+
+        onRestoreInstanceState(outState);
     }
+/*
+    // It's storing the movie data to avoid making
+    // API calls everytime the activiy is temporarily
+    // inactive.
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        // The list is successfully saved.
+        outState.putParcelableArrayList(MOVIE_LIST,mMovieList);
+        super.onSaveInstanceState(outState);
+    }*/
 
     /**
      * Method to Check the Network connection and return true or false
@@ -302,11 +338,18 @@ public class MainActivity extends AppCompatActivity implements
         mMovieAdapter.setMovieData(null);
 
         /** If there is a valid list of {@link AMovie}s, then add them to the adapter's
-         // data set. This will trigger the ListView to update. */
+         data set. This will trigger the ListView to update. */
 
         if (data != null && !data.isEmpty()) {
             mMovieList = data;
             mMovieAdapter.setMovieData(mMovieList);
+        } else {
+            /**If the list wasn't returned, then make sure
+             * the internet connection is still and display
+             * the emptystate view if necessary*/
+            if (!isNetworkConnected()) {
+                emptyStateRl.setVisibility(View.VISIBLE);
+            }
         }
     }
 
