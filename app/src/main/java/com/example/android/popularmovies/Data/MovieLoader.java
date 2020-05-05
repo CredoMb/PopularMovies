@@ -9,7 +9,7 @@ import com.example.android.popularmovies.DetailActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
+public class MovieLoader extends AsyncTaskLoader<ArrayList<AMovie>> {
 
     /**
      * Tag for log messages
@@ -36,7 +36,7 @@ public class MovieLoader extends AsyncTaskLoader<List<AMovie>> {
     /**This will cause the "QueryUtils.fetchMoviesData" to be executed on a background
      thread  */
     @Override
-    public List<AMovie> loadInBackground() {
+    public ArrayList<AMovie> loadInBackground() {
         if (mUrl == null) {
             return null;
         }

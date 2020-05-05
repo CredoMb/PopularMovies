@@ -1,5 +1,6 @@
 package com.example.android.popularmovies;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,6 +13,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.PersistableBundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,11 +25,10 @@ import android.widget.TextView;
 import com.example.android.popularmovies.Data.MovieLoader;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
         MovieAdapter.MovieAdapterOnClickHandler,
-        LoaderManager.LoaderCallbacks<List<AMovie>> {
+        LoaderManager.LoaderCallbacks<ArrayList<AMovie>> {
 
     private static final String TAG = MainActivity.class.getSimpleName();
 
@@ -38,12 +40,20 @@ public class MainActivity extends AppCompatActivity implements
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovieAdapter;
 
+    /**The variable that should contain the movie list*/
+
+    public static ArrayList<AMovie> mMovieList;
+
     // Est ce prudent de rendre l'Adapter public ?
 
     /**
      * Will be used as the base url and parameter will be
      */
     private String MOVIE_REQUEST_URL = "https://api.themoviedb.org/3/discover/movie?";
+
+    /** The key used to save the movie list as
+      a bundle. */
+    public String MOVIE_LIST = "movie_list";
 
     /**
      * The progress Spinner
@@ -85,11 +95,22 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        /**We should verify the network state to
-         * know if we should display the emptystate or not.
-         * This is the most intelligent thing we can do*/
-        // The empty state group view
+        if (savedInstanceState != null) {
+            if (savedInstanceState.containsKey(MOVIE_LIST)) {
+                mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
+            }
+        } else {
+
+            // If there are no saved state,
+            // Initialize the mMovieList with an empty
+            // ArrayList. This list will then be
+            // filled with data inside "onLoadFinished"
+            mMovieList = new ArrayList<AMovie>();
+        }
+
         emptyStateRl = (RelativeLayout) findViewById(R.id.empty_group_view);
+        /**Check the Network state to
+         * know if we should display the emptystate or not. */
 
         // The refresh textView from the empty State
         mRefreshTv = findViewById(R.id.refresh_tv);
@@ -129,15 +150,60 @@ public class MainActivity extends AppCompatActivity implements
 
         /*
          * The MovieAdapter is responsible for linking our movie data with the Recycler that
-         * will end up displaying our movie data.
+         * will end up displaying the data.
          */
         mMovieAdapter = new MovieAdapter(this, new ArrayList<AMovie>(), this);
+
+        // Set the movie list as the data of the adapter
+        mMovieAdapter.setMovieData(mMovieList);
 
         /* Set the adapter of the Recycler view */
         mRecyclerView.setAdapter(mMovieAdapter);
 
-        // Start the Loader
-        startLoaderOrEmptyState(MOVIE_LOADER_ID);
+        // Start the Loader only if there's no element
+        // inside our movie list.
+
+        if(mMovieList.isEmpty()) {
+            startLoaderOrEmptyState(MOVIE_LOADER_ID);
+        }
+
+    }
+
+    /*@Override
+    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }*/
+
+/*
+    Test the LifeCycle method to trouble shoot something.
+
+    Save the state in onPause instead of using on save instance state ?
+     But how to achieve that ?
+
+    @Override
+    protected void onPause() {
+        Log.e("Oyo on Pozi","OnPause");
+        super.onPause();
+    }
+
+    @Override
+    protected void onStop() {
+        Log.e("Oyo on Stopi","OnStop");
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        Log.e("Oyo on destroyi","OnPause");
+        super.onDestroy();
+    }
+*/
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+
+        outState.putParcelableArrayList(MOVIE_LIST,mMovieList);
+        super.onSaveInstanceState(outState);
     }
 
     /**
@@ -172,8 +238,9 @@ public class MainActivity extends AppCompatActivity implements
 
     private void startLoaderOrEmptyState(int loaderId) {
         // Check the status of the network, then either launch the Loader or
-        // display the Empty State
+        // display the Empty State.
 
+        // It's
         if (isNetworkConnected()) {
             getLoaderManager().initLoader(loaderId, null, MainActivity.this).forceLoad();
         } else {
@@ -186,7 +253,7 @@ public class MainActivity extends AppCompatActivity implements
      * Get executed when the loader is initiated
      */
     @Override
-    public Loader<List<AMovie>> onCreateLoader(int i, Bundle bundle) {
+    public Loader<ArrayList<AMovie>> onCreateLoader(int i, Bundle bundle) {
 
         // Remove the empty state view
         emptyStateRl.setVisibility(View.GONE);
@@ -227,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements
      * Get executed when the background thread finishes the work
      */
     @Override
-    public void onLoadFinished(Loader<List<AMovie>> loader, List<AMovie> data) {
+    public void onLoadFinished(Loader<ArrayList<AMovie>> loader, ArrayList<AMovie> data) {
 
         mProgressSpinner.setVisibility(View.GONE);
 
@@ -235,10 +302,11 @@ public class MainActivity extends AppCompatActivity implements
         mMovieAdapter.setMovieData(null);
 
         /** If there is a valid list of {@link AMovie}s, then add them to the adapter's
-         // data set. This will trigger the ListView to update.*/
+         // data set. This will trigger the ListView to update. */
 
         if (data != null && !data.isEmpty()) {
-            mMovieAdapter.setMovieData(data);
+            mMovieList = data;
+            mMovieAdapter.setMovieData(mMovieList);
         }
     }
 
@@ -246,10 +314,11 @@ public class MainActivity extends AppCompatActivity implements
      * This will reset the previous created loader
      */
     @Override
-    public void onLoaderReset(Loader<List<AMovie>> loader) {
+    public void onLoaderReset(Loader<ArrayList<AMovie>> loader) {
 
         // Create a new empty Movie list for the Adapter
-        mMovieAdapter = new MovieAdapter(this, new ArrayList<AMovie>(), this);
+        mMovieList = new ArrayList<AMovie>();
+        mMovieAdapter = new MovieAdapter(this, mMovieList, this);
         mRecyclerView.setAdapter(mMovieAdapter);
 
         // If there's no internet connection display the emptystate view

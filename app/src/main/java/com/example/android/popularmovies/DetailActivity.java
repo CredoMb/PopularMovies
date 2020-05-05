@@ -123,6 +123,8 @@ public class DetailActivity extends AppCompatActivity
         if (!(savedInstanceState == null)) {
 
             if (savedInstanceState.containsKey(MOVIE_LIST)) {
+
+                Log.v("Nao retrouveu state","kimia yo");
                 mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
             }
         }
@@ -139,8 +141,6 @@ public class DetailActivity extends AppCompatActivity
         // This extra represent the mPosition of the movie
         // that was clicked on
         mPosition = intent.getIntExtra(EXTRA_POSITION, DEFAULT_POSITION);
-
-        Log.v("position yangoyo",String.valueOf(mPosition));
 
         if (mPosition == DEFAULT_POSITION) {
             // EXTRA_POSITION not found in intent
@@ -413,6 +413,12 @@ public class DetailActivity extends AppCompatActivity
             NavUtils.navigateUpFromSameTask(this);
             // onBackPressed(); this will make the
             // up button behave like the back button
+
+            // When we press the backButton, save
+            // the movie list as a parcel using "onSaveInstanceState".
+            // This will help keep the list updated even after the
+            // DetailActivity is no longer visible.
+            onSaveInstanceState(new Bundle());
         }
         return super.onOptionsItemSelected(item);
     }
