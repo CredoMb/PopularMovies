@@ -343,6 +343,9 @@ public class MainActivity extends AppCompatActivity implements
         // Clear the adapter by setting an empty ArrayList
         mMovieAdapter.setMovieData(null);
 
+        // Remove the emptyState view
+        emptyStateRl.setVisibility(View.GONE);
+
         /** If there is a valid list of {@link AMovie}s, then add them to the adapter's
          data set. This will trigger the ListView to update. */
 
