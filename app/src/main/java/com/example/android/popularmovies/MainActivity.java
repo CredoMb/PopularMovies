@@ -44,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements
 
     public static ArrayList<AMovie> mMovieList;
 
-    // Est ce prudent de rendre l'Adapter public ?
-
     /**
      * Will be used as the base url and parameter will be
      */

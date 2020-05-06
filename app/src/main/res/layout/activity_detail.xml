@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,7 +7,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ProgressBar
             android:id="@+id/detail_loading_spinner"
@@ -17,6 +17,7 @@
             android:layout_centerInParent="true"
             android:layout_gravity="center_horizontal" />
 
+        <!-- Group View containing the movie informations-->
         <LinearLayout
             android:id="@+id/detail_main_layout"
             android:layout_width="match_parent"
@@ -142,7 +143,7 @@
 
         </LinearLayout>
 
-        <!-- Content for the empty state when there is no internet connection-->
+        <!-- Content for the empty state when there is no internet connection -->
         <RelativeLayout
             android:id="@+id/detail_empty_group_view"
             android:layout_width="match_parent"
@@ -156,12 +157,16 @@
                 android:src="@drawable/no_internet_image" />
 
             <!-- Group View that contains all the texts of the empty state-->
+
+            <!-- Ex margin bottom of the LinearLayout bellow
+                android:layout_marginBottom="@dimen/empty_state_bottom_margin"
+                -->
+
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_above="@id/detail_refresh_tv"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="@dimen/empty_state_bottom_margin"
                 android:orientation="vertical">
 
                 <TextView
@@ -198,13 +203,14 @@
                 android:layout_alignParentBottom="true"
                 android:background="@color/colorEmptyStateRefresh"
                 android:fontFamily="roboto"
-                android:gravity="center"
                 android:text="@string/refresh_text"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/refresh_textView_textsize"
                 android:textStyle="bold" />
         </RelativeLayout>
+
+
     </RelativeLayout>
 
-</FrameLayout>
+</ScrollView>
