@@ -25,7 +25,6 @@ import android.widget.TextView;
 import com.example.android.popularmovies.Data.MovieLoader;
 
 import java.util.ArrayList;
-import java.util.Set;
 
 public class MainActivity extends AppCompatActivity implements
         MovieAdapter.MovieAdapterOnClickHandler,
@@ -188,69 +187,20 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    /*@Override
-    public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistentState) {
-        super.onSaveInstanceState(outState, outPersistentState);
-    }*/
-
-/*
-    Test the LifeCycle method to trouble shoot something.
-
-    Save the state in onPause instead of using on save instance state ?
-     But how to achieve that ?
-
-    @Override
-    protected void onPause() {
-        Log.e("Oyo on Pozi","OnPause");
-        super.onPause();
-    }
-
-    @Override
-    protected void onStop() {
-        Log.e("Oyo on Stopi","OnStop");
-        super.onStop();
-    }
-
-    @Override
-    protected void onDestroy() {
-        Log.e("Oyo on destroyi","OnPause");
-        super.onDestroy();
-    }
-*/
-
-
-    @Override
-    protected void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
-
-        // It's only call upon device configuration
-        // only then, it's called! Bitch !
-        // When we quit and come back to the activity,
-        // this doesn't work
-        if (savedInstanceState.containsKey(MOVIE_LIST)) {
-            Log.e("Ristori","petit");
-        }
-        super.onRestoreInstanceState(savedInstanceState);
-    }
-
+    /**
+      * onSaveInstanceState will be called right after
+      * the "onStop()" method of the life cycle.
+      * Before stopping the activity, the app will
+      * store the movie data so it can be retrieve
+      * after a configuration change. This will avoid making
+      * multiple API queries every time a config change (ex: device rotation) occurs. */
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
 
         outState.putParcelableArrayList(MOVIE_LIST,mMovieList);
         super.onSaveInstanceState(outState);
 
-        onRestoreInstanceState(outState);
     }
-/*
-    // It's storing the movie data to avoid making
-    // API calls everytime the activiy is temporarily
-    // inactive.
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-
-        // The list is successfully saved.
-        outState.putParcelableArrayList(MOVIE_LIST,mMovieList);
-        super.onSaveInstanceState(outState);
-    }*/
 
     /**
      * Method to Check the Network connection and return true or false

@@ -76,7 +76,6 @@ public class DetailActivity extends AppCompatActivity
      */
     private Button mEmptyStateRefreshButton;
 
-    /***/
     // The key to get the extra date our of the intent
     public static String EXTRA_POSITION = "movie position";
 
@@ -123,8 +122,6 @@ public class DetailActivity extends AppCompatActivity
         if (!(savedInstanceState == null)) {
 
             if (savedInstanceState.containsKey(MOVIE_LIST)) {
-
-                Log.v("Nao retrouveu state","kimia yo");
                 mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
             }
         }
@@ -219,8 +216,10 @@ public class DetailActivity extends AppCompatActivity
         mMovieSynopsisTv.append(mClickedMovie.getSynopsis());
         makeTheTitleBold(mMovieSynopsisTv, SYNOPSIS_TEXT_LAST_INDEX);
 
-        /** The length, the director and the stars
-         will also be set inside "onLoadFinished"*/
+        /** The length, director and stars values
+         will also be set inside "onLoadFinished"
+         after the API Query is completed.*/
+
         // The TextView that contains the movie's length.
         mMovieLenghtTv = (TextView) findViewById(R.id.movie_length_tv);
         // Set the MovieLength onto it view
