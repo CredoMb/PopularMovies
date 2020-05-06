@@ -106,8 +106,8 @@ public class MainActivity extends AppCompatActivity implements
                 mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
 
                 // Set the retrieve data onto the movie list of the
-                // DetailActiviy
-                DetailActivity.mMovieList = mMovieList;
+                // DetailActiviy. The following is not needed...
+                /* DetailActivity.mMovieList = mMovieList; */
             }
         } else {
 

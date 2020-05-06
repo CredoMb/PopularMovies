@@ -262,10 +262,12 @@ public class DetailActivity extends AppCompatActivity
             // Start the Loader to update the clickedMovie.
             startLoaderOrEmptyState(EXTRACT_CAST_LOADER_ID);
 
-            // How are they going to be filled ? By "they", I mean the
-            // Director, Cast & Lenght ?
+            // If the movie possess all the necessary attribute,
+            // then there's no need to display neither the spinner
+            // nor the Empty State View
         } else {
             mProgressSpinner.setVisibility(View.GONE);
+            mEmptyStateRl.setVisibility(View.GONE);
         }
 
         /*Override the back button so that it looks like
