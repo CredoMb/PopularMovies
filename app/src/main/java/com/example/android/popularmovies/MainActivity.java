@@ -104,6 +104,10 @@ public class MainActivity extends AppCompatActivity implements
 
                 mMovieList = new ArrayList<AMovie>();
                 mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
+
+                // Set the retrieve data onto the movie list of the
+                // DetailActiviy
+                DetailActivity.mMovieList = mMovieList;
             }
         } else {
 
@@ -346,14 +350,20 @@ public class MainActivity extends AppCompatActivity implements
         // Remove the emptyState view
         emptyStateRl.setVisibility(View.GONE);
 
-        /** If there is a valid list of {@link AMovie}s, then add them to the adapter's
+        /* If there is a valid list of {@link AMovie}s, then add them to the adapter's
          data set. This will trigger the ListView to update. */
 
         if (data != null && !data.isEmpty()) {
+
+            // Update the movie list of DetailActivity
+            DetailActivity.mMovieList = data;
+
+            // Set data onto the adapter
             mMovieList = data;
             mMovieAdapter.setMovieData(mMovieList);
         } else {
-            /**If the list wasn't returned, then make sure
+
+            /*If the list wasn't returned, then make sure
              * the internet connection is still and display
              * the emptystate view if necessary*/
             if (!isNetworkConnected()) {

@@ -47,13 +47,6 @@ public class MovieLoader extends AsyncTaskLoader<ArrayList<AMovie>> {
         // The list should already be ready
         // mMovieList is ready but misses certain things
 
-
-        // Set the list of movie on the
-        // "mMovieList" static attribute of
-        // the DetailActivity. This way, the
-        // DetailActivity could use the list to
-        // show details about a movie that was clicked
-        DetailActivity.mMovieList = movieList;
         return movieList;
 
         // Pourquoi est ce qu'il n'y a pas assez de "movie" dans la liste ?
