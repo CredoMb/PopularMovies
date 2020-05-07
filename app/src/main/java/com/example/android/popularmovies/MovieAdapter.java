@@ -41,8 +41,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
 
         public ImageView mMovieThumbnailIv;
 
-        // The commented code bellow will be used on a other version of the
-        // app.
         public TextView mMovietitleTv;
         public TextView mMovieyearTv;
 
@@ -52,11 +50,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
             // Get the ImageView from the list item layout
             mMovieThumbnailIv = (ImageView) view.findViewById(R.id.movieThumbnail_Iv);
 
-            // The commented code bellow will be used on a other version of the
-            // app.
-
-            //  mMovietitleTv = (TextView) view.findViewById(R.id.title_text_view_main);
-            //  mMovieyearTv = (TextView) view.findViewById(R.id.year_text_view);
+              mMovietitleTv = (TextView) view.findViewById(R.id.title_text_view_main);
+              mMovieyearTv = (TextView) view.findViewById(R.id.year_text_view);
 
             view.setOnClickListener(this);
         }
@@ -106,11 +101,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
         // image view
         glideHelper.loadImage();
 
-        // The commented code bellow will be used on a other version of the
-        // app.
-        /*
         movieAdapterViewHolder.mMovietitleTv.setText(currentMovie.getTitle());
-        movieAdapterViewHolder.mMovieyearTv.setText(currentMovie.getYear());*/
+        movieAdapterViewHolder.mMovieyearTv.setText(currentMovie.getYear());
 
     }
 

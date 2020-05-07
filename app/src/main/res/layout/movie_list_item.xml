@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="@android:color/black">
+>
     
     <ImageView
         android:id="@+id/movieThumbnail_Iv"
@@ -17,10 +17,11 @@
     <!-- The code bellow will be used in an other version
          of the app. -->
 
-    <!--<RelativeLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp">
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp">
 
             <TextView
                 android:id="@+id/title_text_view_main"
@@ -32,7 +33,7 @@
                 android:layout_marginTop="4dp"
                 android:textColor="@android:color/white"
                 android:textSize="16sp" />
-            &lt;!&ndash; &ndash;&gt;
+
             <TextView
                 android:id="@+id/year_text_view"
                 android:layout_width="match_parent"
@@ -44,6 +45,6 @@
                 android:textColor="@android:color/darker_gray"
                 android:textSize="14sp" />
 
-        </RelativeLayout> -->
+        </RelativeLayout>
 
 </LinearLayout>
