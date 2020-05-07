@@ -3,19 +3,12 @@
 # PopularMovies
 
 An app that gives an overview of most popular and top rated movies. 
+Using a RecyclerView, the App displays movie posters queried from themoviedb.org API 
 
-The main screen provides a list of movies by displaying their poster images.
-
-Depending on the user preferences, the movies are displayed either by popularity or rating. 
-
-By clicking on a movie poster, the app displays details about the movie.
-
+Clicking on a movie poster opens a new Activity that contains details about the given movie. 
 In the next version of the app, the user will be able to play the movie's trailer.
 
-The data are queried from the themoviedb.org' API
-
 The App was not created for commercial use.
-
 **P.S.This project is still under construction**.
 
 ## Prerequisites 
