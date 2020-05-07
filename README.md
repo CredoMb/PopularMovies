@@ -9,6 +9,7 @@ Clicking on a movie poster opens a new Activity that contains details about the 
 In the next version of the app, the user will be able to play the movie's trailer.
 
 The App was not created for commercial use.
+
 **P.S.This project is still under construction**.
 
 ## Prerequisites 
