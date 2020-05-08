@@ -1,4 +1,4 @@
-![Main and Detail Activity](https://user-images.githubusercontent.com/48886200/76983107-a0bd1080-691b-11ea-8b48-ecd7d2e10817.png)
+![New_Main_and_Detail_Activity](https://user-images.githubusercontent.com/48886200/81450051-9f57d980-914f-11ea-958d-2599c0e6ef27.png)
 
 # PopularMovies
 
