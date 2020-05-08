@@ -50,8 +50,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
             // Get the ImageView from the list item layout
             mMovieThumbnailIv = (ImageView) view.findViewById(R.id.movieThumbnail_Iv);
 
-              mMovietitleTv = (TextView) view.findViewById(R.id.title_text_view_main);
-              mMovieyearTv = (TextView) view.findViewById(R.id.year_text_view);
+              mMovietitleTv = (TextView) view.findViewById(R.id.movie_title_textview_main);
+              mMovieyearTv = (TextView) view.findViewById(R.id.movie_year_textview_main);
 
             view.setOnClickListener(this);
         }

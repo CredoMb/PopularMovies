@@ -68,7 +68,16 @@
     Dimensions for the movie_list_item.xml
     -->
 
-    <!-- Height of the movie Thumbnail image view -->
+    <!-- Width and Height of the movie Thumbnail image view -->
+    <dimen name="movieThumbnail_IV_width">120dp</dimen>
     <dimen name="movieThumbnail_IV_height">160dp</dimen>
+
+    <!-- Margins for the extra text group view -->
+    <dimen name="extra_text_top_margin">2dp</dimen>
+    <dimen name="extra_text_bottom_margin">8dp</dimen>
+
+    <!-- Text size for the title and the year of the movie-->
+    <dimen name="movie_title_text_size_main">16sp</dimen>
+    <dimen name="movie_year_text_size_main">14sp</dimen>
 
 </resources>
