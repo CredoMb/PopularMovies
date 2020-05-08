@@ -44,5 +44,4 @@
                 android:textSize="@dimen/movie_year_text_size_main" />
 
         </RelativeLayout>
-
 </LinearLayout>

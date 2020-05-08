@@ -16,9 +16,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingTop="@dimen/recycler_spacing"
-            android:paddingStart="@dimen/recycler_spacing"
-            android:paddingEnd="@dimen/recycler_spacing"
-            android:paddingBottom="@dimen/recycler_spacing"
+            android:paddingLeft="@dimen/recycler_spacing"
+            android:paddingRight="@dimen/recycler_spacing"
             />
 
         <ProgressBar
@@ -93,7 +92,6 @@
                 android:background="@color/colorEmptyStateRefresh"
                 />
         </RelativeLayout>
-
     </RelativeLayout>
 
 </FrameLayout>
