@@ -17,7 +17,7 @@
     <!-- Group view that contains the extra text
          to describes the movie -->
     <RelativeLayout
-        android:layout_width="wrap_content"
+        android:layout_width="@dimen/movieThumbnail_IV_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/extra_text_top_margin"
         android:layout_marginBottom="@dimen/extra_text_bottom_margin">
