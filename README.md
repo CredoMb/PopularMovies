@@ -1,4 +1,4 @@
-![New_Main_and_Detail_Activity](https://user-images.githubusercontent.com/48886200/81450051-9f57d980-914f-11ea-958d-2599c0e6ef27.png)
+![New_Main_and_Detail_Activity](https://github.com/CredoMb/PopularMovies/issues/7#issue-614998236)
 
 # PopularMovies
 
