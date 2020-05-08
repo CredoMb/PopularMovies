@@ -15,7 +15,4 @@
         <item name="colorControlActivated">@color/colorRating</item>
     </style>
 
-    <!-- E6D685 -->
-    <!-- Style for the rating bar -->
-
 </resources>
