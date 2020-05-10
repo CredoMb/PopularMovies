@@ -315,8 +315,6 @@ public class DetailActivity extends AppCompatActivity
                 // Set the visibility of the spinner.
                 mProgressSpinner.setVisibility(View.VISIBLE);
 
-                Log.v("Azo salel'ango dé fwa", "Biatch");
-
                 // Create a Loader that should execute the
                 // API calls to get the remaining infos.
                 AsyncTaskLoader<ArrayList<String>> movieDetailsLoader =

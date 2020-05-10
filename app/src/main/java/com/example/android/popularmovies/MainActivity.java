@@ -13,8 +13,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.PersistableBundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -102,9 +100,6 @@ public class MainActivity extends AppCompatActivity implements
                 mMovieList = new ArrayList<AMovie>();
                 mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
 
-                // Set the retrieve data onto the movie list of the
-                // DetailActiviy. The following is not needed...
-                /* DetailActivity.mMovieList = mMovieList; */
             }
         } else {
 
@@ -117,6 +112,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Store the entire emptyState view inside a variable
         emptyStateRl = (RelativeLayout) findViewById(R.id.empty_group_view);
+
         // Make the empty state invisible by default.
         // It will only become visible
         // if the API call is not successful.
