@@ -73,7 +73,7 @@ public class AMovie implements Parcelable {
     }
 
     /** Private constructor to be used
-     *  by the createFromParcel methode of
+     *  by the createFromParcel method of
      *  Parcelable Creator. Will create the object from the
      *  Parcel*/
 

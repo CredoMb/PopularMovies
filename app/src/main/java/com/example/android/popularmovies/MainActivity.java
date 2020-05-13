@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // Start the Loader only if there's no element
         // inside our movie list. Otherwise,
-        // remove the spinner from the screen
+        // remove the spinner from the screen.
         if(mMovieList.isEmpty()) {
             startLoaderOrEmptyState(MOVIE_LOADER_ID);
         }
