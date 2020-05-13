@@ -44,7 +44,7 @@
                 android:paddingStart="@dimen/sidePadding"
                 android:paddingEnd="@dimen/sidePadding"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
+                android:textSize="@dimen/detail_title_text_size"
                 android:textStyle="bold" />
 
             <!-- GroupView for the movie Quick Details -->
@@ -139,7 +139,7 @@
                 android:drawableLeft="@drawable/baseline_play_arrow_white_48"
                 android:gravity="center"
                 android:paddingStart="@dimen/button_padding"
-                android:text="Play Trailer"
+                android:text="@string/trailer"
                 android:textColor="@android:color/white" />
 
         </LinearLayout>

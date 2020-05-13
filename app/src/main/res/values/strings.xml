@@ -1,14 +1,26 @@
 <resources>
+
+    <!--
+    Strings for the DetailActivity
+    -->
     <string name="app_name">PopularMovies</string>
     <string name="synopsis">Synopsis:&#160;</string>
     <string name="director">Director:&#160;</string>
     <string name="mainStars">Main Stars:&#160;</string>
+    <string name="trailer">Play Trailer</string>
+
+    <!--
+    Strings for the MainActivity
+    -->
 
     <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
     <string name="sort_by_menu_item">Sort By</string>
     <string name="popularity">Popularity</string>
     <string name="ratings">Ratings</string>
 
+    <!--
+    Strings for the empty state
+    -->
     <string name="no_internet_title">No Internet</string>
     <string name="no_internet_text">Please check your internet\nconnection and retry</string>
     <string name="refresh_text">Refresh</string>

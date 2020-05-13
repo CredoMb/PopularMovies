@@ -19,6 +19,8 @@
     <!-- Used on the bottom of the title's TextView-->
     <dimen name="title_bottom_margin">16dp</dimen>
 
+    <dimen name="detail_title_text_size">24sp</dimen>
+
     <!-- Used as the bottom margin of the GroupView that contains
          the movie Quick Details -->
     <dimen name="quick_details_bottom_margin">16dp</dimen>
