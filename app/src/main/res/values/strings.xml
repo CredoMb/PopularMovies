@@ -13,7 +13,6 @@
     Strings for the MainActivity
     -->
 
-    <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
     <string name="sort_by_menu_item">Sort By</string>
     <string name="popularity">Popularity</string>
     <string name="ratings">Ratings</string>

@@ -206,7 +206,6 @@
                 android:textSize="@dimen/refresh_textView_textsize"
                 android:textStyle="bold" />
         </RelativeLayout>
-
     </RelativeLayout>
 
 </ScrollView>

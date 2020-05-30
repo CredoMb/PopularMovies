@@ -91,23 +91,18 @@ public class MainActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Initialize the movie list to make sure there
+        // are no "null pointer" exceptions
+        mMovieList = new ArrayList<AMovie>();
+
         // Verify if the movie list was saved as a bundle
         // and retrieve the data.
         if (savedInstanceState != null) {
 
             if (savedInstanceState.containsKey(MOVIE_LIST)) {
-
-                mMovieList = new ArrayList<AMovie>();
                 mMovieList = savedInstanceState.getParcelableArrayList(MOVIE_LIST);
 
             }
-        } else {
-
-            // If there are no saved state,
-            // initialize the mMovieList with an empty
-            // ArrayList. This list will then be
-            // filled with data inside "onLoadFinished"
-            mMovieList = new ArrayList<AMovie>();
         }
 
         // Store the entire emptyState view inside a variable
@@ -143,9 +138,11 @@ public class MainActivity extends AppCompatActivity implements
         // The progress spinner to use for a good
         mProgressSpinner = (ProgressBar) findViewById(R.id.main_loading_spinner);
 
+        // Create a new Grid Layout Manager
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
         mRecyclerView.setHasFixedSize(true);
 
+        // Define the properties of the Layout Manager
         int spanCount = 3; // 3 columns
         int spacing = dpToPx(8); // 8dp
         boolean includeEdge = false;
