@@ -49,11 +49,7 @@ public class MovieLoader extends AsyncTaskLoader<ArrayList<AMovie>> {
 
         return movieList;
 
-        // Pourquoi est ce qu'il n'y a pas assez de "movie" dans la liste ?
-        // On dirait qu'il n'y a que 2 movie ?
     }
-    // Obtain 2 things : How to make the card I want to make
-    // Open dater
 
 }
 
