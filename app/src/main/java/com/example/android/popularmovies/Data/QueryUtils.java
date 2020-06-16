@@ -70,7 +70,7 @@ public final class QueryUtils {
     public static String mMovieLength = "";
 
     /** Will be used wherever we don't have a date*/
-    private static String NOT_SPECIFIED = "Not Specified";
+    private static String NOT_SPECIFIED = "unknown year";
 
     /**
      *

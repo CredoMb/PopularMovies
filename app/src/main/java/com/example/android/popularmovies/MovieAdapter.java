@@ -66,13 +66,13 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     @Override
     public MovieAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         Context context = viewGroup.getContext();
+
         int layoutIdForListItem = R.layout.movie_list_item;
         LayoutInflater inflater = LayoutInflater.from(context);
         boolean shouldAttachToParentImmediately = false;
 
         View view = inflater.inflate(layoutIdForListItem, viewGroup, shouldAttachToParentImmediately);
         return new MovieAdapterViewHolder(view);
-
 
     }
 
@@ -119,8 +119,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieAdapter
     }
 
     /**
-     * This method is used to set the movies on a MovieAdapter if we've already
-     * created one. This is handy when we get new data from the web but don't want to create a
+     * This method is used to set the movies on a existing MovieAdapter .
+     * This is handy when we get new data from the web but don't want to create a
      * new MovieAdapter to display it.
      *
      * @param movieData The new movie data to be displayed.

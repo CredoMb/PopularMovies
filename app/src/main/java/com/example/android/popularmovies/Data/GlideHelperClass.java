@@ -1,16 +1,13 @@
 package com.example.android.popularmovies.Data;
 
 import android.content.Context;
-import android.media.Image;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.module.AppGlideModule;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.android.popularmovies.R;
 
 public class GlideHelperClass extends AppGlideModule {
 

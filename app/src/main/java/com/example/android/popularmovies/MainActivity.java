@@ -34,6 +34,23 @@ public class MainActivity extends AppCompatActivity implements
      * this activity. */
     private static final int MOVIE_LOADER_ID = 0;
 
+    /**
+     * Will be used as values for the mSort variable.
+     * This will determine the order with which the movies
+     * are displayed inside the Main Activity
+     */
+    private String BY_POPULARITY = "popularity.desc";
+    private String BY_RATINGS = "vote_average.desc";
+
+    /**
+     * Will be used as the base url and parameter will be
+     */
+    private String MOVIE_REQUEST_URL = "https://api.themoviedb.org/3/discover/movie?";
+
+    /** The key used to save the movie list as
+     a bundle. */
+    public String MOVIE_LIST = "movie_list";
+
     /** The Recycler and its Adapter*/
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovieAdapter;
@@ -43,26 +60,9 @@ public class MainActivity extends AppCompatActivity implements
     public static ArrayList<AMovie> mMovieList;
 
     /**
-     * Will be used as the base url and parameter will be
-     */
-    private String MOVIE_REQUEST_URL = "https://api.themoviedb.org/3/discover/movie?";
-
-    /** The key used to save the movie list as
-      a bundle. */
-    public String MOVIE_LIST = "movie_list";
-
-    /**
      * The progress Spinner
      */
     private ProgressBar mProgressSpinner;
-
-    /**
-     * Will be used as values for the mSort variable.
-     * This will determine the order with which the movies
-     * are displayed inside the Main Activity
-     */
-    private String BY_POPULARITY = "popularity.desc";
-    private String BY_RATINGS = "vote_average.desc";
 
     /**
      * Will store the sorting option.
@@ -82,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements
     /**
      * This is the textview present inside the
      * empty state's group view
+     *
      */
 
     private TextView mRefreshTv;
