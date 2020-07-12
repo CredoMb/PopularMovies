@@ -70,7 +70,7 @@ public final class QueryUtils {
     public static String mMovieLength = "";
 
     /** Will be used wherever we don't have a date*/
-    private static String NOT_SPECIFIED = "unknown year";
+    private static String YEAR_NOT_SPECIFIED = "unknown year";
 
     /**
      *
@@ -191,7 +191,7 @@ public final class QueryUtils {
 
         // If the JSON string is empty or null, then return null.
         if (TextUtils.isEmpty(jsonResponse)) {
-            return null;
+            return new ArrayList<AMovie>(); // null
         }
 
         // Create an empty ArrayList that we can start adding Movies to
@@ -224,7 +224,7 @@ public final class QueryUtils {
                 String movieTitle = JSONmovieArray.optJSONObject(i).optString("title");
                 // Extract the movie Year
                 String fullReleaseDate = JSONmovieArray.optJSONObject(i).optString("release_date");
-                String movieYear =  NOT_SPECIFIED;
+                String movieYear = YEAR_NOT_SPECIFIED;
                     // Make sure that the movie has a valid release date
                 if(!TextUtils.isEmpty(fullReleaseDate)){
                      movieYear = fullReleaseDate.substring(MOVIE_YEAR_START_INDEX,MOVIE_YEAR_END_INDEX);
@@ -362,6 +362,7 @@ public final class QueryUtils {
             MovieUrlTextWithId += "/credits";
         }
 
+        // Base url + /id + & api key + & language
 
         // Create the variables that will hold
         // the Uri and the uri Builder needed
@@ -374,6 +375,7 @@ public final class QueryUtils {
         // from the API
         movieInfoBaseUri = Uri.parse(MovieUrlTextWithId);
         uriBuilder = movieInfoBaseUri.buildUpon();
+
 
         // Add some relevant information to finalize the Uri
         uriBuilder.appendQueryParameter("api_key",API_KEY);

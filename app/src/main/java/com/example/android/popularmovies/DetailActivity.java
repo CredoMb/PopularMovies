@@ -118,7 +118,7 @@ public class DetailActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        //Retrieve the ArrayList that was saved as bundle
+        // Retrieve the ArrayList that was saved as bundle
         if (!(savedInstanceState == null)) {
 
             if (savedInstanceState.containsKey(MOVIE_LIST)) {
@@ -244,7 +244,6 @@ public class DetailActivity extends AppCompatActivity
         // Will only make the "main stars" label bold
         makeTheTitleBold(mMovieStarsTv, MAIN_STARS_TEXT_LAST_INDEX);
 
-
         // the rating Bar for the movie ratings
         mMovieRatingBar = (RatingBar) findViewById(R.id.rating_bar);
         mMovieRatingBar.setRating(mClickedMovie.getMovieRating());
@@ -358,6 +357,7 @@ public class DetailActivity extends AppCompatActivity
         // After getting those 3 main informations, which are
         // the cast the director and the length,
         // we will update the clickedMovie.
+
         mClickedMovie.setMovieStars(clickedMovieCast);
         mClickedMovie.setMovieDirector(movieDirector);
         mClickedMovie.setMovieLength(movieLength);

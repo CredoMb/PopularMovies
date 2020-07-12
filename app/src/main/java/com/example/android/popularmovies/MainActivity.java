@@ -13,6 +13,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -274,6 +275,7 @@ public class MainActivity extends AppCompatActivity implements
 
         // This will execute the network request needed to get the data
         // from the API and return the data to onLoadFinished
+        Log.e("le lien pour ", uriBuilder.toString());
         return new MovieLoader(this, uriBuilder.toString());
 
     }
@@ -287,7 +289,7 @@ public class MainActivity extends AppCompatActivity implements
         mProgressSpinner.setVisibility(View.GONE);
 
         // Clear the adapter by setting an empty ArrayList
-        mMovieAdapter.setMovieData(null);
+        mMovieAdapter.setMovieData(new ArrayList<AMovie>());
 
         // Remove the emptyState view
         emptyStateRl.setVisibility(View.GONE);
