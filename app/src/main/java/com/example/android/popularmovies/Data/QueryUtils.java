@@ -189,7 +189,7 @@ public final class QueryUtils {
      */
     public static ArrayList<AMovie> extractMovies(String jsonResponse) {
 
-        // If the JSON string is empty or null, then return null.
+        // If the JSON string is empty or null, then return an empty list.
         if (TextUtils.isEmpty(jsonResponse)) {
             return new ArrayList<AMovie>(); // null
         }

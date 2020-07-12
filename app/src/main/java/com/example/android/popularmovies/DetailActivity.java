@@ -146,7 +146,7 @@ public class DetailActivity extends AppCompatActivity
         }
 
         // Verify if the List of movie is not empty
-        if (mMovieList == null) {
+        if (mMovieList == null || mMovieList.isEmpty()) {
             // movie data unavailable
             closeOnError();
             return;
